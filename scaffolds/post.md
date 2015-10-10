@@ -24,6 +24,8 @@ tags:
 
 <!-- cross references -->
 
+<!-- post_references -->
+
 [1]: link "title"
 [2]: link "title" 
 
