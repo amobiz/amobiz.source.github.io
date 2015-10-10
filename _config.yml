@@ -80,7 +80,4 @@ deploy:
 forkme:
   home: https://github.com/amobiz
 
-google_analytics:
-  enable: true
-  id: UA-68633744-1 ## e.g. UA-1766729-8 your google analytics ID.
-  site: auto ## e.g. your google analytics site or set the value as auto.
+google_analytics: UA-68633744-1
