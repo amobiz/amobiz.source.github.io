@@ -25,6 +25,8 @@ tags:
 
 ### Backend
 
+* [sindresorhus/awesome-nodejs](https://github.com/sindresorhus/awesome-nodejs)
+A curated list of delightful Node.js packages and resources.
 * [Google App Engine](#appengine)
 * [Java](#java)
 * [JUnit](#junit)
@@ -37,6 +39,9 @@ tags:
 
 #### Web
 
+* [JavaScript Libraries Catalog](http://jster.net/catalog)
+* [sorrycc/awesome-javascript](https://github.com/sorrycc/awesome-javascript)
+A collection of awesome browser-side JavaScript libraries, resources and shiny things.
 * [AngularJS](#angularjs)
 * [JavaScript](#javascript)
 * [jQuery](#jquery)
