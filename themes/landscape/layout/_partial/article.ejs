@@ -35,10 +35,22 @@
   <% } %>
 </article>
 
-<% if (!index && post.comments && config.disqus_shortname){ %>
+<% if (!index && post.comments) { %>
 <section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
+  <% if (config.disqus_shortname && config.fb_app_id) { %>
+    <ul class="nav"></ul>
+  <% } %>
+  <% if (config.disqus_shortname) { %>
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  <% } %>
+  <% if (config.fb_app_id) { %>
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="<%- config.url + url_for(post.path) %>" data-width="100%" data-numposts="5"></div>
+    </section>
+  <% } %>
 </section>
 <% } %>

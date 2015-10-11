@@ -5,5 +5,25 @@
   border: 1px solid color-border
   border-radius: 3px
   margin: block-margin 0
-  a
-    color: color-link
+  .comments
+    a
+      color: color-link
+  .nav
+    list-style: none
+  .nav > li
+    display: inline-block
+    margin-right: 15px
+  .nav > li > a 
+    color: #337ab7
+    border: 1px solid #337ab7
+    border-radius: 4px
+    position: relative
+    display: inline-block
+    padding: 10px 15px
+    text-decoration: none
+  .nav > li > a.active
+    color: #fff
+    background-color: #337ab7
+
+.fb-comments, .fb-comments span, .fb-comments iframe 
+  width: 100% !important;
