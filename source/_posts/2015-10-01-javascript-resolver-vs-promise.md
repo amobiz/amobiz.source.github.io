@@ -61,7 +61,7 @@ __promise 模式__
 return new Promise(resolver);
 
 function resolver(resolve, reject) {
-    fs.read(file, function(err, data) {
+    fs.read(file, function (err, data) {
         if (err) {
             reject(err);
         } else {

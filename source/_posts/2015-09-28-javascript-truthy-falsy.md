@@ -82,8 +82,8 @@ var tests = {
     }
 };
 
-falsy.forEach(function(value) {
-    Object.keys(tests).forEach(function(test) {
+falsy.forEach(function (value) {
+    Object.keys(tests).forEach(function (test) {
         console.log(test + ': ' + (value === '' ? "''" : value) + ': ' + tests[test](value));
     });
 });
@@ -237,7 +237,7 @@ typeof value === 'object'
 ``` js
 undefined = 'not undefined';
 
-(function(value, undefined) {
+(function (value, undefined) {
     if (value === undefined) {
         // ...
     }
@@ -319,7 +319,7 @@ function read(file, callback) {
     }
 }
 
-read('readme.md', function(err, data) {
+read('readme.md', function (err, data) {
     if (err) {
         throw err;
     }

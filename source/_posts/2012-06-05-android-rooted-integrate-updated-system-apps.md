@@ -5,8 +5,8 @@ categories:
 tags:
   - Android
   - DIY
-  - Howto
-  - Rooted
+  - rooted
+  - howto
 ---
 ### 簡介
 

@@ -3,10 +3,10 @@ date: 2013-12-17 14:02:40
 comments: true
 categories: 
 tags:
-  - Howto
   - Maven
-  - Node.js
   - Yeoman
+  - nodejs
+  - howto
 ---
 如同 Java 可以使用 [Maven] 來幫助專案開發自動化，管理程式庫的依賴關係及下載等瑣碎的維護問題，使用 [Yeoman(Yo/Bower/Grunt)][Yeoman] 可以輔助 Web Front-End 自動化開發，減少人工勞動容易發生的失誤。
 

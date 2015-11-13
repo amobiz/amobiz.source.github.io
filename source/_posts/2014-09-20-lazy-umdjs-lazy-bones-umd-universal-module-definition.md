@@ -7,9 +7,9 @@ tags:
   - CommonJS
   - GitHub
   - JavaScript
-  - Open Source
   - RequireJS
   - UMD
+  - open source
 ---
 [
 ![](https://unsplash.imgix.net/44/E5KMvPp9SsCnqmEGUwAS_2014-08-10%2012.56.40%201.jpg?q=75&fm=jpg&auto=format&s=f5f8fc5b9a9da6696369befc0497fe47)
@@ -30,7 +30,7 @@ tags:
 ### 方法一、傳統的 factory 模式
 
 ```
-(function(name, /* optional */deps, factory) {
+(function (name, /* optional */deps, factory) {
     'use strict';
 
     /* global define, require, module, window */
@@ -64,7 +64,7 @@ tags:
         }
         window[name] = factory.apply(null, deps);
     }
-})('MyModule', ['Promise'], function(Promise) {
+})('MyModule', ['Promise'], function (Promise) {
     'use strict';
 
     return {
@@ -87,17 +87,17 @@ tags:
 ### 方法二、builder 串接語法模式
 
 ```
-(function(module) {
+(function (module) {
     'use strict';
 
     module('MyModule')
         .require('Promise')
-        .define(function(Promise) {
+        .define(function (Promise) {
             return {
             };
         });
 
-})(function(name) {
+})(function (name) {
     'use strict';
 
     /* global define, require, module, window */
@@ -106,14 +106,14 @@ tags:
     // AMD (RequireJS)
     if (typeof define === 'function' && define.amd) {
         return {
-            require: function(lib) {
+            require: function (lib) {
                 deps.push(lib);
                 return this;
             },
-            define: function(factory) {
+            define: function (factory) {
                 define(deps, factory);
             },
-            run: function(script) {
+            run: function (script) {
                 require(deps, script);
             }
         };
@@ -121,14 +121,14 @@ tags:
     // CommonJS (node.js)
     else if (typeof module !== 'undefined' && module.exports) {
         return {
-            require: function(lib) {
+            require: function (lib) {
                 deps.push(require(lib));
                 return this;
             },
-            define: function(factory) {
+            define: function (factory) {
                 module.exports = factory.apply(null, deps);
             },
-            run: function(script) {
+            run: function (script) {
                 script();
             }
         };
@@ -136,14 +136,14 @@ tags:
     // Browser globals
     else {
         return {
-            require: function(lib) {
+            require: function (lib) {
                 deps.push(window[lib]);
                 return this;
             },
-            define: function(factory) {
+            define: function (factory) {
                 window[name] = factory.apply(null, deps);
             },
-            run: function(script) {
+            run: function (script) {
                 script();
             }
         };

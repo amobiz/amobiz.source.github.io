@@ -204,7 +204,7 @@ $text =~ s/(\d)(?=(\d\d\d)+(?!\d))/$1,/g;
 * [jsfiddle.net]
 * [StackOverflow]
 
-### 相關文章：
+### 相關文章
 
 * [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1] 
 * [Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)][regular-expression-javascript-study-notes-2-theory-2]

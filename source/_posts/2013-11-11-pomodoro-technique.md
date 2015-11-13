@@ -4,8 +4,8 @@ comments: true
 categories: 
 tags:
   - Pomodoro Technique
-  - Productivity
-  - Time Management
+  - productivity
+  - time management
 ---
 [![](http://pomodorotechnique.com/wp-content/themes/pomodoro/img/logos/logo.png)][Pomodoro Technique]
 

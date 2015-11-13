@@ -3,10 +3,10 @@ date: 2011-03-11 15:00:00
 comments: true
 categories: 
 tags: 
-  - Howto
   - HTTP
   - Java
   - URL
+  - howto
 ---
 
 Java 的 [HttpURLConnection] 可以自動處理 [轉址 (redirect)][URL_redirection] 動作（但不會處理跨通信協定 (protocol) 的轉址， 請參考相關文章），這樣確實很方便。但是有時候我們需要知道轉址之後的網址，才能進一步處理網頁內容。

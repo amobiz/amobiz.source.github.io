@@ -244,7 +244,7 @@ NFA 引擎最重要的性質是，它會依序處理各個子表達式或組成�
 * [Mastering Regular Expressions, 3rd Edition]
 * [Regular Expressions Cookbook, 2nd Edition]
 
-### 相關文章：
+### 相關文章
 
 * [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1] 
 * [Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)][regular-expression-javascript-study-notes-2-theory-2]

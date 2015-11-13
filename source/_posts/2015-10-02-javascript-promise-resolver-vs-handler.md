@@ -21,9 +21,9 @@ return new Promise(resolver)
     // handler 由 then() 函數啟動
     .then(handler, onerror);
 
-// resolver 具有 function(resolve, reject) 的形式
+// resolver 具有 function (resolve, reject) 的形式
 function resolver(resolve, reject) {
-    fs.readFile('readme.md', function(err, data) {
+    fs.readFile('readme.md', function (err, data) {
         if (err) {
             reject(err);
         } else {
@@ -32,12 +32,12 @@ function resolver(resolve, reject) {
     });
 }
 
-// fulfillment handler 具有 function(result) 的形式
+// fulfillment handler 具有 function (result) 的形式
 function handler(markdown) {
     return marked(markdown);
 }
 
-// rejection handler 具有 function(reason) 的形式
+// rejection handler 具有 function (reason) 的形式
 function onerror(error) {
     log(error);
 }
@@ -60,7 +60,7 @@ $.get(url)
 return new Promise(resolver);
 
 function resolver(resolve, reject) {
-    fs.readFile('readme.md', function(err, data) {
+    fs.readFile('readme.md', function (err, data) {
         if (err) {
             reject(err);
         } else {
@@ -86,7 +86,7 @@ Promise.resolve(true)
 
 function resolver(initValue) {
     return new Promise(function (resolve, reject) {
-        fs.readFile('readme.md', function(err, data) {
+        fs.readFile('readme.md', function (err, data) {
             if (err) {
                 reject(err);
             } else {
@@ -109,18 +109,18 @@ function onerror(error) {
 
 #### 嘗試 2：讓 handler 與 resolver 採用一般化的，一致的 signature
 
-如果採用兩者的聯集形式： `function(value, resolve, reject)` 呢？
+如果採用兩者的聯集形式： `function (value, resolve, reject)` 呢？
 
 為此，我為 `Promise` 添加了兩個函數，分別是 `Promise.first()` 與 `Promise#next()`，負責幫忙建立 `Promise` 物件，並且轉送 `#then()`  函數傳遞的值：
 
 ``` js
-Promise.first = function(handler) {
+Promise.first = function (handler) {
     return new Promise(function (resolve, reject) {
         return handler(undefined, resolve, reject);
     });
 };
 
-Promise.prototype.next = function(handler) {
+Promise.prototype.next = function (handler) {
     return this.then(function (value) {
         return new Promise(function (resolve, reject) {
             return handler(value, resolve, reject);
@@ -135,7 +135,7 @@ return Promise
   .catch(onerror);
 
 function resolver(initValue, resolve, reject) {
-    fs.readFile('readme.md', function(err, data) {
+    fs.readFile('readme.md', function (err, data) {
         if (err) {
             reject(err);
         } else {
@@ -149,7 +149,7 @@ function handler(markdown) {
 }
 
 function writer(data, resolve, reject) {
-    fs.writeFile('readme.md.bak', data, function(err) {
+    fs.writeFile('readme.md.bak', data, function (err) {
         if (err) {
             reject(err);
         } else {

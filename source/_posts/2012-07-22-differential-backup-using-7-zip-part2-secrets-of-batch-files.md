@@ -6,10 +6,10 @@ tags:
   - 7-Zip
   - Backup
   - Batch
-  - cmd
-  - Howto
-  - pitfalls
   - Windows
+  - cmd
+  - howto
+  - pitfalls
 ---
 ### 簡介
 

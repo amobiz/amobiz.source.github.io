@@ -4,8 +4,8 @@ comments: true
 categories: 
 tags:
   - git
-  - Howto
   - svn
+  - howto
 ---
 [
   ![](https://s3.amazonaws.com/ooomf-com-files/Vo7YbYQQ8iyOo4J9bOoj_ggb24.jpg)

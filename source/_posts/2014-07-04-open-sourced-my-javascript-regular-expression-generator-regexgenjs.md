@@ -7,11 +7,11 @@ tags:
   - Generator
   - GitHub
   - JavaScript
-  - Open Source
   - Regular Expression
   - nodejs
   - npm
   - regex
+  - open source
 ---
 [
 ![](http://2.bp.blogspot.com/-0nmrdX7VFbs/U-eoW6u1oZI/AAAAAAAAAHg/ogSeGtS54sY/s320/Octocat.png)

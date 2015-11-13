@@ -3,11 +3,11 @@ date: 2013-12-27 0:56:01
 comments: true
 categories: 
 tags:
-  - Howto
   - JAX-RS
   - Jersey
   - Maven
   - Yeoman
+  - howto
 ---
 建立整合專案時，可以使用 Maven 的 template 機制，建立需要的專案架構。這時候可以執行 `mvn archetype:generate` 指令，從中選取適合的範本。執行該指令時，若不指定 `filter` 或 `archetypeGroupId` 及 `archetypeArtifactId` 參數，會進入 interactive mode，Maven 會列出在中央倉庫中所有的 archetypes，目前有 800 多個範本可選。
 

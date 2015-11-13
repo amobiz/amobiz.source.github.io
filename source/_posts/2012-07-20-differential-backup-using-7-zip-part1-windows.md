@@ -6,9 +6,9 @@ tags:
   - 7-Zip
   - Backup
   - Batch
-  - cmd
-  - Howto
   - Windows
+  - cmd
+  - howto
 ---
 ### 簡介
 

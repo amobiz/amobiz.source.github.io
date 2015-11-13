@@ -7,7 +7,7 @@ tags:
   - Gist
   - GitHub
   - Google Code Prettify
-  - Howto
+  - howto
 ---
 {% cheatsheet 異動說明 %}
 由於部落格已經改用 [GitHub Pages](https://pages.github.com/) 並搬家到 [這裡](/)，現在改用 Markdown 語法撰寫文章，然後使用 [Hexo](https:/hexo.io/) 進行轉換，所以新的部落格已經不再使用這裡提到的技巧。不過，__這些技巧對於使用 [Google Blogger](http://www.blogger.com/) 的朋友仍然有效__。

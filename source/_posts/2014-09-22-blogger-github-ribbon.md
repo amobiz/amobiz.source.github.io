@@ -5,7 +5,7 @@ categories:
 tags:
   - Blogger
   - GitHub
-  - Howto
+  - howto
 ---
 [
   ![](https://unsplash.imgix.net/3/alejandroescamilla-tenedores.jpg?q=75&fm=jpg&auto=format&s=927ccb71c1941511657cd27823e96129)
@@ -31,7 +31,7 @@ tags:
 <script>
 //<![CDATA[
 /* Add GitHub Ribbons */
-(function(options) {
+(function (options) {
   var el, href, pos;
 
   if (location.pathname==='/') {

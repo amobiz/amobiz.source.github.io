@@ -3,6 +3,9 @@ date: 2013-12-28 05:00
 comments: true
 categories:
 tags: 
+  - Maven
+  - Yeoman
+  - howto
 ---
 ### 使用 [`versions-maven-plugin`][versions-maven-plugin] 來檢查相依 library, plugin 的更新
 

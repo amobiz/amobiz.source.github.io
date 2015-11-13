@@ -396,7 +396,7 @@ JavaScript 對數字大小似乎沒有限制，即範圍為 1 ~ Number.MAX_VALUE
 * [How to escape square brackets inside brackets in grep]
 * [New regular expression features in ECMAScript 6]
 
-### 相關文章：
+### 相關文章
 
 * [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1] 
 * [Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)][regular-expression-javascript-study-notes-2-theory-2]

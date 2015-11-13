@@ -5,10 +5,10 @@ categories:
 tags:
   - Android
   - APP2SD
-  - Custom ROM
-  - DIY
   - Ginger yoshi
-  - Howto
+  - custom ROM
+  - DIY
+  - howto
 ---
 ### 簡介
 

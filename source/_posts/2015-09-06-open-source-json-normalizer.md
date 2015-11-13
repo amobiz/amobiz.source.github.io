@@ -5,12 +5,12 @@ category:
 tags:
   - CommonJS
   - JSON
-  - normalize
-  - normalizer
-  - Open Source
   - GitHub
   - nodejs
   - npm
+  - normalize
+  - normalizer
+  - open source
 ---
 [
 ![](http://2.bp.blogspot.com/-0nmrdX7VFbs/U-eoW6u1oZI/AAAAAAAAAHg/ogSeGtS54sY/s320/Octocat.png)
@@ -95,7 +95,7 @@ Optional. Currently only accepts a loader or an array of loaders.
 ###### `options.loader` | `options.loaders`
 A loader or an array of loaders that help loading remote schemas. Loaders are tested in the order listed.
 #### `callback`
-The callback function with `function(err, detail)` signature that the normalizer delivers the normalized JSON object to. Called with null context.
+The callback function with `function (err, detail)` signature that the normalizer delivers the normalized JSON object to. Called with null context.
 #### Returns
 No return value.
 #### Example
@@ -117,7 +117,7 @@ var mapper = ...; // see example bellow
 var options = {
     loaders: [mapper]
 };
-normalize(schema, data, options, function(err, result) {
+normalize(schema, data, options, function (err, result) {
     if (!err) {
         // process the normalized JSON data object here.
     }
@@ -170,7 +170,7 @@ Optional. Currently only accepts a loader or an array of loaders.
 ###### `options.loader` | `options.loaders`
 A loader or an array of loaders that help loading remote schemas. Loaders are tested in the order listed.
 ##### `callback`
-The callback function with `function(err, detail)` signature that the `deref` function delivers the deferenced schema to. Called with null context.
+The callback function with `function (err, detail)` signature that the `deref` function delivers the deferenced schema to. Called with null context.
 #### Returns
 No return value.
 
@@ -231,7 +231,7 @@ var schema = {
 };
 
 // Async Version
-deref(schema, { loader: mapper }, function(err, schema) {
+deref(schema, { loader: mapper }, function (err, schema) {
 	if (err) {
 	    // handle error here.
 	}
@@ -251,10 +251,10 @@ catch (err) {
 ```
 
 ### Write Your Own Loader
-*  Async loaders are functions with `function(rootSchema, $ref, callback(err, schema))` signature.
+*  Async loaders are functions with `function (rootSchema, $ref, callback(err, schema))` signature.
 *  Async loaders must return truthy if it can handle the given reference `$ref`, and the callback be called later when the schema is ready. However, if error occurred, e.g., network failure, the callback be called with the `err` set to the type of error and the second argument provides details of that error.
 *  Async loaders must return falsy if it can not handle the given reference `$ref`, and the `callback` should not be called at all.
-*  Sync loaders are functions with `function(rootSchema, $ref)` signature.
+*  Sync loaders are functions with `function (rootSchema, $ref)` signature.
 *  A local loader is always tested first, and other loaders provided in `options.loader` or `options.loaders` argument are then tested by the order listed.
 
 ## Usage Examples
