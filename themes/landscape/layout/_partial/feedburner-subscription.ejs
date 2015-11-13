@@ -1,0 +1,20 @@
+<!-- FeedBurner Subscription -->
+
+<div id="feedburner-subscription-button">
+<a>
+<img height="26" width="88" style="border:0" alt="" />
+</a>
+</div>
+
+<script>
+(function(id) {
+        var URL = 'http://feeds.feedburner.com/';
+        var SRC = 'http://feeds.feedburner.com/~fc/';
+        var SRC_PARAMS = '?bg=99FF00&amp;fg=000000&amp;anim=0';
+        var div = document.querySelector('feedburner-subscription-button');
+        var a = div.querySelector('a');
+        var img = div.querySelector('img');
+        a.setAttribute('href', URL + id); 
+        img.setAttribute('src', SRC + id + SRC_PARAMS);
+})('blogspot/mpUni');
+</script>
