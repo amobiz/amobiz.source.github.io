@@ -50,7 +50,7 @@ jshint: {
 
 前面提到的[文件][JSHint Doc]頁面，裡面提到的 directives 使用的 [options][JSHint Options] 都是像 `unused` 及 `eqnull` 這樣的選項。這些選項，比較像是大分類，而執行 JSHint 時所報告的錯誤，實際可能是由這些選項、或是預設的選項所控制，但是卻無從得知這些規則代碼與配置選項之間的對應關係。所以，即使你很仔細地設定了每一條配置選項， JSHint 還是有可能會報告錯誤。除非你已經是 JavaScript 的專家，在面對 JSHint 報告的發生錯誤的規則代碼時，你很難知道究竟是那一條規則所造成的，於是，你只能以規則代碼去查詢 [JSLint Error Explanations] 網站。最後，恐怕還是只能在 source code 上寫下 `/* jshint -W034 */` 。
 
-## 結論
+### 結論
 
 其實 JSHint 自己也[承認][JSHint Doc]這些問題的存在：
 > Trying to figure out how JSHint options work can be confusing and frustrating (and we're working on fixing that!)
@@ -66,11 +66,11 @@ jshint: {
 
 ### 相關文章：
 
-* [Applying ESLint - Using Atom & linter-eslint (ESLint 學習筆記)][applying-eslint]
+* [Applying ESLint - Using Atom & linter-eslint (ESLint 學習筆記)][applying-eslint-using-atom-linter-eslint]
 
 <!-- cross references -->
 
-[applying-eslint]: applying-eslint-using-atom-linter-eslint
+<!-- post_references -->
 
 <!-- external references -->
 
