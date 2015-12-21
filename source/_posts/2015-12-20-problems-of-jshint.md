@@ -56,7 +56,7 @@ jshint: {
 其實 JSHint 自己也[承認][JSHint Doc]這些問題的存在：
 > Trying to figure out how JSHint options work can be confusing and frustrating (and we're working on fixing that!)
 
-在 JSHint 變得更酷之前，就先允許我們小小地[叛逃][applying-eslint]吧。
+在 JSHint 變得更酷之前，就先允許我們小小地[叛逃][applying-eslint-using-atom-linter-eslint]吧。
 
 ### 參考文章：
 
@@ -67,7 +67,7 @@ jshint: {
 
 ### 相關文章：
 
-* [Applying ESLint - Using Atom & linter-eslint (ESLint 學習筆記)][applying-eslint-using-atom-linter-eslint]
+* [(ESLint 學習筆記) Applying ESLint - Using Atom & linter-eslint][applying-eslint-using-atom-linter-eslint]
 
 <!-- cross references -->
 
