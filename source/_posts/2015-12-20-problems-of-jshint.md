@@ -34,7 +34,7 @@ tags:
 
 當你調整好規則，繼續快樂地 coding。幾天之後，你再次看到 `W034`，卻根本記不得這條規則是什麼。像這種寫在 source code 檔案中的 directives： `/* jshint -W034 */`，除非你在旁邊寫註解來說明這條規則，否則你光是看到 `W034`，根本稿不清楚這是什麼規則。但是這樣一來，每個檔案都必須重複同樣的內容，根本違反 [DRY] 原則。
 
-那麼，寫在 `.jshintrc` 檔案如何？很不幸的是，`.jshintrc` 檔案是 [JSON] 格式，而 JSON 是不能有註解的。更不用提 JSHint 文件上根本就沒有提到像 `W034` 這樣的規則，要如何寫在 `.jshintrc` 檔案中了。
+那麼，寫在 `.jshintrc` 檔案如何？很不幸的是，`.jshintrc` 檔案是 [JSON] 格式，而標準 JSON 是不能有註解的。更不用提 JSHint 文件上根本就沒有提到像 `W034` 這樣的規則，要如何寫在 `.jshintrc` 檔案中了。
 
 在 Google 直接搜尋 `W034`，可以找到在這個 [Grunt] 的 [Issue][Grunt Issue 59] 中，有人回答了 Grunt 的作法：
 
