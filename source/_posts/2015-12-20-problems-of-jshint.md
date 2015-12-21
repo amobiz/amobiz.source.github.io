@@ -1,7 +1,8 @@
 title: "The Problems of JSHint (JSHint 的問題)"
 comments: true
 date: 2015-12-20 06:30:30
-category: Programming
+category:
+  - Programming
 tags:
   - JSHint
   - lint
