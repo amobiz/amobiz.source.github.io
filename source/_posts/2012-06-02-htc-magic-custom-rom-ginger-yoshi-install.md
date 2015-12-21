@@ -1,7 +1,8 @@
 title: 'HTC Magic Custom ROM: Ginger Yoshi (rooted) step by step - 正確安裝步驟'
 date: 2012-06-02 01:51:08
 comments: true
-categories: 
+categories:
+  - Hack
 tags:
   - Android
   - APP2SD

@@ -1,7 +1,8 @@
 title: 'Open Sourced my JavaScript Regular Expression Generator - RegexGen.js'
 date: 2014-07-04 14:53:38
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - CommonJS
   - Generator
@@ -424,7 +425,7 @@ Generates:
 
 ## Change logs
 
-### 2015-09-12: 
+### 2015-09-12:
 * Remove UMD headers that support RequireJS and browser globals.
 * The json object returned from `extract()` method without the "0" property.
 * Add `replace()` method to RegExp object.
@@ -433,13 +434,13 @@ Generates:
 * Fix CommonJS factory invoking bug.
 
 ### 2014-08-17:
-* Rename RegExp.jsonExec() to extract(). 
+* Rename RegExp.jsonExec() to extract().
 
 ### 2014-08-15:
 * Character Classes now support nesting.
 * Fix a bug in multiple(). In the case of multiple(5) that returns /{,}/, and should be /{5,}/.
 
-### 2014-08-10: 
+### 2014-08-10:
 * Added RegExp.jsonExec() method, that returns a JSON object using capture names as properties.
 
 ## Author
@@ -454,7 +455,7 @@ Generates:
 
 ### Related Articles：
 
-* [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1] 
+* [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1]
 * [Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)][regular-expression-javascript-study-notes-2-theory-2]
 * [Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法][regular-expression-javascript-study-notes-3-informal-bnf-grammar]
 * [為什麼我要開發 Regular Expression Generator - RegexGen.js][why-i-developed-javascript-regular-expression-generator-regexgenjs]

@@ -1,7 +1,8 @@
 title: Logdown 學習筆記
 date: 2015-11-15 02:05:00
 comments: true
-category:
+categories:
+  - Software
 tags:
   - Logdown
   - Markdown
@@ -21,7 +22,7 @@ tags:
 
 A: 有兩個問題:
 
-1. Logdown 不會自動為 header 元素設定 id，所以必須自行加上 anchor 元素。如: 
+1. Logdown 不會自動為 header 元素設定 id，所以必須自行加上 anchor 元素。如:
 ``` markdown
 ### <a id="mylink" href="#">My Link</a>
 ```
@@ -30,7 +31,7 @@ A: 有兩個問題:
 Here is [My Link](#mylink).
 ```
 
-參考: 
+參考:
 
 [Markdown Cheatsheet]
 
@@ -38,7 +39,7 @@ Here is [My Link](#mylink).
 
 A: 由於 Logdown 支援 LaTeX，其中還支援 inline math 語法，就是「`$ expression $`」，但是這樣卻反而造成顯示普通程式時的困擾，如 jQuery 的代表符號「`$`」，如果產出的 HTML 要用「`<code>`」標籤強調，用 markdown 語法必須寫成「`$`」，但是在 Logdown 中，這樣寫的時候「`$`」這個符號是顯示不出來的。目前解決方法是直接使用 HTML 標籤：「`<code>$</code>`」。
 
-參考: 
+參考:
 
 [在 logdown 裡面打複雜方程式][latex-in-logdown]
 
@@ -64,4 +65,3 @@ A: 由於 Logdown 支援 LaTeX，其中還支援 inline math 語法，就是「`
 [fragmentsoftime]: http://fragmentsoftime.logdown.com/ "Fragments Of Time"
 [Markdown Cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links
 [latex-in-logdown]: http://nan.logdown.com/post/2013/08/03/write-complex-latex-equations-in-logdown-by-mathjax-support "在 logdown 裡面打複雜方程式"
-

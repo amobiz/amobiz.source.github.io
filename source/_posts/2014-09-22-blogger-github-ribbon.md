@@ -1,8 +1,10 @@
 title: '在 Blogger 上顯示 GitHub Ribbon'
 date: 2014-09-22 00:55:48
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
+  - JavaScript
   - Blogger
   - GitHub
   - howto
@@ -75,7 +77,7 @@ tags:
 
 * [GitHub Ribbons]
 * [Fork me on GitHub CSS ribbon][github-fork-ribbon-css]
-* [Pure CSS responsive Fork me on GitHub ribbon][css-fork-on-github-ribbon] 
+* [Pure CSS responsive Fork me on GitHub ribbon][css-fork-on-github-ribbon]
 
 <!-- cross references -->
 

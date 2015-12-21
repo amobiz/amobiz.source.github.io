@@ -1,7 +1,8 @@
 title: 'HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath'
 date: 2011-02-15 00:00:00
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - Groovy
   - HTML
@@ -23,13 +24,13 @@ Internet 上蘊藏著豐富的內容，供人們分享訊息、傳承知識。�
 
 但是眾所週知，即使存在著如 XHTML 標準規範，網路上還是充斥著各種不合乎標準的 HTML 網頁。這個現象，甚至還有個專用名詞，叫做 [Tag soup][2]。
 
- 
+
 <!-- more -->
 
 
 而業界一致看好、制訂中的 [HTML5][4] ，面對這樣的現況，並非選擇像 [XHTML 2.0][5] 一樣，以放棄向後相容的方式，以激烈的手段加以抵制。而是，相反地，對這樣的現況加以包容。因此，可以預見，要想解析 HTML，程式設計師必然無法逃避與 tag soup 的纏鬥。
 
-回過頭來想，XHTML 的設計思維，是以方便程式化處理為首要考量；而 HTML5 則以最大相容性為出發，要兼容現實中的實際使用需求。有沒有辦法能夠兩者兼得，既可以方便人們撰寫網頁，又可以讓程式方便解析呢？ 
+回過頭來想，XHTML 的設計思維，是以方便程式化處理為首要考量；而 HTML5 則以最大相容性為出發，要兼容現實中的實際使用需求。有沒有辦法能夠兩者兼得，既可以方便人們撰寫網頁，又可以讓程式方便解析呢？
 
 答案其實就在眼前。瀏覽器，這個當年 Internet 標準大戰的主角，雖然對於 tag soup 的存在，也有不小的貢獻，但是，從另一方面來看，瀏覽器其實也是 tag soup 的解藥：瀏覽器能夠將網路上充斥的各式各樣不合標準的內容，呈現給使用者觀看，其實是瀏覽器的設計者，竭盡所能，猜測網頁設計者可能的意圖，設法將雜亂不合規格的 HTML 文件，轉換成瀏覽器能夠解讀的格式。
 
@@ -43,10 +44,10 @@ Internet 上蘊藏著豐富的內容，供人們分享訊息、傳承知識。�
 
 是的，老早就有人想到這樣做了。以下是幾個熱門的 HTML 解析器：
 
-* [Cyberneko HTML Parser][9] 
-* [HTML Parser][10] 
-* [JTidy][11] 
-* [TagSoup][12] 
+* [Cyberneko HTML Parser][9]
+* [HTML Parser][10]
+* [JTidy][11]
+* [TagSoup][12]
 
 其中，TagSoup 是架構在 XML 解析器 [SAX2][13] 標準 [XMLReader][14] 介面之上，所以具有良好的可攜性，可以與 [JAXP][15]、[JDOM][16]、[XOM][17]、[dom4j][18] 等主流工具搭配使用。
 
@@ -152,15 +153,15 @@ groovy gnews
 
 即會在螢幕上輸出最新 Google News 上面的新聞標題。
 
-就是這樣！是不是很簡單？ 
+就是這樣！是不是很簡單？
 
- 歡迎大家的回饋與心得分享。 
+ 歡迎大家的回饋與心得分享。
 
 ### 相關文章：
 
 * [HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath][html-data-mining-part-1-jdom-tagsoup-xpath]
-* [HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace] 
-* [HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to] 
+* [HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace]
+* [HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to]
 
 <!-- cross references -->
 
@@ -195,4 +196,3 @@ groovy gnews
 [26]: http://www.jdom.org/docs/apidocs/org/jdom/output/DOMOutputter.html
 [27]: http://www.jdom.org/docs/apidocs/org/jdom/output/XMLOutputter.html
 [28]: http://iservice.libertytimes.com.tw/liveNews/news.php?no=462864&type=%E9%AB%94%E8%82%B2
-

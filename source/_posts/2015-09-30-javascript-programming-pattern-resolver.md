@@ -1,7 +1,8 @@
 title: 'JavaScript Programming Pattern: Resolver'
 comments: true
 date: 2015-09-30 14:21:48
-category:
+categories:
+  - Programming
 tags:
   - JavaScript
   - Design Pattern
@@ -87,7 +88,7 @@ var result;
 var resolved = expired() || cached() || read();
 if (resolved) {
     result = resolved();
-} 
+}
 ```
 
 如果，想要簡化對於結果的處理方式，可以在串接的函數最後面，安置一個 guardian 函數，負責回傳預設的結果，以保證最終可以獲得結果：
@@ -144,7 +145,7 @@ eval('1+1-2');
 
 前一陣子 [釋出][open-source-json-normalizer] 的 [json-normalizer]，大量使用到本文介紹的 resolver 模式，想看更多 [實戰範例][normalize.js] 的朋友，不妨前往瞧個究竟。
 
-歡迎大家的回饋與心得分享。 
+歡迎大家的回饋與心得分享。
 
 ### 參考文章：
 

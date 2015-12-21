@@ -2,6 +2,7 @@ title: '整合 Maven 與 Yeoman，學習筆記 (6) - versions-maven-plugin'
 date: 2013-12-28 05:00
 comments: true
 categories:
+  - Programming
 tags: 
   - Maven
   - Yeoman
@@ -78,7 +79,6 @@ mvn versions:set -DnewVersion=2.0.0-SNAPSHOT
 [display-dependency-updates]: http://mojo.codehaus.org/versions-maven-plugin/display-dependency-updates-mojo.html "versions:display-dependency-updates"
 [Checking for new dependency updates]: http://mojo.codehaus.org/versions-maven-plugin/examples/display-dependency-updates.html "Checking for new dependency updates"
 [display-plugin-updates]: http://mojo.codehaus.org/versions-maven-plugin/display-plugin-updates-mojo.html "versions:display-plugin-updates"
-[Checking for new plugin updates]: http://mojo.codehaus.org/versions-maven-plugin/examples/display-plugin-updates.html 
+[Checking for new plugin updates]: http://mojo.codehaus.org/versions-maven-plugin/examples/display-plugin-updates.html
 [versions:set]: http://mojo.codehaus.org/versions-maven-plugin/set-mojo.html
 [Changing the project version]: http://mojo.codehaus.org/versions-maven-plugin/examples/set.html
-

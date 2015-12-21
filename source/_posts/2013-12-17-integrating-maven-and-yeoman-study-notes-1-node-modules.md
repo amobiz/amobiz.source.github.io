@@ -1,7 +1,8 @@
 title: '整合 Maven 與 Yeoman，學習筆記 (1) - node_modules'
 date: 2013-12-17 14:02:40
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - Maven
   - Yeoman
@@ -43,13 +44,13 @@ for /d %f in (*) do (npm uninstall %f | npm link %f)
 ```
 
 * 每次專案新增依賴模組時，針對新增模組執行一次
-  
+
 ``` bat
 npm uninstall new_module | npm link new_module
 ```
 
 或執行一次上面的 `for` 迴圈指令，全部更新。
-    
+
 2.接受它，放下它：
 
 * 就...假裝看不見吧。
@@ -98,7 +99,7 @@ npm uninstall new_module | npm link new_module
 [Maven]: http://maven.apache.org/
 [Yeoman]: http://yeoman.io/ "Yeoman (Yo/Bower/Grunt)"
 [install node_modules global]: https://www.google.com.tw/search?q=+install+node_modules+global&amp;oq=+install+node_modules+global
-[npm_node_modules]: https://npmjs.org/doc/faq.html#Why-can-t-npm-just-put-everything-in-one-place-like-other-package-managers "Why can't npm just put everything in one place，like other package managers?" 
+[npm_node_modules]: https://npmjs.org/doc/faq.html#Why-can-t-npm-just-put-everything-in-one-place-like-other-package-managers "Why can't npm just put everything in one place，like other package managers?"
 [nodejs_npm_installation]: https://nodejs.org/en/blog/npm/npm-1-0-global-vs-local-installation/ "npm 1.0: Global vs Local installation"
 [npmjs_faq]: https://docs.npmjs.com/misc/faq#why-can-t-npm-just-put-everything-in-one-place-like-other-package-managers "npm fag - Why can't npm just put everything in one place，like other package managers?"
 [npm folders]: https://docs.npmjs.com/files/folders

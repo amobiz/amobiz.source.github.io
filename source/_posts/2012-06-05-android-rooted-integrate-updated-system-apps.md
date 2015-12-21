@@ -1,7 +1,8 @@
 title: 'Android (rooted) - Integrate updated system apps to ROM - 把更新的系統應用程式整合到 ROM'
 date: 2012-06-05 02:45:00
 comments: true
-categories: 
+categories:
+  - Hack
 tags:
   - Android
   - DIY
@@ -49,5 +50,5 @@ root 手機或自行修改手機具有一定的風險，如失去保固、損壞
 <!-- external references -->
 
 [1]: https://play.google.com/store/apps/details?id=com.keramidas.TitaniumBackup "Titanium Backup"
-[2]: https://play.google.com/store/apps/details?id=com.jrummy.root.browserfree "Root Browser Lite" 
+[2]: https://play.google.com/store/apps/details?id=com.jrummy.root.browserfree "Root Browser Lite"
 [3]: https://play.google.com/store/apps/details?id=pl.solidexplorer2 "Solid Explorer"

@@ -1,7 +1,8 @@
 title: '為什麼我要開發 Regular Expression Generator - RegexGen.js'
 date: 2014-08-05 16:42:19
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - CommonJS
   - GitHub
@@ -23,7 +24,7 @@ tags:
 然而，畢竟正則表達式的語法相當緊湊，想要一眼看懂複雜的表達式，幾乎是不可能的。首先必須熟悉正則表達式的 meta-character (元字元)，然後一步一步拆解。雖然有 [RegexBuddy] 這樣的軟體可以幫忙拆解，但即使能正確的拆解，也可能無法了解作者 (通常是自己) 原本的思考邏輯，或者要避免的問題。
 
 <!-- more -->
-<!-- forkme https://github.com/amobiz/regexgen.js --> 
+<!-- forkme https://github.com/amobiz/regexgen.js -->
 
 如果使用的是 Perl 或 PHP 之類的程式設計語言，可以使用註解模式來撰寫 regular expression，這樣撰寫的時候，一方面可以直接將 sub-expression (子表達式) 一一拆解開來，方便辨識，另一方面可以寫上註解，說明該 sub-expression 的用途、考量的問題、使用的技巧等。
 
@@ -53,7 +54,7 @@ tags:
 
 ### 相關文章：
 
-* [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1] 
+* [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1]
 * [Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)][regular-expression-javascript-study-notes-2-theory-2]
 * [Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法][regular-expression-javascript-study-notes-3-informal-bnf-grammar]
 * [Open Sourced my JavaScript Regular Expression Generator - RegexGen.js][open-sourced-my-javascript-regular-expression-generator-regexgenjs]

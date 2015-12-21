@@ -1,7 +1,8 @@
 title: 'JavaScript: Resolver vs. Promise'
 date: 2015-10-01 14:05:18
 comments: true
-category:
+categories:
+  - Programming
 tags:
   - JavaScript
   - Design Pattern

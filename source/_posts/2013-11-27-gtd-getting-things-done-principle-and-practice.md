@@ -1,7 +1,8 @@
 title: 'GTD - Getting Things Done - Principle and Practice 原理與實踐'
 date: 2013-11-27 13:22:32
 comments: true
-categories: 
+categories:
+  - Productivity
 tags:
   - GTD
   - Time Management

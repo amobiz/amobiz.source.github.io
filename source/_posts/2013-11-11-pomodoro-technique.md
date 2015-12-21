@@ -1,7 +1,8 @@
 title: '『Pomodoro Technique - 蕃茄時鐘工作法』 原理與實踐'
 date: 2013-11-11 14:27:38
 comments: true
-categories: 
+categories:
+  - Productivity
 tags:
   - Pomodoro Technique
   - productivity

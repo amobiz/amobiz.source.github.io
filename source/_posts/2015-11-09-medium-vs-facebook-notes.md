@@ -1,7 +1,8 @@
 title: Medium 與 Facebook Notes 簡短試用
 date: 2015-11-09 22:05:00
 comments: true
-categories: 
+categories:
+  - Software
 tags:
   - HTML
   - Markdown

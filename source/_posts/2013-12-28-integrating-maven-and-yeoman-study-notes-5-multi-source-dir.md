@@ -1,7 +1,8 @@
 title: '整合 Maven 與 Yeoman，學習筆記 (5) - 使用 build-helper-maven-plugin 支援多 src 目錄'
 date: 2013-12-28 03:50
 comments: true
-categories: 
+categories:
+  - Programming
 tags: 
   - Maven
   - howto

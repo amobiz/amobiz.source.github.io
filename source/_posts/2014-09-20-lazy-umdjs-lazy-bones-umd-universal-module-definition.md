@@ -1,7 +1,8 @@
 title: 'Lazy-umd.js - 懶人 UMD (Universal Module Definition)'
 date: 2014-09-20 18:32:59
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - AMD
   - CommonJS

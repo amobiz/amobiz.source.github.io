@@ -4,11 +4,12 @@ date: 2015-12-21 12:48:30
 category:
   - Programming
 tags:
+  - JavaScript
   - Atom
   - ESLint
-  - lint
   - linter-eslint
   - linter
+  - lint
   - tutorial
 ---
 使用 Atom 編輯器，安裝上 linter-eslint 外掛，再加上一個現成的 ESLint  範本，就可以無痛投入到 ESLint 的懷抱了。

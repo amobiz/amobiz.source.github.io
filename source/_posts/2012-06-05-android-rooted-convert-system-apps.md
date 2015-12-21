@@ -1,7 +1,8 @@
 title: 'Android (rooted) - Convert system apps to user apps, or reverse - 把系統應用程式轉成使用者應用程式，或相反'
 date: 2012-06-05 03:57:00
 comments: true
-categories: 
+categories:
+  - Hack
 tags:
   - Android
   - DIY
@@ -62,5 +63,5 @@ tags:
 <!-- external references -->
 
 [1]: https://play.google.com/store/apps/details?id=com.keramidas.TitaniumBackup "Titanium Backup"
-[2]: https://play.google.com/store/apps/details?id=com.jrummy.root.browserfree "Root Browser Lite" 
+[2]: https://play.google.com/store/apps/details?id=com.jrummy.root.browserfree "Root Browser Lite"
 [3]: https://play.google.com/store/apps/details?id=pl.solidexplorer2 "Solid Explorer"

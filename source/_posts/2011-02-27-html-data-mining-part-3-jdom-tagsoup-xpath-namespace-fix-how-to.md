@@ -1,7 +1,8 @@
 title: 'HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案'
 date: 2011-02-27 20:24:00
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - Groovy
   - HTML
@@ -18,9 +19,9 @@ tags:
 
 另一方面，TagSoup 處理過的 HTML 文件，有三個與 namespace 有關的問題：
 
-1. TagSoup 處理過的 HTML 文件，一律輸出為 XHTML 格式，並且定義了 `xmlns="http://www.w3.org/1999/xhtml"` 這個 default namespace，以及`xmlns:html="http://www.w3.org/1999/xhtml"` 這個以 `html` 為 prefix 的 namespace。而其餘的 namespace 的定義，都將被移除。 
-2. 由於 TagSoup 處理過的 HTML 文件，含有 default namespace 的定義，使用 XPath 選取元素時，一定要在路徑的標籤或屬性前，加上 `html` 這個 prefix，才能對應到元素。 
-3. TagSoup 處理過的 HTML 文件，其元素標籤若含有 prefix 定義，即使 prefix 是 `html`，都會被修改並對應到 `urn:x-prefix:html` 這樣的 URI（參考 TagSoup 原始碼中 Parser 類別的 foreign() 函數、ElementType 類別的 namespace() 函數以及 [change log][2]），因而使該標籤對應不到原本正確的 namespace 的 URI。導致使用了該 prefix 的 XPath 路徑，也對應不到正確的標籤。（原本應該能正確對應的，這一點可以經由使用 JDOM 內建的 XML 解析器的實驗證明。） 
+1. TagSoup 處理過的 HTML 文件，一律輸出為 XHTML 格式，並且定義了 `xmlns="http://www.w3.org/1999/xhtml"` 這個 default namespace，以及`xmlns:html="http://www.w3.org/1999/xhtml"` 這個以 `html` 為 prefix 的 namespace。而其餘的 namespace 的定義，都將被移除。
+2. 由於 TagSoup 處理過的 HTML 文件，含有 default namespace 的定義，使用 XPath 選取元素時，一定要在路徑的標籤或屬性前，加上 `html` 這個 prefix，才能對應到元素。
+3. TagSoup 處理過的 HTML 文件，其元素標籤若含有 prefix 定義，即使 prefix 是 `html`，都會被修改並對應到 `urn:x-prefix:html` 這樣的 URI（參考 TagSoup 原始碼中 Parser 類別的 foreign() 函數、ElementType 類別的 namespace() 函數以及 [change log][2]），因而使該標籤對應不到原本正確的 namespace 的 URI。導致使用了該 prefix 的 XPath 路徑，也對應不到正確的標籤。（原本應該能正確對應的，這一點可以經由使用 JDOM 內建的 XML 解析器的實驗證明。）
 
 ### 思考可能的解決方案
 
@@ -34,7 +35,7 @@ TagSoup 可以處理 non-well-formed HTML，但是會有 namseapce 問題。該�
 
 |       | 在 XPath 路徑中一律使用 prefix | 關掉 TagSoup 對 namespace 的處理 |
 |:-----:|:--------------------------|:-----------------------------|
-|致命缺點| <ol><li>由於 TagSoup 不處理外部 namespace 定義，即使使用 prefix 依然不能對應多個 namespace。</li></ol> | <ol><li>可能造成 namespace 衝突。</li></ol> | 
+|致命缺點| <ol><li>由於 TagSoup 不處理外部 namespace 定義，即使使用 prefix 依然不能對應多個 namespace。</li></ol> | <ol><li>可能造成 namespace 衝突。</li></ol> |
 |缺點   | <ol><li>手動撰寫 prefix，容易遺漏，既麻煩又容易出錯。</li><li>若 XPath 是開放給使用者輸入，則必須強迫、提醒使用者記得加入 `html` prefix，不友善又麻煩又容易出錯。</li></ol> | <ol><li>需要一些技巧才能關掉或移除 namespace。</li></ol> |
 |優點   | <ol><li>可以利用程式自動追加 `html` prefix，避免上述缺點。</li><li>符合 XPath 規範。</li></ol> | <ol><li>XPath 寫法比較不繁瑣。</li></ol> |
 
@@ -53,22 +54,22 @@ Re: Thank you for great product! Workaround for namespace issue:
 
 John Cowan   
 May 13 2010, 2:03 am   
-misha680 scripsit: 
+misha680 scripsit:
 
 
 > I am using tagsoup with XOM. It is working great, however I have run   
 > into the following namespace issues as described here:   
 > http://www.supermind.org/blog/613/dom4j-xpath-tagsoup-namespaces-sweet
 > Per the post, it looks like there is not an easy solution, but I was   
-> hoping perhaps that there might be something (new) I am missing? 
+> hoping perhaps that there might be something (new) I am missing?
 
 
 Well, you could suck it up and use html: prefixes in your XPath expressions,   
-which is what I would recommend. 
+which is what I would recommend.
 
 
 There is a long-standing bug in getting TagSoup not to send namespace   
-information.  When I get a chance I'll work on that. 
+information.  When I get a chance I'll work on that.
 
 </pre>
 
@@ -86,16 +87,16 @@ information.  When I get a chance I'll work on that.
 builder.setFeature( "http://xml.org/sax/features/namespaces", false )
 ```
 
-其中，參數 `http://xml.org/sax/features/namespaces` 是 SAX API 定義的所謂 **features** (特性或模式)，用來設定 XML 解析器或是文件處理器的行為。更多的 features 可參考 [SAX API 的 features 列表][7]。 
+其中，參數 `http://xml.org/sax/features/namespaces` 是 SAX API 定義的所謂 **features** (特性或模式)，用來設定 XML 解析器或是文件處理器的行為。更多的 features 可參考 [SAX API 的 features 列表][7]。
 
-可惜的是，這個方法在 JDOM/TagSoup 這個組合行不通。網路上有一堆討論，讀者若有興趣，可以使用 tagsoup namespace 關鍵字自行搜尋。值得注意的是，在這一堆討論中，其中一篇[討論文][8]中提到： 
+可惜的是，這個方法在 JDOM/TagSoup 這個組合行不通。網路上有一堆討論，讀者若有興趣，可以使用 tagsoup namespace 關鍵字自行搜尋。值得注意的是，在這一堆討論中，其中一篇[討論文][8]中提到：
 
 <pre>
 
 How to parse XML document with default namespace with JDOM XPath
 
-TagSoup lets you disable namespaces by setting the standard SAX feature `http://xml.org/sax/features/namespaces` 
-to false. Unfortunately for you, JDOM will turn it back on before parsing. 
+TagSoup lets you disable namespaces by setting the standard SAX feature `http://xml.org/sax/features/namespaces`
+to false. Unfortunately for you, JDOM will turn it back on before parsing.
 You might need to use a standard DOM instead; Java 5 and Java 6 have built-in XPath support.
 
 </pre>
@@ -119,15 +120,15 @@ System.setProperty( "javax.xml.parsers.SAXParserFactory", "org.ccil.cowan.tagsou
 就是在這樣絕望的情況下，自行針對解析完畢的 DOM 物件，尋訪其全部的元素，再一一移除每個元素的 namespace 定義。不過，文章中介紹的是針對 dom4j 的作法，在 JDOM 下，要怎麼做呢？其實也不難，我的作法如下：
 
 ``` groovy
-def removeNamespace( element ) { 
+def removeNamespace( element ) {
     def additional = element.additionalNamespaces
     if ( additional.size() == 0 && element.namespace == Namespace.NO_NAMESPACE ) {
         return
     }
 
     element.namespace = Namespace.NO_NAMESPACE
-    if ( additional.size() > 0 ) { 
-        for ( int i = additional.size(); --i >= 0; ) { 
+    if ( additional.size() > 0 ) {
+        for ( int i = additional.size(); --i >= 0; ) {
             element.removeNamespaceDeclaration( additional.get( i ) )
         }
     }
@@ -135,12 +136,12 @@ def removeNamespace( element ) {
     def children = element.children
     for ( int i = children.size(); --i >= 0; ) {
         def child = children.get( i )
-        removeNamespace( child ) 
+        removeNamespace( child )
     }
 }
 ```
 
-上面這個函數負責移除指定的元素以及其所有子元素的所有的 namespace 定義。如果只要移除特定的 namespace，則需要判斷 URI，不過由於 TagSoup 會修改使用 prefix 的標籤的 URI 的定義，這樣做並沒有意義。另外，上面的函數並未處理屬性的 namespace，需要的話，請讀者自行嘗試加上屬性的處理。 
+上面這個函數負責移除指定的元素以及其所有子元素的所有的 namespace 定義。如果只要移除特定的 namespace，則需要判斷 URI，不過由於 TagSoup 會修改使用 prefix 的標籤的 URI 的定義，這樣做並沒有意義。另外，上面的函數並未處理屬性的 namespace，需要的話，請讀者自行嘗試加上屬性的處理。
 
 有了上面的函數，要移除整個文件的 namespace 定義，只要將 JDOM 的 Document 物件傳入即可：
 
@@ -158,7 +159,7 @@ removeNamespace( doc )
 
 為甚麼不直接從源頭修正呢？
 
-如果前面提到的『JDOM 會再把 namespace 的處理重新打開』是正確的，我們是不是可以在實際解析之前，再把 namespace 的處理關掉呢？ 
+如果前面提到的『JDOM 會再把 namespace 的處理重新打開』是正確的，我們是不是可以在實際解析之前，再把 namespace 的處理關掉呢？
 
 查看 JDOM 的原始碼，可以在 `SAXBuilder` 類別中看到，XML 解析器是在 `createParser()` 函數中建立的：
 
@@ -167,8 +168,8 @@ protected XMLReader createParser() throws JDOMException {
     XMLReader parser = null;
     if (saxDriverClass != null) {
         // The user knows that they want to use a particular class
-        try { 
-            parser = XMLReaderFactory.createXMLReader(saxDriverClass); 
+        try {
+            parser = XMLReaderFactory.createXMLReader(saxDriverClass);
             // Configure parser
             setFeaturesAndProperties(parser, true);
         }
@@ -178,7 +179,7 @@ protected XMLReader createParser() throws JDOMException {
     }
     else {
         // ...
-    } 
+    }
 }
 ```
 
@@ -195,8 +196,8 @@ private void setFeaturesAndProperties(XMLReader parser, boolean coreFeatures)
         throws JDOMException {
     // ...
     if (coreFeatures) {
-        // ... 
-        // Setup some namespace 
+        // ...
+        // Setup some namespace
         features.internalSetFeature(parser, "http://xml.org/sax/features/namespaces", true, "Namespaces");
         internalSetFeature(parser, "http://xml.org/sax/features/namespace-prefixes", true, "Namespace prefixes");
     }
@@ -216,12 +217,12 @@ private void internalSetFeature(XMLReader parser, String feature, boolean value,
     catch (SAXNotSupportedException e) {
         throw new JDOMException( displayName
             + " feature not supported for SAX driver "
-            + parser.getClass().getName()); 
+            + parser.getClass().getName());
     }
     catch (SAXNotRecognizedException e) {
         throw new JDOMException( displayName
             + " feature not recognized for SAX driver "
-            + parser.getClass().getName()); 
+            + parser.getClass().getName());
     }
 }
 ```
@@ -264,7 +265,7 @@ Caught: org.jdom.IllegalNameException: The name "" is not legal for JDOM/XML ele
 首先，`http://xml.org/sax/features/namespaces` 這個 feature ，在 src/java/org/ccol/cowan/tagsoup/Parser.java 中，被定義為 `namespacesFeature` 這個常數：
 
 ``` java
-public final static String namespacesFeature = "http://xml.org/sax/features/namespaces"; 
+public final static String namespacesFeature = "http://xml.org/sax/features/namespaces";
 ```
 
 然後，在 `setFeature()` 函數中，判定若參數 `name` 值等於 `namespacesFeature`，則將 namespace 這個變數設定為指定的值，在上面的實驗裡，這個值是 `false`：
@@ -273,9 +274,9 @@ public final static String namespacesFeature = "http://xml.org/sax/features/name
 public void setFeature (String name, boolean value)
         throws SAXNotRecognizedException, SAXNotSupportedException {
     // . . .
-    if (name.equals(namespacesFeature)) 
+    if (name.equals(namespacesFeature))
         namespaces = value;
-    // . . . 
+    // . . .
 }
 ```
 
@@ -283,14 +284,14 @@ public void setFeature (String name, boolean value)
 
 ``` java
 private void pop() throws SAXException {
-    if (theStack == null) return; // empty stack 
+    if (theStack == null) return; // empty stack
     String name = theStack.name();
-    String localName = theStack.localName(); 
+    String localName = theStack.localName();
     String namespace = theStack.namespace();
     String prefix = prefixOf(name);
     if (!namespaces) namespace = localName = "";
     theContentHandler.endElement(namespace, localName, name);
-    // . . . 
+    // . . .
 }
 ```
 
@@ -306,7 +307,7 @@ if (!namespaces) namespace = localName = "";
 
 <pre>
 localName - the local name (without prefix),
-    or the empty string if Namespace processing is not being performed 
+    or the empty string if Namespace processing is not being performed
 </pre>
 
 意思大致是說，當不處理 namespace 時（也就是 `http://xml.org/sax/features/namespaces` 設定為 `false` 時），`localName` 這個參數是**空字串**。
@@ -364,7 +365,7 @@ public void startElement(String namespaceURI, String localName, String qName, At
     // Handle attributes
     for (int i=0, len=atts.getLength(); i<len; i++) {
         Attribute attribute = null;
-        
+
         String attLocalName = atts.getLocalName(i);
         String attQName = atts.getQName(i);
         int attType = getAttributeType(atts.getType(i));
@@ -374,7 +375,7 @@ public void startElement(String namespaceURI, String localName, String qName, At
         // them already in startPrefixMapping().
         // This is sometimes necessary when SAXHandler is used with
         // another source than SAXBuilder, as with JDOMResult.
-        if (attQName.startsWith("xmlns:") || attQName.equals("xmlns")) { 
+        if (attQName.startsWith("xmlns:") || attQName.equals("xmlns")) {
             continue;
         }
 
@@ -472,48 +473,48 @@ namespace prefix: "myns"; xpath: "//myns:span"
 
 <pre>
 
-**Warning: TagSoup will not build on stock Java 5.x or 6.x!** Due to a bug 
-in the versions of Xalan shipped with Java 5.x and 6.x, TagSoup will not build 
-out of the box. You need to retrieve [Saxon 6.5.5][19], which does not have 
-the bug. Unpack the zipfile in an empty directory and copy the saxon.jar and 
-saxon-xml-apis.jar files to $ANT_HOME/lib. The Ant build process for TagSoup 
-will then notice that Saxon is available and use it instead. 
+**Warning: TagSoup will not build on stock Java 5.x or 6.x!** Due to a bug
+in the versions of Xalan shipped with Java 5.x and 6.x, TagSoup will not build
+out of the box. You need to retrieve [Saxon 6.5.5][19], which does not have
+the bug. Unpack the zipfile in an empty directory and copy the saxon.jar and
+saxon-xml-apis.jar files to $ANT_HOME/lib. The Ant build process for TagSoup
+will then notice that Saxon is available and use it instead.
 
 </pre>
 
 所以請先下載 [Saxon 6.5.5][19]，解開後，將 saxon.jar 及 saxon-xml-apis.jar 放到 ant 安裝目錄的 lib 目錄下。
 
-然後請打開 Parser.java，我們要將所有使用到 `startPrefixMapping()` 及 `endPrefixMapping()` 函數的地方，都加上是否啟用 `namespaces` 的判斷。同樣地，要修改的地方都放在 `hack start` 到 `hack end` 註解中間，為了避免說明不清造成誤解，修改後的函數的完整列表如下： 
+然後請打開 Parser.java，我們要將所有使用到 `startPrefixMapping()` 及 `endPrefixMapping()` 函數的地方，都加上是否啟用 `namespaces` 的判斷。同樣地，要修改的地方都放在 `hack start` 到 `hack end` 註解中間，為了避免說明不清造成誤解，修改後的函數的完整列表如下：
 
 ``` java
 public void parse (InputSource input) throws IOException, SAXException {
-    setup(); 
+    setup();
     Reader r = getReader(input);
     theContentHandler.startDocument();
     theScanner.resetDocumentLocator(input.getPublicId(), input.getSystemId());
     if (theScanner instanceof Locator) {
-        theContentHandler.setDocumentLocator((Locator)theScanner); 
+        theContentHandler.setDocumentLocator((Locator)theScanner);
     }
     // hack start
     if (namespaces)
     // hack end
-    if (!(theSchema.getURI().equals(""))) 
-        theContentHandler.startPrefixMapping(theSchema.getPrefix(), theSchema.getURI()); 
+    if (!(theSchema.getURI().equals("")))
+        theContentHandler.startPrefixMapping(theSchema.getPrefix(), theSchema.getURI());
     theScanner.scan(r, this);
 }
 
-public void eof(char[] buff, int offset, int length) throws SAXException { 
+public void eof(char[] buff, int offset, int length) throws SAXException {
     if (virginStack)
         rectify(thePCDATA);
     while (theStack.next() != null) {
-        pop(); 
+        pop();
     }
     // hack start
     if (namespaces)
     // hack end
-    if (!(theSchema.getURI().equals(""))) 
+    if (!(theSchema.getURI().equals("")))
         theContentHandler.endPrefixMapping(theSchema.getPrefix());
-    theContentHandler.endDocument(); 
+    theContentHandler.endDocument();
 }
 
 private void pop() throws SAXException {
@@ -526,11 +527,11 @@ private void pop() throws SAXException {
     // System.err.println("%% Popping " + name);
     if (!namespaces) namespace = localName = "";
     theContentHandler.endElement(namespace, localName, name);
-    
+
     // hack start
     if (namespaces) {
     // hack end
-    
+
     if (foreign(prefix, namespace)) {
         theContentHandler.endPrefixMapping(prefix);
         // System.err.println("%% Unmapping [" + prefix + "] for elements to " + namespace);
@@ -544,12 +545,12 @@ private void pop() throws SAXException {
             // System.err.println("%% Unmapping [" + attPrefix + "] for attributes to " + attNamespace);
         }
     }
-        
+
     // hack start
-    } 
+    }
     // hack end
-    
-    theStack = theStack.next(); 
+
+    theStack = theStack.next();
 }
 
 private void push(Element e) throws SAXException {
@@ -567,11 +568,11 @@ private void push(Element e) throws SAXException {
         }
         catch (IOException ew) {}   // Can't be thrown for root I believe.
     }
-    
+
     // hack start
     if (!namespaces)
     // hack end
-    
+
     if (foreign(prefix, namespace)) {
         theContentHandler.startPrefixMapping(prefix, namespace);
         // System.err.println("%% Mapping [" + prefix + "] for elements to " + namespace);
@@ -581,13 +582,13 @@ private void push(Element e) throws SAXException {
     for (int i = 0; i < len; i++) {
         String attNamespace = atts.getURI(i);
         String attPrefix = prefixOf(atts.getQName(i));
-        
+
         // hack start
         if (!namespaces) {
             ((AttributesImpl)atts).setURI( i, "" );
             ((AttributesImpl)atts).setLocalName( i, "" );
-        } 
-        else 
+        }
+        else
         // hack end
         if (foreign(attPrefix, attNamespace)) {
             theContentHandler.startPrefixMapping(attPrefix, attNamespace);
@@ -598,13 +599,13 @@ private void push(Element e) throws SAXException {
     e.setNext(theStack);
     theStack = e;
     virginStack = false;
-    if (CDATAElements && (theStack.flags() & Schema.F_CDATA) != 0) { 
-        theScanner.startCDATA(); 
+    if (CDATAElements && (theStack.flags() & Schema.F_CDATA) != 0) {
+        theScanner.startCDATA();
     }
 }
 ```
 
-修改後，同樣使用 ant 建置專案，完成後，將 build/lib/tagsoup-1.2.jar 放到 CLASSPATH 下即可（記得先備份原有的 tagsoup-1.2.jar）。 
+修改後，同樣使用 ant 建置專案，完成後，將 build/lib/tagsoup-1.2.jar 放到 CLASSPATH 下即可（記得先備份原有的 tagsoup-1.2.jar）。
 
 為了確認能否正確處理屬性，還要將實驗程式加上屬性：
 
@@ -654,7 +655,7 @@ namespace prefix: "html"; xpath: "//html:span"
 namespace prefix: "myns"; xpath: "//myns:span"
 ```
 
-不但 `id` 屬性可以正確處理，連 `html` 標籤上的 `xmlns:html` 定義都移除了。帥啊！ 
+不但 `id` 屬性可以正確處理，連 `html` 標籤上的 `xmlns:html` 定義都移除了。帥啊！
 
 最後，套用到 gnews.groovy 看看：
 
@@ -670,13 +671,13 @@ namespace prefix: "myns"; xpath: "//myns:span"
 
 另外，由於 TagSoup 完全不處理 `http://www.w3.org/1999/xhtml` 以外的 namespace，並直接將外部 namespace 都對應為 `xmlns:xxx="urn:x-prefix:xxx"` 的形式。所以，當處理含有外部 namespace 定義的文件時，應考慮使用標準 XML 解析器進行解析。若使用 TagSoup 解析，將會遇到許多困難。
 
-歡迎大家的回饋與心得分享。 
+歡迎大家的回饋與心得分享。
 
 ### 相關文章：
 
 * [HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath][html-data-mining-part-1-jdom-tagsoup-xpath]
-* [HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace] 
-* [HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to] 
+* [HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace]
+* [HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to]
 
 <!-- cross references -->
 

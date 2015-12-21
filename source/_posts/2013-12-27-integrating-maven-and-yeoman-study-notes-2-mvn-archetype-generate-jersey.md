@@ -1,7 +1,8 @@
 title: '整合 Maven 與 Yeoman，學習筆記 (2) - 使用 mvn archetype:generate 建立 JAX-RS / Jersey 專案'
 date: 2013-12-27 0:56:01
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - JAX-RS
   - Jersey

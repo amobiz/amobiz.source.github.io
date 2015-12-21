@@ -4,6 +4,7 @@ date: 2015-12-20 06:30:30
 category:
   - Programming
 tags:
+  - JavaScript
   - JSHint
   - lint
   - pitfalls

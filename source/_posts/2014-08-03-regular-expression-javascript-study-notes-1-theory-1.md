@@ -1,7 +1,8 @@
 title: 'Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)'
 date: 2014-08-03 00:06:54
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - JavaScript
   - Regular Expression
@@ -38,7 +39,7 @@ Stephen Cole Kleene 的正則表達式，使用的是 [Deterministic Finite Auto
 
 而由 Perl 語言所引領風潮的正則表達式，包括 JavaScript，所採用的正則引擎則屬於 [Nondeterministic Finite Automaton] (NFA, 非確定性有限狀態自動機) 引擎。這種引擎實際上已經不是數學意義上的正則表達式了。[Mastering Regular Expressions, 3rd Edition] 的作者 Jeffrey E. F. Friedl 將這種引擎比擬為「燃油引擎」，意思是它跟正統的 DFA 引擎相比，更難掌控，但威力強大，如果控制得宜，可以做到 DFA 引擎做不到的功能。 (簡單地說，可以玩出更多花樣。)
 
-### NFA 引擎匹配基本原理 
+### NFA 引擎匹配基本原理
 
 這裡介紹的匹配原理，是以描述程式處理邏輯的方式說明，不涉及數學公式。以下文章在內文中提到正則表達式時，會以「`expression`」的方式表示，在提到文本以及匹配的文本時，會以 `"literal"` 的方式表示。
 
@@ -246,7 +247,7 @@ NFA 引擎最重要的性質是，它會依序處理各個子表達式或組成�
 
 ### 相關文章
 
-* [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1] 
+* [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1]
 * [Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)][regular-expression-javascript-study-notes-2-theory-2]
 * <span id="bnf-grammar"></span>[Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法][regular-expression-javascript-study-notes-3-informal-bnf-grammar]
 * [Open Sourced my JavaScript Regular Expression Generator - RegexGen.js][open-sourced-my-javascript-regular-expression-generator-regexgenjs]
@@ -263,4 +264,3 @@ NFA 引擎最重要的性質是，它會依序處理各個子表達式或組成�
 [Nondeterministic Finite Automaton]: http://en.wikipedia.org/wiki/Nondeterministic_Finite_Automaton
 [Mastering Regular Expressions, 3rd Edition]: http://shop.oreilly.com/product/9780596528126.do
 [Regular Expressions Cookbook, 2nd Edition]: http://shop.oreilly.com/product/0636920023630.do
-

@@ -1,8 +1,10 @@
 title: Gulp 學習筆記 - Gulp Internals (3.x)
 date: 2015-11-12 20:38:00
 comments: true
-category:
+categories:
+  - Programming
 tags:
+  - JavaScript
   - Gulp
   - notes
 ---
@@ -251,6 +253,3 @@ module.exports = function (filename, baseDir) {
 3. 前面提到 `vinyl` 物件最重要的四大屬性，其中 `contents` 是用來傳輸 / 存放檔案內容的。在這裡，`contents` 實際上又是一個 `through2` 物件，注意這裡沒有定義 `objectMode`，所以這是一個 `byte stream`。
 4. 在每當 up stream 有資料傳送進來時，便呼叫 `push()` 函數，將資料推送到 buffer 中。
 5. `through2` 接受的第二個函數，稱為 `flushFunction`，是當 stream 資料傳輸完畢時，負責進行最後的收尾清理工作。在這裡都 `push(null)` 表示資料結尾。
-
-
-

@@ -1,7 +1,8 @@
 title: 'How to get the redirected URL using HttpURLConnection - 如何取得 HttpURLConnection 轉址後的 URL'
 date: 2011-03-11 15:00:00
 comments: true
-categories: 
+categories:
+  - Programming
 tags: 
   - HTTP
   - Java

@@ -1,7 +1,8 @@
 title: 'JavaScript: Truthy? Falsy?'
 comments: true
 date: 2015-09-28 13:21:18
-category:
+categories:
+  - Programming
 tags:
   - JavaScript
   - pitfalls
@@ -18,7 +19,7 @@ tags:
 
 __falsy values__
 
-Value     | Type      | Implementation 
+Value     | Type      | Implementation
 ----------|-----------|----------------
 0         | Number    | Constant
 NaN       | Number    | Global Variable
@@ -58,7 +59,7 @@ value == true
 
 {% cheatsheet 警告 class:warning %}
 不建議使用 `==` 運算子，詳見 [JavaScript - The Good Parts](http://shop.oreilly.com/product/9780596517748.do)
-{% endcheatsheet %} 
+{% endcheatsheet %}
 
 Falsy 值測試範例：
 
@@ -229,7 +230,7 @@ value === null
 typeof value === 'object'
 ```
 
-{% endcheatsheet %} 
+{% endcheatsheet %}
 
 {% cheatsheet 注意 %}
 在 JavaScript 中，`undefined` 不是關鍵字，而是以 global 變數的方式實作。在無法完全控制的環境下，可以像這樣確保 `undefined` 不受影響：
@@ -244,7 +245,7 @@ undefined = 'not undefined';
 })(value);
 ```
 
-{% endcheatsheet %} 
+{% endcheatsheet %}
 
 關於兩者的使用時機：
 
@@ -355,7 +356,7 @@ if (message) {
 
 由於 JavaScript 對於 falsy 值的認定過於寬鬆，甚至比 C/C++ 還寬鬆，導致在處理有效值的時候，反而需要進行額外的處理。這當然是 bad parts，而且還是無法避開的部份。希望經過本文的詳細探討之後，能幫助初學者掌握到其中的關鍵。
 
-歡迎大家的回饋與心得分享。 
+歡迎大家的回饋與心得分享。
 
 ### 參考文章：
 

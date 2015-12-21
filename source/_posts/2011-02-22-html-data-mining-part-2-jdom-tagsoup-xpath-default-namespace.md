@@ -1,7 +1,8 @@
 title: 'HTML 資訊汲取（中篇） - Default namespace 問題'
 date: 2011-02-22 02:46:00
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - Groovy
   - HTML
@@ -56,7 +57,7 @@ result.each { println it.text }
 
 ``` html
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:html="http://www.w3.org/1999/xhtml"> 
+      xmlns:html="http://www.w3.org/1999/xhtml">
 ```
 
 其中 `xmlns="http://www.w3.org/1999/xhtml"` 是『default namespace (預設命名空間)』。所謂 default namespace，是指若 XML 標籤未明確指明其 namespace，則自動歸屬於該 namespace。
@@ -65,7 +66,7 @@ result.each { println it.text }
 
 這裡的重要觀念是，namespace 並非由 prefix 決定，而是由引號中的 URI 指定。上面兩個 namespace，不論是 default namespace 或是以 html 作為 prefix 指定的一般 namespace，由於他們的 URI 皆為 `http://www.w3.org/1999/xhtml`，所以其實是同一個 namespace。也就是說，在這個例子裡，`span` 跟 `html:span` 兩種寫法是等價的，指的都是 `http://www.w3.org/1999/xhtml` 這個 namespace。
 
-上面『（只）含有』的意思是，如果網頁同時含有其他 namespace 的定義，都會被 TagSoup 移除，並且在實際用到該 prefix 的標籤處，換成類似下面這樣的宣告： 
+上面『（只）含有』的意思是，如果網頁同時含有其他 namespace 的定義，都會被 TagSoup 移除，並且在實際用到該 prefix 的標籤處，換成類似下面這樣的宣告：
 
 ``` html
 <html:span xmlns:html="urn:x-prefix:html">prefix:html</html:span>
@@ -112,9 +113,9 @@ output:
     <myns:span xmlns:myns="urn:x-prefix:myns">prefix:myns</myns:span>
   </body>
 </html>
-		
+
 result:
-	
+
 namespace prefix: ""; xpath: "//span"
 namespace prefix: "html"; xpath: "//html:span"
 	<span xmlns="http://www.w3.org/1999/xhtml">prefix:default</span>
@@ -126,7 +127,7 @@ namespace prefix: "myns"; xpath: "//myns:span"
 
 ``` html
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:html="http://www.w3.org/1999/xhtml">
 ```
 
@@ -134,14 +135,14 @@ namespace prefix: "myns"; xpath: "//myns:span"
 ``` html
 <span>prefix:default</span>
 <html:span>prefix:html</html:span>
-<myns:span>prefix:myns</myns:span> 
+<myns:span>prefix:myns</myns:span>
 ```
 
 TagSoup 輸出後，卻變成這樣：
 
 ``` html
 <span>prefix:default</span>
-<html:span xmlns:html="urn:x-prefix:html">prefix:html</html:span> 
+<html:span xmlns:html="urn:x-prefix:html">prefix:html</html:span>
 <myns:span xmlns:myns="urn:x-prefix:myns">prefix:myns</myns:span>
 ```
 
@@ -163,11 +164,11 @@ xpath.addNamespace( prefix, "http://www.w3.org/1999/xhtml" )
 
 當 XPath 進行比對時，除了會由 XML 文件的 namespace 定義中，建立 namespace 的 prefix / URI 對應表，還會查找我們提供的 prefix / URI 對應關係。這是因為文件撰寫者與 XPath 使用者通常不會是同一人，由於 prefix 是可以自訂的，所以 namespace 被設計成使用 URI 作為識別，prefix 則只是當作該 URI 的別名使用。由於嚴格的 XML 須使用 DTD 定義，因此所有的合法標籤，都應該已被定義在適當的 namespace 之中，也就是說，對應到特定的 URI。所以，XPath 只需提供方法，讓 XPath 使用者使用任意自訂的 prefix，再提供方法，讓該 prefix 能指向正確的 URI，即可對應到正確的 namespace 了。
 
-但由於 TagSoup 輸出的 XHTML 中，將我們定義的 `myns` 移除了，JDOM 無法從 XHTML 中建立 `myns` 的對應關係，此時如果將呼叫 `addNamespace()` 函數的這一行程式碼移除，JDOM 將找不到 `myns` 對應的 URI 定義，於是在解析 XPath 時，將會丟出這樣的錯誤訊息： 
+但由於 TagSoup 輸出的 XHTML 中，將我們定義的 `myns` 移除了，JDOM 無法從 XHTML 中建立 `myns` 的對應關係，此時如果將呼叫 `addNamespace()` 函數的這一行程式碼移除，JDOM 將找不到 `myns` 對應的 URI 定義，於是在解析 XPath 時，將會丟出這樣的錯誤訊息：
 
 ```
-Caught: org.jdom.JDOMException: XPath error while evaluating "//myns:span": 
-XPath expression uese unbound namespace prefix myns: XPath expression uses 
+Caught: org.jdom.JDOMException: XPath error while evaluating "//myns:span":
+XPath expression uese unbound namespace prefix myns: XPath expression uses
 unbound namespace prefix myns
 ```
 
@@ -202,7 +203,7 @@ input:
         <myns:span>prefix:myns</myns:span>
     </body>
 </html>
-		
+
 output:
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -218,9 +219,9 @@ output:
         <myns:span>prefix:myns</myns:span>
     </body>
 </html>
-		
+
 result:
-		
+
 namespace prefix: ""; xpath: "//span"
 namespace prefix: "html"; xpath: "//html:span"
 	<span xmlns="http://www.w3.org/1999/xhtml">prefix:default</span>
@@ -265,7 +266,7 @@ namespace prefix: "myns"; xpath: "//myns:span"
 xpath.addNamespace( prefix, "http://www.w3.org/1999/xhtml" )
 ```
 
-XPath 選擇的結果也完全相同。可見得 JDOM 可以透過 `html` 標籤中的 `xmlns 的`namespace 定義，正確的對應 prefix。 
+XPath 選擇的結果也完全相同。可見得 JDOM 可以透過 `html` 標籤中的 `xmlns 的`namespace 定義，正確的對應 prefix。
 
 若進一步實驗：將 `html` 標籤中的 default namespace 定義移除，而保留另外兩個具 prefix 的 namespace 的定義：
 
@@ -292,8 +293,8 @@ namespace prefix: "myns"; xpath: "//myns:span"
 
 查看 JDOM 的 XPath 類別的 addNamespace() 函數的[說明文件][6]，發現了這一段說明：
 
-> **Note**: In XPath, there is no such thing as a 'default namespace'. The empty 
-> prefix **always** resolves to the empty namespace URI. 
+> **Note**: In XPath, there is no such thing as a 'default namespace'. The empty
+> prefix **always** resolves to the empty namespace URI.
 
 意思是說：在 XPath 中，並沒有所謂『預設命名空間』。所以，若 prefix 為空字串 ""，則永遠對應到『空』命名空間。
 
@@ -315,10 +316,10 @@ namespace prefix: "myns"; xpath: "//myns:span"
 ### 相關文章：
 
 * [HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath][html-data-mining-part-1-jdom-tagsoup-xpath]
-* [HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace] 
-* [HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to] 
+* [HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace]
+* [HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to]
 
-歡迎大家的回饋與心得分享。 
+歡迎大家的回饋與心得分享。
 
 <!-- cross references -->
 

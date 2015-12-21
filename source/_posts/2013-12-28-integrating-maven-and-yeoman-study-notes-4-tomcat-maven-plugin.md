@@ -2,6 +2,7 @@ title: '整合 Maven 與 Yeoman，學習筆記 (4) - tomcat-maven-plugin'
 date: 2013-12-28 01:46
 comments: true
 categories:
+  - Programming
 tags: 
   - Tomcat
   - Maven
@@ -17,7 +18,7 @@ tags:
 <properties>
   <tomcat.version>2.2</tomcat.version>
 </properties>
-    
+
 <build>
   <plugins>
     <!-- Tomcat support -->
@@ -33,7 +34,7 @@ tags:
 <build>
 ```
 
-1. 跟 Jetty 相反，Tomcat 預設的 web app context 是 `/${project.artifactId}`，以 [此範例][maven_yeoman_2] 來說就是 `/myapp`，所以最好指定 `path` 參數。參考 Tomcat 文件：[Usage][Tomcat Usage]。 
+1. 跟 Jetty 相反，Tomcat 預設的 web app context 是 `/${project.artifactId}`，以 [此範例][maven_yeoman_2] 來說就是 `/myapp`，所以最好指定 `path` 參數。參考 Tomcat 文件：[Usage][Tomcat Usage]。
 2. 全部的 goal 請參考 [Plugin Documentation]。
 3. 參數：[Guide to Configuring Plug-ins]。沒有找到類似 Jetty 的 `scanIntervalSeconds` 參數。
 

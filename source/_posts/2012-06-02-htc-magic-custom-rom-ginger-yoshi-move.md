@@ -1,7 +1,8 @@
 title: 'HTC Magic Custom Rom: Ginger Yoshi (rooted) - Move Davlik-cache back to ROM step by step - 把 Davlik-cache 搬回 ROM'
 date: 2012-06-02 04:45:44
 comments: true
-categories: 
+categories:
+  - Hack
 tags:
   - Android
   - APP2SD
@@ -101,7 +102,7 @@ done
 
 ### 結論
 
-經過上述兩個步驟，內部記憶體還剩餘 109 MB，而 a2sd 則變成 174 MB，已經相當滿意了。而且使用上，因為 `davlik-cache` 放在 ROM 的關係，程式的啟動速度更快了。 
+經過上述兩個步驟，內部記憶體還剩餘 109 MB，而 a2sd 則變成 174 MB，已經相當滿意了。而且使用上，因為 `davlik-cache` 放在 ROM 的關係，程式的啟動速度更快了。
 
 ### 失敗筆記
 
@@ -131,5 +132,4 @@ done
 [2]: https://play.google.com/store/apps/details?id=com.keramidas.TitaniumBackup "Titanium Backup"
 [4]: http://www.mobile01.com/topicdetail.php?f=423&t=1715008 "[分享文] 使用 A2SD 時，資料存放的位置解說"
 [5]: http://sjbbs.zol.com.cn/1/33672_116.html "【教程】超詳細的App to SD 教程與大家分享"
-[6]: http://android-dls.com/wiki/index.php?title=Haykuro_Apps_to_SD "Haykuro Apps to SD" 
-
+[6]: http://android-dls.com/wiki/index.php?title=Haykuro_Apps_to_SD "Haykuro Apps to SD"

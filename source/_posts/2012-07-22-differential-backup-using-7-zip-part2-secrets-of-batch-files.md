@@ -1,7 +1,8 @@
 title: 'Differential backup using 7-Zip for Windows (Part 2) - Secrets of batch files - 利用 7-Zip 進行差異備份（下篇） - 批次檔案的秘密'
 date: 2012-07-22 04:55:53
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - 7-Zip
   - Backup
@@ -23,7 +24,7 @@ tags:
 首先，以下是我慣用的批次檔檔案架構：
 
 ``` bat
-@echo off 
+@echo off
   goto CONFIG
 
   rem 批次檔使用與注意事項說明
@@ -758,7 +759,7 @@ Requesting diff backup for ""C:\temp""...
   goto :END
 :SUB
   echo %1 expands to: %~f1
-:END 
+:END
 ```
 
 輸出：
@@ -852,7 +853,7 @@ for %%F in (%SRC_DIR%) do (
 <!-- differential-backup-using-7-zip-windows-7z-bak.cmd -->
 <!-- inno-v/5650722 -->
 {% gist amobiz/d0be531a7c109c785845 %}
- 
+
 ### 結論
 
 之前對於批次檔的認識，一直停留在 DOS 3.X ~ 6.X 的時代，從來沒用過擴充功能。這次心血來潮，決定使用批次檔來呼叫 7-Zip 執行備份工作，說真的，實在是...自找罪受。Cmd 批次檔畢竟是 DOS 時代的遺物了，應該要跟上時代，改用 [Windows PowerShell][18]。

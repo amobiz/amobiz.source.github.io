@@ -1,7 +1,8 @@
 title: '在 Blogger 上用 Google Code Prettify 及 GitHub Gist 顯示程式碼 (不修改範本的懶人招數)'
 date: 2013-05-28 01:16:59
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - Blogger
   - Gist
@@ -49,7 +50,7 @@ tags:
 
 網路上找到的 Google Code Prettify 中文資訊，似乎還是很久以前剛做設定時同樣的那幾篇文章，做法都還是不免要直接編輯 HTML 範本，並且要修改兩、三個地方。
 
-這是由於 Google Code Prettify 需要處理以下三個步驟： 
+這是由於 Google Code Prettify 需要處理以下三個步驟：
 
 {% cheatsheet Google Code Prettify 對程式碼的處理需要三個步驟 %}
 * 載入 css 樣式表，設定程式碼顯示的樣式，

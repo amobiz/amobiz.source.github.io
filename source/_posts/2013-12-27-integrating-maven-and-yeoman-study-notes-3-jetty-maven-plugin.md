@@ -1,7 +1,8 @@
 title: '整合 Maven 與 Yeoman，學習筆記 (3) - jetty-maven-plugin'
 date: 2013-12-27 03:24:11
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - Jetty
   - Maven
@@ -17,7 +18,7 @@ tags:
 <properties>
   <jetty.version>9.0.6.v20130930</jetty.version>
 </properties>
-    
+
 <build>
   <plugins>
     <!-- Jetty support -->

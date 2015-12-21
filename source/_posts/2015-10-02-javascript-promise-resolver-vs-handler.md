@@ -1,7 +1,8 @@
 title: 'JavaScript Promise: resolver vs. handler'
 date: 2015-10-02 17:55:08
 comments: true
-category:
+categories:
+  - Programming
 tags:
   - JavaScript
   - Design Pattern

@@ -1,7 +1,8 @@
 title: 'Differential backup using 7-Zip for Windows (Part 1) - 利用 7-Zip 進行差異備份（上篇）'
 date: 2012-07-20 04:50:32
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - 7-Zip
   - Backup

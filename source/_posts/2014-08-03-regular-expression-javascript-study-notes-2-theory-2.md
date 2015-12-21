@@ -1,7 +1,8 @@
 title: 'Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)'
 date: 2014-08-03 00:06:55
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - JavaScript
   - Regular Expression
@@ -31,7 +32,7 @@ tags:
 
 #### Lookahead (順序環視)
 
-Lookahead (順序環視)，或稱為「順向環視」、「向前環視」，顧名思義是在原地向前看的意思。也就是先偷看還沒看過的內容，確認是否符合預期，只有在接下來的內容能夠滿足指定條件的前提下，才繼續由下一個表達式、由目前位置開始後續的測試。(注意這裡的「前」，是 ahead 的意思，是指對引擎而言，擺在引擎前方尚未測試過的文本。與中文的「先前」，英文的 previous 意思不同。由於在中文裡，ahead 與 previous 的翻譯都有「前」這個字眼，但是實際上方向卻完全相反，為避免混淆，建議使用「順序環視」（依照檢視的順序），以強調環視測試文本的方向與引擎測試文本的方向，兩者之間的關係。) 
+Lookahead (順序環視)，或稱為「順向環視」、「向前環視」，顧名思義是在原地向前看的意思。也就是先偷看還沒看過的內容，確認是否符合預期，只有在接下來的內容能夠滿足指定條件的前提下，才繼續由下一個表達式、由目前位置開始後續的測試。(注意這裡的「前」，是 ahead 的意思，是指對引擎而言，擺在引擎前方尚未測試過的文本。與中文的「先前」，英文的 previous 意思不同。由於在中文裡，ahead 與 previous 的翻譯都有「前」這個字眼，但是實際上方向卻完全相反，為避免混淆，建議使用「順序環視」（依照檢視的順序），以強調環視測試文本的方向與引擎測試文本的方向，兩者之間的關係。)
 
 順序環視表達式的語法為：
 
@@ -206,7 +207,7 @@ $text =~ s/(\d)(?=(\d\d\d)+(?!\d))/$1,/g;
 
 ### 相關文章
 
-* [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1] 
+* [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1]
 * [Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)][regular-expression-javascript-study-notes-2-theory-2]
 * <span id="bnf-grammar"></span>[Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法][regular-expression-javascript-study-notes-3-informal-bnf-grammar]
 * [Open Sourced my JavaScript Regular Expression Generator - RegexGen.js][open-sourced-my-javascript-regular-expression-generator-regexgenjs]

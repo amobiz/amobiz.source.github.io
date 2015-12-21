@@ -1,7 +1,8 @@
 title: '將 SVN Local Repository 轉換為 Git Local Repository (Windows)'
 date: 2014-09-07 21:38:15
 comments: true
-categories: 
+categories:
+  - Programming
 tags:
   - git
   - svn
