@@ -2,7 +2,10 @@ title: {{ title }}
 date: {{ date }}
 comments: true
 category:
+  - Programming
 tags:
+  - tutorial
+  - pitfalls
 ---
 {% cheatsheet 草稿 class:draft class:warning %}
 本文為草稿，請小心參酌使用。
@@ -28,14 +31,14 @@ tags:
 * 項目
 * 項目
 * 項目
-* 項目 
+* 項目
   * 子項目
   * 子項目
 
 1. 項目
 2. 項目
 3. 項目
-4. 項目 
+4. 項目
   1. 子項目
   2. 子項目
 
@@ -49,9 +52,9 @@ tags:
 ### 內嵌程式碼
 
 This is `inline` code.
-		  
+
 ### 程式碼區塊
-	
+
 __filename__
 ``` lang
 ```
@@ -62,12 +65,11 @@ __filename__
 
 ### 結論
 
-歡迎大家的回饋與心得分享。 
+歡迎大家的回饋與心得分享。
 
 ### 參考文章：
 
-* [][1]
-* [][2]
+* [title][slug]
 
 ### 相關文章：
 
@@ -76,10 +78,9 @@ __filename__
 
 <!-- cross references -->
 
-[1]: link "title"
-[2]: link "title" 
+<!-- post_references -->
 
 <!-- external references -->
 
 [1]: link "title"
-[2]: link "title" 
+[2]: link "title"
