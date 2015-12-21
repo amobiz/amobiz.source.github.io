@@ -1,4 +1,4 @@
-title: The Problems of JSHint (JSHint 的問題)'
+title: "The Problems of JSHint (JSHint 的問題)"
 comments: true
 date: 2015-12-20 06:30:30
 category: Programming
@@ -15,6 +15,8 @@ tags: JSHint, lint, pitfalls
 #### 1. 難以確認發生錯誤的規則
 
 預設情況下，根本無法從它的錯誤訊息中，得知是違反那一條[規則][JSHint Options]。每次遇到錯誤，只能利用它的錯誤訊息來搜尋文件，每次幾乎都是看完所有的文件，還是找不到正確的規則。然後你才會不小心[發現 (想起來)][JSHint Doc]，它可以在執行的時候指定 `--verbose` 參數，然後就會顯示對應的規則代碼 (warning code)，譬如 `(W034)`。這難道不應該是預設行為才對嗎？
+
+最糟糕的是，JSHint 的 API 並不支援 `verbose` 選項，這是寫在 [`cli`][JSHint CLI] 模組裡的，也就是說，如果你是使用自動化建制工具，如 [Gulp] 或 [Grunt]，那麼你永遠看不到規則代碼！
 
 #### 2. 沒有完整的規則代碼列表
 
@@ -73,12 +75,14 @@ jshint: {
 [JSHint]: http://jshint.com/docs/
 [JSHint Options]: http://jshint.com/docs/options/
 [JSHint Doc]: http://jshint.com/docs
+[JSHint CLI]: https://github.com/jshint/jshint/blob/master/src/cli.js
 [Search W034]: https://www.google.com.tw/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=site%3Ajshint.com%20W034
 [JSLint Error Explanations]: https://jslinterrors.com/
 [jslinterrors W034]: https://jslinterrors.com/?q=W034
 [Unnecessary 'use strict']: https://jslinterrors.com/unnecessary-use-strict
 [DRY]: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
 [JSON]: https://en.wikipedia.org/wiki/JSON
+[Gulp]: http://gulpjs.com/
 [Grunt]: http://gruntjs.com/
 [Grunt Issue 59]: https://github.com/gruntjs/grunt-contrib-jshint/issues/59
 
