@@ -2,7 +2,10 @@ title: "The Problems of JSHint (JSHint 的問題)"
 comments: true
 date: 2015-12-20 06:30:30
 category: Programming
-tags: JSHint, lint, pitfalls
+tags:
+	- JSHint
+	- lint
+	- pitfalls
 ---
 最早的 JavaScript [linter] 是 [JSLint]，但是由於作者 [Douglas Crockford] 設定了太多個人主觀認定必須要遵守的強制規則，而且很少有妥協的餘地，所以後來強調可以配置規則的 [JSHint] 漸漸崛起，我自己從一開始就是使用 JSHint，並且也用了蠻長一段時間。然而...
 
