@@ -18,7 +18,7 @@ tags:
 
 ### 轉移到 ESLint
 
-老實說，很慶幸我恰巧選擇了使用 [Atom] 編輯器，及 [linter-eslint] package 外掛來進行轉換工作，整個過程輕鬆愉快，一個晚上，就把所有的專案都移轉到 [ESLint] 下了。
+老實說，很慶幸我恰巧選擇了使用 [Atom] 編輯器，及 [linter-eslint] package 外掛來進行轉換工作，整個過程輕鬆愉快，一個晚上，就把所有的專案都移轉到 [ESLint] 下了。(其實不一定要 Atom，任何可以支援 linter-eslint 的編輯器都可以。)
 
 我的作法如下：
 
@@ -53,15 +53,15 @@ tags:
 
 linter-eslint 其實是 [linter] 的 plugin，而 linter 的界面做的相當好：
 
+![圖：(1) 可以在程式碼中直接看到錯誤的地方與發生錯誤的規則。 (2) 可以在下方的錯誤列表中直接複製規則名稱。][linter-eslint-png]
+
 1. 在編輯器中直接強調錯誤的程式碼，以及違反的規則名稱
-所以到底是那一段程式碼發生錯誤，以及違反了那一條規則，一目了然。
+到底是那一段程式碼發生錯誤，以及違反了那一條規則，一目了然。
 
 2. 在下方的錯誤列表中，可以使用滑鼠圈選文字的方式，複製錯誤規則名稱
 如果懶的自己打規則名稱，或者怕打錯，還可以直接複製，然後到網站上查詢。
 
 這一點是我覺得 ESLint 這麼好用的最重要原因。所有的規則，一一對應，沒有模糊不清的地方。你只要根據規則名稱，到 [Rules][eslint-rules] 搜尋一下，就可以找到對應的說明，然後就可以判斷自己要不要遵守這條規則，或是根據自己的喜好或習慣，開關或調整規則的選項。
-
-![圖：(1) 可以在程式碼中直接看到錯誤的地方與發生錯誤的規則。 (2) 可以在下方的錯誤列表中直接複製規則名稱。][linter-eslint-png]
 
 ### ESLint 超簡單入門
 
@@ -73,7 +73,7 @@ ESLint 完全可以自行決定是否套用特定規則，以及套用到何種�
 
 2. 以 [`.eslintrc.*` 檔案][eslint-configuration-file-formats]的方式獨立配置。對該目錄及所有子目錄的檔案[生效][eslint-configuration-cascading-and-hierarchy]；每個子目錄都可以有自己的 `.eslintrc.*` 檔案配置，並且覆蓋其父目錄的配置。注意，繼承規則時，會一路往磁碟的根目錄查詢規則，任何目錄若不想繼承其父目錄的規則，可以使用 `"root": true` 加以阻絕。最後
 
-3. 如果是以 npm 管理模組，可以直接在 `pacakge.json` 中的 `"eslintConfig"` 區段直接配置。(以重複使用的角度，我個人不建議使用這種方式。)
+3. 如果是以 npm 管理模組，可以直接在 `pacakge.json` 中的 "eslintConfig" 區段直接配置。(以重複使用的角度，我個人不建議使用這種方式。)
 
 #### 2. 支援 ES2015 及 JSX 語法規則
 
@@ -123,8 +123,6 @@ ESLint 完全可以自行決定是否套用特定規則，以及套用到何種�
 /* eslint rule-name: [severity, options ...], "plugin-name/rule-name": [severity, options ...] */
 ```
 
-如果使用的外掛需要調整設定，則必須以 `plugin-name/rule-name` 的形式指定。
-
 若以規則檔指定，則以 ["rules"][eslint-configuring-rules] 區指定規則。規則的 JSON 格式完整形式如下：
 ```
 "rule-name": [severity, options ...],
@@ -141,7 +139,7 @@ ESLint 完全可以自行決定是否套用特定規則，以及套用到何種�
 
 而 `options` 的部份，則每一條規則不同，需要查[文件][eslint-rules]。若不需要指定 `options` 部份，則可以省略 `[]` 括號。
 
-如果使用的外掛需要調整設定，則必須以 `plugin-name/rule-name` 的形式指定。注意，這時候__不能__指定 `eslint-plugin-` 前置名稱。
+如果使用的外掛需要調整設定，則必須以 `"plugin-name/rule-name"` 的形式指定。注意，這時候__不能__指定 `eslint-plugin-` 前置名稱。
 
 譬如：
 
