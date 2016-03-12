@@ -137,6 +137,19 @@ app.component('componentName', component);
 [Exploring the Angular 1.5 .component() method](https://toddmotto.com/exploring-the-angular-1-5-component-method)
 
 
+#### Batarang
+
+對於 one time binding 的支援似乎有些問題：
+
+1. 有文章說它會 disable one time binding, 現在一時找不到該文。
+2. 我發現 one time binding 的寫法會有影響，`{{::item.url}}` 這樣在 Batarang 才不會出現 watcher，若這樣 `{{ ::item.url }}` 就會出現。但後者似乎是官方推薦的寫法。
+
+
+#### jqLite
+
+號稱是簡易版的 jQuery，但是由於 API 不支援完整的 jQuery 功能，所以使用時經常踩雷之後才會注意到。譬如：`.children()`, `.parent()` 不支援 selector，`.find()` 雖然支援，但只能使用 tagname。嗯....雖然文件有簡單的註記，但誰會記得這些東西啊～～。這些功能應該 (至少在 development 模式下) 要做 assert，有不支援的參數應該要丟出 exception 才對。
+
+
 ### 文章摘要
 
 #### [WHEN TO USE DIRECTIVES, CONTROLLERS, OR SERVICES IN ANGULAR JS](http://kirkbushell.me/when-to-use-directives-controllers-or-services-in-angular/)

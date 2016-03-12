@@ -1,4 +1,4 @@
-# AngularJS 面試問題
+# AngularJS 1.x 面試問題
 
 ## 請說明 Factory, Service, Provider 的區別
 
@@ -86,8 +86,8 @@ module.provider('providerName', function);
 什麼時候會用到 Provider 呢，首先注意到使用 DI 的時候，我們只能指定依賴對象的名稱，而無法指定參數。
 
 其實 AngularJS 在建立 provider `xxx` 時，會先建立一個 `xxxProvider`，這其實就是使用我們提供的建構函數，以 `new` operator 呼叫後建立的物件。
-程式在初始化的時候，可以要求 DI 插入 `xxxProvider` 物件以獲取該物件，然後，我們可以呼叫該物件提供的任意函數，進行初始化或執行任意行為。
-而其餘部份的程式，則依照舊有的方式，以名稱 `xxx` 的方式，由要求插入 `xxx` 物件，這時候 AngularJS 才會呼叫 `xxxProvider.$get()` 函數，返回真正的元件。
+程式在初始化的時候，可以要求 DI 注入 `xxxProvider` 物件以獲取該物件，然後，我們可以呼叫該物件提供的任意函數，進行初始化或執行任意行為。
+而其餘部份的程式，則依照舊有的方式，以名稱 `xxx` 的方式，要求注入 `xxx` 物件，這時候 AngularJS 才會呼叫 `xxxProvider.$get()` 函數，返回真正的元件。
 
 注意到，provider 本身是 singleton，就跟 service 一樣。但是透過 DI 由 `.$get()` 函數取得的值，則由 provider 本身決定，就跟 factory 一樣。由此可知，service 與 factory 實際上是 provider 的特殊化版本。
 
@@ -107,12 +107,44 @@ module.provider('providerName', function);
 3. 不可透過 decorator 修飾。
 
 value 相較於  constant 的區別：
+
 1. 不可在 module.config() 時期透過 DI 取用，
 2. 不可 DI 引用其他服務 (與 constant 同)，
 3. 可透過 decorator 修飾。
 
 AngularJS: Service vs provider vs factory
 http://stackoverflow.com/questions/15666048/angularjs-service-vs-provider-vs-factory
+
+#### 那麼，到底什麼時候該用哪一個呢？
+
+很多人建議只使用 factory 就好，譬如上面的文章：[Sane, scalable Angular apps are tricky, but not impossible. Lessons learned from PayPal Checkout.](https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef)。
+
+這些人的論點，主要就是前面我強調的：factory 可以做所有 service 可以做的事。
+
+但是我個人則認為，若只看 service 與 factory，由其名稱來看，並不會有什麼容易產生使用時機誤解的地方，反而是考慮到 provider 之後，才讓人發生困惑。
+所以我建議，當服務是 singleton 的時候，使用 service；當服務是用來建立新物件的時候，使用 factory。
+
+那麼，若需要對 service 或 provider 進行設定的話，要怎麼辦呢？
+
+如果可行的話，應該考慮開始採用 AngularJS 2.0。
+在那之前，我建議至少開始改用 borwserify, webpack 或 System.js 這類現代工具來管理模組。
+在建立 angular 模組之前，先載入相依的模組，然後直接進行相關的設定：
+
+```js
+import angular from 'angular';
+import myOtherModule from '../my-other-module/my-other-module';
+import MyAppController from './my-app-controller';
+
+myOtherModule.setValue('max-cache', 500);
+
+let appModule = angular.module('myApp', [myOtherModule])
+.controller('MyAppController', MyAppController);
+
+export default appModule;
+```
+
+至於那些 angular 提供的 provider，只好繼續使用 `.config()` 來引用並進行設定了。
+
 
 ## 請說明 controller 的 $scope 的繼承機制
 
