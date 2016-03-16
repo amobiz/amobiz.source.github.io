@@ -122,7 +122,70 @@ http://stackoverflow.com/questions/15666048/angularjs-service-vs-provider-vs-fac
 這些人的論點，主要就是前面我強調的：factory 可以做所有 service 可以做的事。
 
 但是我個人則認為，若只看 service 與 factory，由其名稱來看，並不會有什麼容易產生使用時機誤解的地方，反而是考慮到 provider 之後，才讓人發生困惑。
+
 所以我建議，當服務是 singleton 的時候，使用 service；當服務是用來建立新物件的時候，使用 factory。
+更多時候，我認為，商業邏輯以及可重用的部份，都可以寫成 service，而 factory 則是做為幫手或者『膠水』，幫助我們更方便使用這些 service。
+
+譬如：
+
+```js
+// 假設 Connection 是外部程式提供的重量級功能，需要複雜的初始化過程及漫長的建立時間
+function Connection(config) {
+}
+
+Connection.prototype.connect = function () {
+};
+
+Connection.prototype.disconnect = function () {
+};
+
+Connection.prototype.send = function (data) {
+};
+
+// 所以想利用 PoolService 幫助回收、重複使用已經建立好的 Connection 物件。
+function PoolService() {
+	this._pool = [];
+
+	this.pop = function () {
+		return this._pool.pop();
+	};
+
+	this.push = function (instance) {
+		this._pool.push(instance);
+	};
+}
+
+// 在程式中，可以寫個簡單的 factory，幫助我們建立並透過 PoolService 重用 Connection 物件。
+function connectionFactory(PoolService, connectionConfig) {
+	var connection = PoolService.pop();
+	if (connection) {
+		return connection;
+	}
+	
+	return new Connection(connectionConfig);
+}
+
+// 在程式中，由於有 factory 的幫助，需要使用 Connection 的地方，
+// 就可以直接利用 factory 來建立或重用 Connection 物件，不需要再多費心思。
+function SessionController(PoolService, connection) {
+	connection.connect();
+
+	this.close = function () {
+		connection.disconnect();
+		PoolService.push(connection);
+	};
+}
+
+var connectionConfig = {
+};
+
+angular
+	.module('app')
+	.constant('connectionConfig', connectionConfig)
+	.service('PoolService', PoolService)
+	.factory('connection', connectionFactory)
+	.controller('SessionController', SessionController);
+```
 
 那麼，若需要對 service 或 provider 進行設定的話，要怎麼辦呢？
 
