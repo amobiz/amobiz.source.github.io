@@ -31,13 +31,21 @@ function postReferenceTag(args, content) {
 	if (!_refs) {
 		Post = hexo.model('Post');
 		_refs = Post.map(function (post, idx) {
-			return '[' + post.slug + ']: ' + (hexo.config.root + (post.path || post.source)) + ' "' + post.title + '"\n';
+			return '[' + post.slug + ']: ' + _link(post) + _title(post) + '\n';
 		}).join('');
 	}
 
 	content = content + '\n' + _refs;
 
 	return '<div>' + hexo.render.renderSync({ text: content, engine: 'markdown' }) + '</div>';
+
+	function _link(post) {
+		return hexo.config.root + (post.path || post.source);
+	}
+
+	function _title(post) {
+		return post.title ? ' "' + post.title + '"' : '';
+	}
 }
 
 hexo.extend.tag.register('postrefs', postReferenceTag, true);
