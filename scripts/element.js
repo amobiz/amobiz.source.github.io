@@ -32,15 +32,15 @@ function elementTag(args, content) {
 		+ '</div>';
 
 	function getId(value) {
-		return getValue('id');
+		return getValue('id', value);
 	}
 
 	function getClass(value) {
-		return getValue('class');
+		return getValue('class', value);
 	}
 
 	function getValue(type, value) {
-		value = value.split('\s*:\s*');
+		value = value.split(/\s*:\s*/);
 		if (value && value[0] === type) {
 			return value[1];
 		}
