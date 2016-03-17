@@ -152,13 +152,12 @@ tags:
 
 ### 相關文章：
 
-* [Differential backup using 7-Zip for Windows (Part 1) - 利用 7-Zip 進行差異備份（上篇）][differential-backup-using-7-zip-part1-windows]
-* [Differential backup using 7-Zip for Windows (Part 2) - Secrets of batch files - 利用 7-Zip 進行差異備份（下篇） - 批次檔案的秘密][differential-backup-using-7-zip-part2-secrets-of-batch-files]
-
 <!-- cross references -->
 
-<!-- post_references differential-backup-using-7-zip-part1-windows -->
-<!-- post_references differential-backup-using-7-zip-part2-secrets-of-batch-files -->
+{% postrefs %}
+* [Differential backup using 7-Zip for Windows (Part 1) - 利用 7-Zip 進行差異備份（上篇）][differential-backup-using-7-zip-part1-windows]
+* [Differential backup using 7-Zip for Windows (Part 2) - Secrets of batch files - 利用 7-Zip 進行差異備份（下篇） - 批次檔案的秘密][differential-backup-using-7-zip-part2-secrets-of-batch-files]
+{% endpostrefs %}
 
 <!-- external references -->
 

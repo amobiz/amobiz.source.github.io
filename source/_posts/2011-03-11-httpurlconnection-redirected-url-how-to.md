@@ -3,7 +3,7 @@ date: 2011-03-11 15:00:00
 comments: true
 categories:
   - Programming
-tags: 
+tags:
   - HTTP
   - Java
   - URL
@@ -12,7 +12,7 @@ tags:
 
 Java 的 [HttpURLConnection] 可以自動處理 [轉址 (redirect)][URL_redirection] 動作（但不會處理跨通信協定 (protocol) 的轉址， 請參考相關文章），這樣確實很方便。但是有時候我們需要知道轉址之後的網址，才能進一步處理網頁內容。
 
-<!-- more -->  
+<!-- more -->
 
 ### 透過 setInstanceFollowRedirects() 函數自行處理轉址
 
@@ -48,6 +48,7 @@ is.close();
 * [Stackoverflow - Java doesn't follow redirect in URLConnection][stackoverflow-java-follow-redirect]
 
 <!-- cross references -->
+
 
 <!-- external references -->
 

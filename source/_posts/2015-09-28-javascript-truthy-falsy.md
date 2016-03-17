@@ -303,7 +303,7 @@ employee.save({
 
 其中 `err` 是用來標示錯誤的發生，當其值不為 falsy 時，表示發生錯誤，而 `err` 通常就是錯誤訊息或存放錯誤訊息的物件。
 
-相反地，當 `err` 為 falsy 時 (依慣例通常是 `null`，以表示：沒有 error)，這時候，`result` 用來表示回傳的結果。    
+相反地，當 `err` 為 falsy 時 (依慣例通常是 `null`，以表示：沒有 error)，這時候，`result` 用來表示回傳的結果。
 
 ``` js
 function read(file, callback) {
@@ -364,13 +364,13 @@ if (message) {
 
 ### 相關文章：
 
+<!-- cross references -->
+
+{% postrefs %}
 * [JavaScript Programming Pattern: Resolver][javascript-programming-pattern-resolver]
 * [JavaScript: Resolver vs. Promise][javascript-resolver-vs-promise]
 * [JavaScript Promise: resolver vs. handler][javascript-promise-resolver-vs-handler]
-
-<!-- cross references -->
-
-<!-- post_references -->
+{% endpostrefs %}
 
 <!-- external references -->
 

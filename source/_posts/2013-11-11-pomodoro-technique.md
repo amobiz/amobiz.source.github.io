@@ -102,11 +102,11 @@ tags:
 
 ### 相關文章：
 
-* [GTD - Getting Things Done - Principle and Practice 原理與實踐][gtd-getting-things-done-principle-and-practice]
-
 <!-- cross references -->
 
-<!-- post_references gtd-getting-things-done-principle-and-practice -->
+{% postrefs %}
+* [GTD - Getting Things Done - Principle and Practice 原理與實踐][gtd-getting-things-done-principle-and-practice]
+{% endpostrefs %}
 
 <!-- external references -->
 

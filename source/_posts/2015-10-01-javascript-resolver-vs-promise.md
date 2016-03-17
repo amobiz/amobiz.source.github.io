@@ -52,7 +52,7 @@ function resolver() {
 }
 
 function parse(expression) {
-    // ...        
+    // ...
 }
 ```
 
@@ -99,13 +99,13 @@ return new Promise(read)
 
 ### 相關文章：
 
+<!-- cross references -->
+
+{% postrefs %}
 * [JavaScript: Truthy? Falsy?][javascript-truthy-falsy]
 * [JavaScript Programming Pattern: Resolver][javascript-programming-pattern-resolver]
 * [JavaScript Promise: resolver vs. handler][javascript-promise-resolver-vs-handler]
-
-<!-- cross references -->
-
-<!-- post_references -->
+{% endpostrefs %}
 
 <!-- external references -->
 

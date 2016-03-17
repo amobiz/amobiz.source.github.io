@@ -29,7 +29,7 @@ tags:
 
 TagSoup 可以處理 non-well-formed HTML，但是會有 namseapce 問題。該是時候放棄 TagSoup，另找一個 HTML 解析器了嗎？還是如果我們可以配合 TagSoup 輸出的 namespace 定義，在 XPath 中一律使用 `html` prefix；或是，相反地，讓 TagSoup 不輸出 namespace 。是否就可以解決問題呢？（雖然邏輯上還存在著一個完美的可能性，就是讓 TagSoup 不輸出 default namespace，也同時能保留外部 namespace 的定義，不過這並不容易達到。這已牽涉到 TagSoup 的設計架構了，除非大幅修改 TagSoup 的架構，讓它正確處理外部 namespace 的定義。但是這已經超出本文的目的了。）
 
-<!-- more -->  
+<!-- more -->
 
 試著分析一下這兩種方法的優劣：
 
@@ -52,23 +52,23 @@ TagSoup 的作者 John Cowan 也推薦這個作法，在 Google Groups 的 tagso
 Re: Thank you for great product! Workaround for namespace issue:
 
 
-John Cowan   
-May 13 2010, 2:03 am   
+John Cowan
+May 13 2010, 2:03 am
 misha680 scripsit:
 
 
-> I am using tagsoup with XOM. It is working great, however I have run   
-> into the following namespace issues as described here:   
+> I am using tagsoup with XOM. It is working great, however I have run
+> into the following namespace issues as described here:
 > http://www.supermind.org/blog/613/dom4j-xpath-tagsoup-namespaces-sweet
-> Per the post, it looks like there is not an easy solution, but I was   
+> Per the post, it looks like there is not an easy solution, but I was
 > hoping perhaps that there might be something (new) I am missing?
 
 
-Well, you could suck it up and use html: prefixes in your XPath expressions,   
+Well, you could suck it up and use html: prefixes in your XPath expressions,
 which is what I would recommend.
 
 
-There is a long-standing bug in getting TagSoup not to send namespace   
+There is a long-standing bug in getting TagSoup not to send namespace
 information.  When I get a chance I'll work on that.
 
 </pre>
@@ -675,13 +675,13 @@ namespace prefix: "myns"; xpath: "//myns:span"
 
 ### 相關文章：
 
+<!-- cross references -->
+
+{% postrefs %}
 * [HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath][html-data-mining-part-1-jdom-tagsoup-xpath]
 * [HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace]
 * [HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to]
-
-<!-- cross references -->
-
-<!-- post_references -->
+{% endpostrefs %}
 
 <!-- external references -->
 

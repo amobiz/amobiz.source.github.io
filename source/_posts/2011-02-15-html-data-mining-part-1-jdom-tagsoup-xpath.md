@@ -69,7 +69,7 @@ Internet 上蘊藏著豐富的內容，供人們分享訊息、傳承知識。�
 
 首先，建立 JDOM 的 SAXBuilder，SAXBuilder 可以在 constructor 指定解析器的類別名稱，我們只要傳入 TagSoup 的解析器類別全名：org.ccil.cowan.tagsoup.Parser，即可使用 TagSoup 進行解析：
 
-``` groovy
+```groovy
 def builder = new SAXBuilder( "org.ccil.cowan.tagsoup.Parser" )
 ```
 
@@ -77,7 +77,7 @@ def builder = new SAXBuilder( "org.ccil.cowan.tagsoup.Parser" )
 
 雖然 SAXBuilder 提供了多個不同參數的 build() 方法，其中也有以 `String systemId` 為參數，可以直接傳入 uri 的版本，但是實際解析時，該方法卻是以系統預設編碼進行解析，而不會自動依據 HTML 文件指定的編碼格式自動解析。在台灣，這表示將以 BIG5 編碼解析文件，倘若對象文件並非以 BIG5 編碼（這裡將以 [`http://news.google.com.tw/`][22] 為例，該網頁是以 UTF-8 編碼。別誤會，這裡使用 Google News 首頁，並不表示該網站不符合 HTML 規範，而是因為 Google 的服務具有良好的反應速度與穩定性，相信它能夠承受得起我們這些程式設計師的胡亂測試，…這應該算是對 Google 的推崇吧！），解析結果將是一堆亂碼。因此，我們必須使用 [`build(org.xml.sax.InputSource in)`][23] 這個版本，建立好 InputSouce 之後，設定正確的編碼方式，再傳入 SAXBuilder 的 build() 方法進行解析：
 
-```
+```groovy
 def is = new InputSource( "http://news.google.com.tw/" )
 is.setEncoding( “UTF-8” )
 def doc = builder.build( is )
@@ -85,19 +85,19 @@ def doc = builder.build( is )
 
 這樣子，就得到了 DOM 物件。不過，這裡需注意的是，SAXBuilder 的 build() 方法，建立的 DOM 物件，是 [`org.jdom.Document`][24]，若需要轉換為 [`org.w3c.dom.Document`][25] （譬如想要進一步使用 Java 標準 API 對該 DOM 文件進行處理時），則必須另外使用 [`org.jdom.output.DOMOutputter`][26] 進行轉換：
 
-``` groovy
+```groovy
 org.w3c.dom.Document w3cdoc = new DOMOutputter().build( doc )
 ```
 
 同樣地，若是要將 JDOM 的 Document 輸出成 XML/XHTML ，則使用 [`org.jdom.output.XMLOutputter`][27] 進行轉換：
 
-``` groovy
+```groovy
 String xhtml = new org.jdom.output.XMLOutputter().outputString( doc )
 ```
 
 或是直接輸出成檔案：
 
-``` groovy
+```groovy
 new org.jdom.output.XMLOutputter().output( doc, new FileWriter( "output.html" ) )
 ```
 
@@ -107,19 +107,19 @@ new org.jdom.output.XMLOutputter().output( doc, new FileWriter( "output.html" ) 
 
 這裡將示範如何取出 Google News 主頁上的所有新聞標題。查看 [`http://news.google.com.tw/`][22] ，可以看到每則新聞標題是以如下的格式呈現，譬如『[曾雅妮的魔幻數字與粉紅色][28]』這一則新聞︰
 
-``` html
+```html
 <span class="titletext">曾雅妮的魔幻數字與粉紅色</span>
 ```
 
 簡單起見，假設要選取所有 class 含有 titletext 內容的 HTML 標籤，則 XPath 如下：
 
-``` xpath
+```xpath
 //*[contains(@class,’titletext’)]
 ```
 
 決定了 XPath 路徑，就可以用來取得新聞標題，並列印出來了：
 
-``` groovy
+```groovy
 def xpath = XPath.newInstance( "//*[contains(@class,'titletext')]" )
 def result = xpath.selectNodes( doc )
 result.each { println it.text }
@@ -129,7 +129,7 @@ result.each { println it.text }
 
 __gnews.groovy__
 
-``` groovy
+```groovy
 import org.jdom.*
 import org.jdom.input.*
 import org.jdom.xpath.*
@@ -147,7 +147,7 @@ result.each { println it.text }
 
 要執行上面的 groovy 程式，請在命令列下，執行：
 
-``` bash
+```bash
 groovy gnews
 ```
 
@@ -155,17 +155,17 @@ groovy gnews
 
 就是這樣！是不是很簡單？
 
- 歡迎大家的回饋與心得分享。
+歡迎大家的回饋與心得分享。
 
 ### 相關文章：
 
+<!-- cross references -->
+
+{% postrefs %}
 * [HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath][html-data-mining-part-1-jdom-tagsoup-xpath]
 * [HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace]
 * [HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to]
-
-<!-- cross references -->
-
-<!-- post_references -->
+{% endpostrefs %}
 
 <!-- external references -->
 

@@ -196,11 +196,11 @@ tags:
 
 ### 相關文章：
 
-* [『Pomodoro Technique - 蕃茄時鐘工作法』 原理與實踐][pomodoro-technique]
-
 <!-- cross references -->
 
-<!-- post_references pomodoro-technique -->
+{% postrefs %}
+* [『Pomodoro Technique - 蕃茄時鐘工作法』 原理與實踐][pomodoro-technique]
+{% endpostrefs %}
 
 <!-- external references -->
 

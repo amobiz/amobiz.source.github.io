@@ -52,13 +52,11 @@ tags:
 
 ### 相關文章
 
-* [HTC Magic Custom ROM: Ginger Yoshi (rooted) step by step - 正確安裝步驟][htc-magic-custom-rom-ginger-yoshi-install]
-
 <!-- cross references -->
 
-<!-- post_references htc-magic-custom-rom-ginger-yoshi-install -->
-<!-- post_references htc-magic-custom-rom-ginger-yoshi-install#規劃_SD_卡:_sd-ext_partition -->
-<!-- post_references htc-magic-custom-rom-ginger-yoshi-install#刷新的_ROM -->
+{% postrefs %}
+* [HTC Magic Custom ROM: Ginger Yoshi (rooted) step by step - 正確安裝步驟][htc-magic-custom-rom-ginger-yoshi-install]
+{% endpostrefs %}
 
 <!-- external references -->
 

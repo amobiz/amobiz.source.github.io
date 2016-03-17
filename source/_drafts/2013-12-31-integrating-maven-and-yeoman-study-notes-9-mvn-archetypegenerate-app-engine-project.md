@@ -1,7 +1,7 @@
 title: '整合 Maven 與 Yeoman，學習筆記 (9) - 使用 mvn archetype:generate 建立 App Engine 專案'
 date: 2013-12-31 06:00
 comments: true
-categories: 
+categories:
 tags:
   - Google App Engine
   - Maven
@@ -22,6 +22,9 @@ tags:
 
 ### 相關文章：
 
+<!-- cross references -->
+
+{% postrefs %}
 * [整合 Maven 與 Yeoman，學習筆記 (1) - node_modules][integrating-maven-and-yeoman-study-notes-1-node-modules]
 * [整合 Maven 與 Yeoman，學習筆記 (2) - mvn archetype:generate][integrating-maven-and-yeoman-study-notes-2-mvn-archetype-generate-jersey]
 * [整合 Maven 與 Yeoman，學習筆記 (3) - jetty-maven-plugin][integrating-maven-and-yeoman-study-notes-3-jetty-maven-plugin]
@@ -31,10 +34,7 @@ tags:
 * [整合 Maven 與 Yeoman，學習筆記 (7) - trecloux-yeoman-maven-plugin][integrating-maven-and-yeoman-study-notes-7-trecloux-yeoman-maven-plugin]
 * [整合 Maven 與 Yeoman，學習筆記 (8) - 使用 RequireJS R.js 自動打包專案 JavaScript 檔案][integrating-maven-and-yeoman-study-notes-8-requirejs]
 * [整合 Maven 與 Yeoman，學習筆記 (9) - 使用 mvn archetype:generate 建立 App Engine 專案][integrating-maven-and-yeoman-study-notes-9-mvn-archetypegenerate-app-engine-project]
-
-<!-- cross references -->
-
-<!-- post_references -->
+{% endpostrefs %}
 
 <!-- external references -->
 

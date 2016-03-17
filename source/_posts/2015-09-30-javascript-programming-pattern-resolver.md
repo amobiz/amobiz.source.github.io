@@ -154,13 +154,13 @@ eval('1+1-2');
 
 ### 相關文章：
 
+<!-- cross references -->
+
+{% postrefs %}
 * [JavaScript: Truthy? Falsy?][javascript-truthy-falsy]
 * [JavaScript: Resolver vs. Promise][javascript-resolver-vs-promise]
 * [JavaScript Promise: resolver vs. handler][javascript-promise-resolver-vs-handler]
-
-<!-- cross references -->
-
-<!-- post_references -->
+{% endpostrefs %}
 
 <!-- external references -->
 

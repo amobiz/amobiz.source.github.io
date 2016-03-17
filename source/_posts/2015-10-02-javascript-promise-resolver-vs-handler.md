@@ -174,13 +174,13 @@ function onerror(error) {
 
 ### 相關文章：
 
+<!-- cross references -->
+
+{% postrefs %}
 * [JavaScript: Truthy? Falsy?][javascript-truthy-falsy]
 * [JavaScript Programming Pattern: Resolver][javascript-programming-pattern-resolver]
 * [JavaScript: Resolver vs. Promise][javascript-resolver-vs-promise]
-
-<!-- cross references -->
-
-<!-- post_references -->
+{% endpostrefs %}
 
 <!-- external references -->
 

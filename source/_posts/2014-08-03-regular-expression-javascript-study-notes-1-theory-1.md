@@ -247,15 +247,15 @@ NFA 引擎最重要的性質是，它會依序處理各個子表達式或組成�
 
 ### 相關文章
 
+<!-- cross references -->
+
+{% postrefs %}
 * [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1]
 * [Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)][regular-expression-javascript-study-notes-2-theory-2]
 * <span id="bnf-grammar"></span>[Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法][regular-expression-javascript-study-notes-3-informal-bnf-grammar]
 * [Open Sourced my JavaScript Regular Expression Generator - RegexGen.js][open-sourced-my-javascript-regular-expression-generator-regexgenjs]
 * [為什麼我要開發 Regular Expression Generator - RegexGen.js][why-i-developed-javascript-regular-expression-generator-regexgenjs]
-
-<!-- cross references -->
-
-<!-- post_references -->
+{% endpostrefs %}
 
 <!-- external references -->
 

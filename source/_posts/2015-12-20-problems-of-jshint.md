@@ -68,11 +68,11 @@ jshint: {
 
 ### 相關文章：
 
-* [(ESLint 學習筆記) Applying ESLint - Using Atom & linter-eslint][applying-eslint-using-atom-linter-eslint]
-
 <!-- cross references -->
 
-<!-- post_references -->
+{% postrefs %}
+* [(ESLint 學習筆記) Applying ESLint - Using Atom & linter-eslint][applying-eslint-using-atom-linter-eslint]
+{% endpostrefs %}
 
 <!-- external references -->
 

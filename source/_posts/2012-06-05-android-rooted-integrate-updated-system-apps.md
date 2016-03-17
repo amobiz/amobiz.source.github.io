@@ -38,14 +38,12 @@ root 手機或自行修改手機具有一定的風險，如失去保固、損壞
 
 ### 相關文章
 
-* [HTC Magic Custom ROM: Ginger Yoshi (rooted) step by step - 正確安裝步驟][htc-magic-custom-rom-ginger-yoshi-install]
-* [Android (rooted) - Convert system apps to user apps, or reverse - 把系統應用程式轉成使用者應用程式，或相反][android-rooted-convert-system-apps]
-
 <!-- cross references -->
 
-<!-- post_references htc-magic-custom-rom-ginger-yoshi-install -->
-<!-- post_references htc-magic-custom-rom-ginger-yoshi-install#規劃_SD_卡:_sd-ext_partition -->
-<!-- post_references android-rooted-convert-system-apps -->
+{% postrefs %}
+* [HTC Magic Custom ROM: Ginger Yoshi (rooted) step by step - 正確安裝步驟][htc-magic-custom-rom-ginger-yoshi-install]
+* [Android (rooted) - Convert system apps to user apps, or reverse - 把系統應用程式轉成使用者應用程式，或相反][android-rooted-convert-system-apps]
+{% endpostrefs %}
 
 <!-- external references -->
 

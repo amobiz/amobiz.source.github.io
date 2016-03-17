@@ -12,11 +12,9 @@ tags:
 
 #### $watch(), $digest(), $apply() 及 $on(), $broadcast() 用途分別為何？
 
-$watch How the $apply Runs a $digest
-http://angular-tips.com/blog/2013/08/watch-how-the-apply-runs-a-digest/
+[$watch How the $apply Runs a $digest](http://angular-tips.com/blog/2013/08/watch-how-the-apply-runs-a-digest/)
 
-理解$watch ，$apply 和 $digest --- 理解数据绑定过程
-http://www.angularjs.cn/A0a6
+[理解$watch ，$apply 和 $digest - 理解数据绑定过程](http://www.angularjs.cn/A0a6)
 
 #### 指定 controller as 之後，controller 中的 this 與 $scope 有何不同？
 
@@ -53,16 +51,13 @@ $scope.obj = new ParentCtrl($scope);
 
 這一篇解釋得很詳細：
 
-AngularJS: "Controller as" or "$scope"?
-http://codetunnel.io/angularjs-controller-as-or-scope/
+[AngularJS: "Controller as" or "$scope"?](http://codetunnel.io/angularjs-controller-as-or-scope/)
 
 John Papa 應該是最早介紹 Controller As 語法的人：
 
-Do You Like Your Angular Controllers with or without Sugar?
-http://www.johnpapa.net/do-you-like-your-angular-controllers-with-or-without-sugar/
+[Do You Like Your Angular Controllers with or without Sugar?](http://www.johnpapa.net/do-you-like-your-angular-controllers-with-or-without-sugar/)
 
-AngularJS's Controller As and the vm Variable
-http://www.johnpapa.net/angularjss-controller-as-and-the-vm-variable/
+[AngularJS's Controller As and the vm Variable](http://www.johnpapa.net/angularjss-controller-as-and-the-vm-variable/)
 
 [Exploring Angular 1.3: Binding to Directive Controllers](http://blog.thoughtram.io/angularjs/2015/01/02/exploring-angular-1.3-bindToController.html)。
 
@@ -142,7 +137,21 @@ app.component('componentName', component);
 對於 one time binding 的支援似乎有些問題：
 
 1. 有文章說它會 disable one time binding, 現在一時找不到該文。
-2. 我發現 one time binding 的寫法會有影響，`{{::item.url}}` 這樣在 Batarang 才不會出現 watcher，若這樣 `{{ ::item.url }}` 就會出現。但後者似乎是官方推薦的寫法。
+2. 我發現 one time binding 的寫法會有影響，
+
+這樣在 Batarang 才不會出現 watcher:
+
+```
+{{::item.url}}
+```
+
+若這樣:
+
+```
+{{ ::item.url }}
+```
+
+就會出現。但後者似乎是官方推薦的寫法。
 
 
 #### jqLite
@@ -187,6 +196,6 @@ module.directive( "addBookButton", [ 'Book', function( Book ) {
 <button add-book-button>Add</button>
 ```
 
-### [Sane, scalable Angular apps are tricky, but not impossible. Lessons learned from PayPal Checkout.](https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#.g9ng4gso0)
+### [Sane, scalable Angular apps are tricky, but not impossible. Lessons learned from PayPal Checkout.](https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef)
 
 

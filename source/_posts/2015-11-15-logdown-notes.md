@@ -51,11 +51,11 @@ A: 由於 Logdown 支援 LaTeX，其中還支援 inline math 語法，就是「`
 
 ### 相關文章：
 
-* [Medium 與 Facebook Notes 簡短試用][medium-vs-facebook-notes]
-
 <!-- cross references -->
 
-<!-- post_references -->
+{% postrefs %}
+* [Medium 與 Facebook Notes 簡短試用][medium-vs-facebook-notes]
+{% endpostrefs %}
 
 <!-- external references -->
 

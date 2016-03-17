@@ -114,17 +114,17 @@ done
 
 ### 相關文章：
 
+<!-- cross references -->
+
+{% postrefs %}
 * [HTC Magic Custom ROM: Ginger Yoshi (rooted) step by step - 正確安裝步驟][htc-magic-custom-rom-ginger-yoshi-install]
+{% endpostrefs %}
 
 ### 參考資料
 
 * [[分享文] 使用 A2SD 時，資料存放的位置解說][4]
 * [【教程】超詳細的App to SD 教程與大家分享][5]
 * [Haykuro Apps to SD][6]
-
-<!-- cross references -->
-
-<!-- post_references -->
 
 <!-- external references -->
 

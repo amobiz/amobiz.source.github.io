@@ -192,13 +192,13 @@ __.eslintrc.json__
 
 ### 相關文章：
 
-* [The Problems of JSHint (JSHint 的問題)][problems-of-jshint]
-
 <!-- cross references -->
 
-[linter-eslint-png]: linter-eslint.png
+{% postrefs %}
+* [The Problems of JSHint (JSHint 的問題)][problems-of-jshint]
+{% endpostrefs %}
 
-<!-- post_references -->
+[linter-eslint-png]: linter-eslint.png
 
 <!-- external references -->
 

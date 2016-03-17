@@ -289,7 +289,7 @@ namespace prefix: "html"; xpath: "//html:span"
 namespace prefix: "myns"; xpath: "//myns:span"
 	<html:span xmlns:html="http://www.w3.org/1999/xhtml">prefix:html</html:span>
 	<myns:span xmlns:myns="http://www.w3.org/1999/xhtml">prefix:myns</myns:span>
-```		
+```
 
 查看 JDOM 的 XPath 類別的 addNamespace() 函數的[說明文件][6]，發現了這一段說明：
 
@@ -313,20 +313,19 @@ namespace prefix: "myns"; xpath: "//myns:span"
 
 在下一篇文章『[HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to]』裡，我將介紹 TagSoup 輸出 namespace 問題的解決方法。
 
-### 相關文章：
-
-* [HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath][html-data-mining-part-1-jdom-tagsoup-xpath]
-* [HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace]
-* [HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to]
-
 歡迎大家的回饋與心得分享。
+
+### 相關文章：
 
 <!-- cross references -->
 
-<!-- post_references -->
+{% postrefs %}
+* [HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath][html-data-mining-part-1-jdom-tagsoup-xpath]
+* [HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace]
+* [HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to]
+{% endpostrefs %}
 
 <!-- external references -->
-
 
 [2]: http://www.jdom.org/
 [3]: http://home.ccil.org/~cowan/XML/tagsoup/
