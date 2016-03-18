@@ -7,8 +7,8 @@
  * 插入所有的 post 的 slug id。
  * 方便 markdown 使用 slug id 來索引相關 post。
  *
- * 注意，原本是以 hexo filter 的形式寫成，但是由於 hexo 處理 filter 是在 swig/nunjucks 處理 template 之後，
- * 導致 swig/nunjuck 處理時，reference link 找不到對應的定義。
+ * 注意，原本是以 hexo filter 的形式寫成，但是由於 hexo 會先處理 markdown，然後才處理 swig/nunjucks 的 template (filter 就是這個時候才處理)，
+ * 由於處理 markdown 時 filter 根本尚未執行，導致 reference link 找不到對應的定義。
  *
  * 之前直接修改 hexo 原始碼來解決這個問題。現在改為使用 swig/nunjucks 的 tag 形式，並將定義直接含在 tag 內部的 markdown 中一併處理。
  *
