@@ -21,7 +21,7 @@ tags:
 
 如同我在 {% post_link regular-expression-javascript-study-notes-1-theory-1 Regular Expression 學習筆記 %} 所說明的：「學習 regular expression 的關鍵，不在於記憶簡寫符號，而是對引擎匹配原理的掌握。」最佳的 regular expression 學習方法，就是先學習正則引擎的匹配原理。想要快速查閱重點的話，可以參考前三篇學習筆記: {% post_link regular-expression-javascript-study-notes-1-theory-1 (1) %}, {% post_link regular-expression-javascript-study-notes-2-theory-2 (2) %}, {% post_link regular-expression-javascript-study-notes-3-informal-bnf-grammar (3) %}，如果有充足的時間的話，當然還是建議詳閱 [Mastering Regular Expressions] 這本書。
 
-然而，畢竟正則表達式的語法相當緊湊，想要一眼看懂複雜的表達式，幾乎是不可能的。首先必須熟悉正則表達式的 meta-character (元字元)，然後一步一步拆解。雖然有 [RegexBuddy] 這樣的軟體可以幫忙拆解，但即使能正確的拆解，也可能無法了解作者 (通常是自己) 原本的思考邏輯，或者要避免的問題。
+然而，畢竟正則表達式的語法相當緊湊，想要一眼看懂複雜的表達式，幾乎是不可能的。首先必須熟悉正則表達式的 meta-character (元字元)，然後一步一步拆解。雖然有 [RegexBuddy] 、 [regexper] 這樣的軟體可以幫忙拆解，但即使能正確的拆解，也可能無法了解作者 (通常是自己) 原本的思考邏輯，或者要避免的問題。
 
 <!-- more -->
 <!-- forkme https://github.com/amobiz/regexgen.js -->
@@ -35,7 +35,7 @@ tags:
 這就是 [RegexGen.js] 了。RegexGen.js 的設計，謹守著下列目標：
 
 1. 寫出來的程式碼，應該易讀易懂。
-2. 產出來的程式碼，應該要像專家寫的一樣緊湊，不要為了產生器本身容易撰寫，而產出機械式程式碼。尤其是不要產出不必要的 `{}` 或 `()`。
+2. 產出來的程式碼，應該要像人工寫的一樣緊湊，不要為了產生器本身容易撰寫，而產出機械式程式碼。尤其是不要產出不必要的 `{}` 或 `()`。
 3. 不再需要手動對元字元進行轉義。(除了 `\` 元字元本身。或者使用了表達式置換 (regex overwrite) 功能。)
 4. 如果產生器力有未逮，無法產生理想的子表達式，必須要能夠在語法中直接指定替代的子表達式。也就是表達式置換功能。
 
@@ -67,6 +67,7 @@ tags:
 
 [Mastering Regular Expressions]: http://shop.oreilly.com/product/9780596528126.do
 [RegexBuddy]: http://www.regexbuddy.com/ "Learn, Create, Understand, Test, Use and Save Regular Expressions with RegexBuddy"
+[regexper]: https://regexper.com/ "regexper"
 [JSVerbalExpressions]: https://github.com/VerbalExpressions/JSVerbalExpressions "JSVerbalExpressions - JavaScript Regular expressions made easy"
 [Easy regular expressions with JSVerbalExpressions]: http://macr.ae/article/jsverbalexpressions.html "Easy regular expressions with JSVerbalExpressions"
 [JavaScript: The Good Parts]: http://shop.oreilly.com/product/9780596517748.do
