@@ -138,7 +138,7 @@ tags:
 
 完成了 `7z-bak.cmd` 之後，利用自動排程工具，自動定時備份，確實是相當方便。意外的驚喜是，7-Zip 進行差異備份的速度，實在是快得驚人，讀者不妨自行體驗一下。
 
-最後，不得不承認，使用 Windows/DOS 內建的 cmd 批次檔功能來處理自動備份，實在是個蠢主意。為什麼這麼說呢？在 [下一篇][differential-backup-using-7-zip-part2-secrets-of-batch-files]，將說明撰寫這個批次檔過程中所遇到的問題與陷阱，想要了解技術細節的朋友，請不要錯過。
+最後，不得不承認，使用 Windows/DOS 內建的 cmd 批次檔功能來處理自動備份，實在是個蠢主意。為什麼這麼說呢？在 {% post_link differential-backup-using-7-zip-part2-secrets-of-batch-files 下一篇 %}，將說明撰寫這個批次檔過程中所遇到的問題與陷阱，想要了解技術細節的朋友，請不要錯過。
 
 歡迎大家的回饋與心得分享。
 

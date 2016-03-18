@@ -233,9 +233,11 @@ NFA 引擎最重要的性質是，它會依序處理各個子表達式或組成�
 
 ### 小結
 
-到這裡，已經介紹完了正則引擎的基本功能與原理。在學習時，可以多看看現成的範例，了解專家們在構造正則表達式的過程中如何思考。譬如 [Regular Expressions Cookbook, 2nd Edition] 裡，就有相當多的範例。另外，搭配查閱 [非正式 BNF 語法][regular-expression-javascript-study-notes-3-informal-bnf-grammar]，可以更快掌握正則表達式的完整功能。
+到這裡，已經介紹完了正則引擎的基本功能與原理。在學習時，可以多看看現成的範例，了解專家們在構造正則表達式的過程中如何思考。譬如 [Regular Expressions Cookbook, 2nd Edition] 裡，就有相當多的範例。另外，搭配查閱 {% post_link regular-expression-javascript-study-notes-3-informal-bnf-grammar 非正式 BNF 語法 %}，可以更快掌握正則表達式的完整功能。
 
-[下一篇文章][regular-expression-javascript-study-notes-2-theory-2]，將介紹更強大的功能：lookaround (環視)。
+{% post_link regular-expression-javascript-study-notes-2-theory-2 "下一篇文章" %}，將介紹更強大的功能：lookaround (環視)。
+
+{% raw %}{% endraw %}
 
 ### 參考資料
 
@@ -245,18 +247,6 @@ NFA 引擎最重要的性質是，它會依序處理各個子表達式或組成�
 * [Mastering Regular Expressions, 3rd Edition]
 * [Regular Expressions Cookbook, 2nd Edition]
 
-### 相關文章
-
-<!-- cross references -->
-
-{% postrefs %}
-* [Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)][regular-expression-javascript-study-notes-1-theory-1]
-* [Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)][regular-expression-javascript-study-notes-2-theory-2]
-* <span id="bnf-grammar"></span>[Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法][regular-expression-javascript-study-notes-3-informal-bnf-grammar]
-* [Open Sourced my JavaScript Regular Expression Generator - RegexGen.js][open-sourced-my-javascript-regular-expression-generator-regexgenjs]
-* [為什麼我要開發 Regular Expression Generator - RegexGen.js][why-i-developed-javascript-regular-expression-generator-regexgenjs]
-{% endpostrefs %}
-
 <!-- external references -->
 
 [Stephen Cole Kleene]: http://en.wikipedia.org/wiki/Stephen_Cole_Kleene
@@ -264,3 +254,13 @@ NFA 引擎最重要的性質是，它會依序處理各個子表達式或組成�
 [Nondeterministic Finite Automaton]: http://en.wikipedia.org/wiki/Nondeterministic_Finite_Automaton
 [Mastering Regular Expressions, 3rd Edition]: http://shop.oreilly.com/product/9780596528126.do
 [Regular Expressions Cookbook, 2nd Edition]: http://shop.oreilly.com/product/0636920023630.do
+
+### 相關文章
+
+<!-- cross references -->
+
+* {% post_link regular-expression-javascript-study-notes-1-theory-1 Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上) %}
+* {% post_link regular-expression-javascript-study-notes-2-theory-2 Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下) %}
+* <span id="bnf-grammar"></span> {% post_link regular-expression-javascript-study-notes-3-informal-bnf-grammar Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法 %}
+* {% post_link open-sourced-my-javascript-regular-expression-generator-regexgenjs Open Sourced my JavaScript Regular Expression Generator - RegexGen.js %}
+* {% post_link why-i-developed-javascript-regular-expression-generator-regexgenjs 為什麼我要開發 Regular Expression Generator - RegexGen.js %}

@@ -10,7 +10,9 @@ tags:
 ---
 ### 前言
 
-[上一篇][regular-expression-javascript-study-notes-1-theory-1] 介紹了正則引擎的基本功能與原理，接下來介紹功能更為強大的 lookaround (環視)。
+{% post_link regular-expression-javascript-study-notes-1-theory-1 上一篇 %} 介紹了正則引擎的基本功能與原理，接下來介紹功能更為強大的 lookaround (環視)。
+
+{% raw %} {% endraw %}
 
 ### Lookaround (環視) 不會佔用匹配字元
 
@@ -194,7 +196,9 @@ $text =~ s/(\d)(?=(\d\d\d)+(?!\d))/$1,/g;
 
 ### 小結
 
-到這裡，正則引擎最重要的功能與原理都介紹完畢了。記得在學習時，可以搭配查閱 [非正式 BNF 語法][regular-expression-javascript-study-notes-3-informal-bnf-grammar] 快速掌握正則表達式的語法。
+到這裡，正則引擎最重要的功能與原理都介紹完畢了。記得在學習時，可以搭配查閱 {% post_link regular-expression-javascript-study-notes-3-informal-bnf-grammar 非正式 BNF 語法 %} 快速掌握正則表達式的語法。
+
+{% raw %} {% endraw %}
 
 ### 參考資料
 

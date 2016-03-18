@@ -14,7 +14,7 @@ tags:
 
 ### 前言
 
-讀者應該已經發現，[上一篇][javascript-programming-pattern-resolver] 文中提到的 resolver 模式，與 [Promise][promise] 似乎有著極為類似的形式。的確，Promise 與 resolver 模式有許多相似之處，尤其是 resolver 的變體形式，與 Promise 一樣，都有著 `resolve()` 函數。然而，resolver 主要是用來對付 falsy 值問題，而 promise 的主要目的是處理 asnyc (異步) 問題。
+讀者應該已經發現，{% post_link javascript-programming-pattern-resolver 上一篇 %} 文中提到的 resolver 模式，與 [Promise][promise] 似乎有著極為類似的形式。的確，Promise 與 resolver 模式有許多相似之處，尤其是 resolver 的變體形式，與 Promise 一樣，都有著 `resolve()` 函數。然而，resolver 主要是用來對付 falsy 值問題，而 promise 的主要目的是處理 asnyc (異步) 問題。
 
 <!-- more -->
 

@@ -19,7 +19,7 @@ tags:
 
 [RegexGen.js] is a JavaScript Regular Expression Generator that helps to construct complex regular expressions.
 
-如同我在 [Regular Expression 學習筆記][regular-expression-javascript-study-notes-1-theory-1] 所說明的：「學習 regular expression 的關鍵，不在於記憶簡寫符號，而是對引擎匹配原理的掌握。」最佳的 regular expression 學習方法，就是先學習正則引擎的匹配原理。想要快速查閱重點的話，可以參考前三篇學習筆記: [(1)][regular-expression-javascript-study-notes-1-theory-1], [(2)][regular-expression-javascript-study-notes-2-theory-2], [(3)][regular-expression-javascript-study-notes-3-informal-bnf-grammar]，如果有充足的時間的話，當然還是建議詳閱 [Mastering Regular Expressions] 這本書。
+如同我在 {% post_link regular-expression-javascript-study-notes-1-theory-1 Regular Expression 學習筆記 %} 所說明的：「學習 regular expression 的關鍵，不在於記憶簡寫符號，而是對引擎匹配原理的掌握。」最佳的 regular expression 學習方法，就是先學習正則引擎的匹配原理。想要快速查閱重點的話，可以參考前三篇學習筆記: {% post_link regular-expression-javascript-study-notes-1-theory-1 (1) %}, {% post_link regular-expression-javascript-study-notes-2-theory-2 (2) %}, {% post_link regular-expression-javascript-study-notes-3-informal-bnf-grammar (3) %}，如果有充足的時間的話，當然還是建議詳閱 [Mastering Regular Expressions] 這本書。
 
 然而，畢竟正則表達式的語法相當緊湊，想要一眼看懂複雜的表達式，幾乎是不可能的。首先必須熟悉正則表達式的 meta-character (元字元)，然後一步一步拆解。雖然有 [RegexBuddy] 這樣的軟體可以幫忙拆解，但即使能正確的拆解，也可能無法了解作者 (通常是自己) 原本的思考邏輯，或者要避免的問題。
 
@@ -41,7 +41,7 @@ tags:
 
 至於為什麼是 JavaScript? 雖然 C++, Java 都是我更熟悉的語言，但是自從開始接觸 JavaScript 之後，應該說，自從讀過 [JavaScript: The Good Parts] 之後，我覺得開始愛上這門輕巧簡單的程式語言了。
 
-希望 JavaScript 版的 RegexGen 只是個開始，藉由它的 [open source][open-sourced-my-javascript-regular-expression-generator-regexgenjs]，由此拋磚引玉，吸引同好投入開發、除錯、改進、加強，甚至開發各種語言的 regular expression generator。
+希望 JavaScript 版的 RegexGen 只是個開始，藉由它的 {% post_link open-sourced-my-javascript-regular-expression-generator-regexgenjs open source %}，由此拋磚引玉，吸引同好投入開發、除錯、改進、加強，甚至開發各種語言的 regular expression generator。
 
 ### 參考資料
 

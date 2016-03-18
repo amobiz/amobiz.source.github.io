@@ -12,7 +12,7 @@ tags:
 
 長期關注本部落格的朋友，可能有發現到，除了原本在 Blogger 的 [格物致知][andmobiz] 之外，還有一個同步更新的網站 [Fragments of Time][fragmentsoftime] 位於 [Logdown]。
 
-這是因為我在之前的文章『[Medium 與 Facebook Notes 簡短試用][medium-vs-facebook-notes]』中提到的，厭倦了使用 HTML 撰寫部落格，所以在 Logdown [發佈][interview]之後，曾經有一段時間，我是在 Logdown 先用 Markdown 語法撰寫文章，然後再將 HTML 複製到 Blogger 中。
+這是因為我在之前的文章『{% post_link medium-vs-facebook-notes Medium 與 Facebook Notes 簡短試用 %}』中提到的，厭倦了使用 HTML 撰寫部落格，所以在 Logdown [發佈][interview]之後，曾經有一段時間，我是在 Logdown 先用 Markdown 語法撰寫文章，然後再將 HTML 複製到 Blogger 中。
 
 現在決定改用 [GitHub Pages](https://pages.github.com/) / [hexo](https://hexo.io/zh-tw/)，上面的步驟就省了，現在我可以直接用 Markdown 寫文章，然後下個指令，就自動轉成 HTML 並且發佈。當初除了必須手動複製這個原因之外，其實在使用 Logdown 時，還遇到一些不方便的地方，並且做了一些筆記。我不確定現在這些問題是否依舊沒有改善，整理出來，給不幸遇到的朋友參考看看。
 
@@ -53,9 +53,7 @@ A: 由於 Logdown 支援 LaTeX，其中還支援 inline math 語法，就是「`
 
 <!-- cross references -->
 
-{% postrefs %}
-* [Medium 與 Facebook Notes 簡短試用][medium-vs-facebook-notes]
-{% endpostrefs %}
+* {% post_link medium-vs-facebook-notes Medium 與 Facebook Notes 簡短試用 %}
 
 <!-- external references -->
 

@@ -10,7 +10,6 @@ tags:
   - node
   - browser
   - AMD
-  - CMD
   - CommonJS
   - UMD
 ---
@@ -31,7 +30,7 @@ tags:
 
 	* 採用 [UMD](https://github.com/umdjs/umd) 的話，通常作者預期可以同時在 browser 和 node 上使用，
 
-	* 採用 [CMD](http://www.commonjs.org/) 的話，通常作者只預期可以在 node 上使用 (但實際上也許可以供 browser 使用)，
+	* 採用 [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) 的話，通常作者只預期可以在 node 上使用 (但實際上也許可以供 browser 使用)，
 
 	* 採用 [ES2015 module](http://www.2ality.com/2014/09/es6-modules-final.html) 的話，就很難僅憑格式判斷。
 
@@ -40,7 +39,7 @@ tags:
 4. 看一下相依的模組，看看有沒有熟悉的模組，這些模組是否只支援特定平台。
 
 5. 掃一下 source code，看看有沒有平台相關的關鍵字，譬如 `window`, `location` (browser) 或 `process`, `readFile` (node) 之類。
- 
+
 6. 如果上面的方式都無法判斷的話，最快的方式就是直接寫測試程式，在目標平台上執行看看。
 
 	因為至少有下面兩項因素會導致套件無法在 browser 上使用：

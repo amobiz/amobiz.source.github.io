@@ -14,7 +14,7 @@ tags:
 ---
 ### 簡介
 
-在上一篇文章「[Differential backup using 7-Zip for Windows (Part 1) - 利用 7-Zip 進行差異備份（上篇）][differential-backup-using-7-zip-part1-windows]」中，介紹了如何利用 Open Source 軟體 [7-Zip][2] 壓縮程式，來進行差異備份。並使用 Windows/DOS 的 cmd [batch][3] 批次檔案，自動為備份檔名附加日期時間戳記。本文將繼續說明在撰寫 cmd batch 批次指令時，遇到的各種問題 (陷阱) 與解決方法。
+在上一篇文章 「{% post_link differential-backup-using-7-zip-part1-windows Differential backup using 7-Zip for Windows (Part 1) - 利用 7-Zip 進行差異備份（上篇） %}」 中，介紹了如何利用 Open Source 軟體 [7-Zip][2] 壓縮程式，來進行差異備份。並使用 Windows/DOS 的 cmd [batch][3] 批次檔案，自動為備份檔名附加日期時間戳記。本文將繼續說明在撰寫 cmd batch 批次指令時，遇到的各種問題 (陷阱) 與解決方法。
 
 <!-- more -->
 <!-- forkme https://gist.github.com/amobiz/d0be531a7c109c785845 -->

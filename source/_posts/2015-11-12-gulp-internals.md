@@ -10,7 +10,7 @@ tags:
 ---
 ### 前言
 
-最近正在開發一個 gulp 工具：[configurable-gulp-recipes](https://github.com/amobiz/configurable-gulp-recipes)，所以分別研究了 Gulp 3.9 和 Gulp 4.0 的原始碼，以下是 Gulp 3.9 的快速筆記。
+最近正在開發一個幫助重複使用 gulp task 的工具：[gulp-chef](https://gulp-cookery.github.io/gulp-chef/)，所以分別研究了 Gulp 3.9 和 Gulp 4.0 的原始碼，以下是 Gulp 3.9 的快速筆記。
 
 <!-- more -->
 

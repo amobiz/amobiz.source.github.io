@@ -13,7 +13,7 @@ tags:
   - XPath
   - pitfalls
 ---
-在上一篇文章『[HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath][html-data-mining-part-1-jdom-tagsoup-xpath]』裡，我提到了如何利用 [JDOM][2] 搭配 [TagSoup][3]，並使用 XPath 簡單地汲取資訊。其實，在上一篇的範例裡，我刻意避開了兩個困擾許多人的問題：**namespace (命名空間) 問題**以及 **TagSoup 的輸出問題**。
+在上一篇文章『{% post_link html-data-mining-part-1-jdom-tagsoup-xpath HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath %}』裡，我提到了如何利用 [JDOM][2] 搭配 [TagSoup][3]，並使用 XPath 簡單地汲取資訊。其實，在上一篇的範例裡，我刻意避開了兩個困擾許多人的問題：**namespace (命名空間) 問題**以及 **TagSoup 的輸出問題**。
 
 <!-- more -->
 
@@ -311,7 +311,7 @@ namespace prefix: "myns"; xpath: "//myns:span"
 2. 由於 TagSoup 處理過的 HTML 文件，含有 default namespace 的定義，使用 XPath 選取元素時，一定要在路徑的標籤或屬性前，加上 `html` 這個 prefix，才能對應到元素。
 3. TagSoup 處理過的 HTML 文件，其元素標籤若含有 prefix 定義，即使 prefix 是 `html`，都會被修改並對應到 `urn:x-prefix:html` 這樣的 URI（參考 TagSoup 原始碼中 Parser 類別的 foreign() 函數、ElementType 類別的 namespace() 函數以及 [change log][7]），因而使該標籤對應不到原本正確的 namespace 的 URI。導致使用了該 prefix 的 XPath 路徑，也對應不到正確的標籤。（原本應該能正確對應的，這一點可以經由使用 JDOM 內建的 XML 解析器的實驗證明。）
 
-在下一篇文章『[HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案][html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to]』裡，我將介紹 TagSoup 輸出 namespace 問題的解決方法。
+在下一篇文章『{% post_link html-data-mining-part-3-jdom-tagsoup-xpath-namespace-fix-how-to HTML 資訊汲取（下篇） - TagSoup 輸出 namespace 問題的解決方案 %}』裡，我將介紹 TagSoup 輸出 namespace 問題的解決方法。
 
 歡迎大家的回饋與心得分享。
 

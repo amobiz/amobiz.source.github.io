@@ -15,7 +15,7 @@ tags:
 ---
 ### Namespace 問題
 
-在上一篇文章『[HTML 資訊汲取（中篇） - Default namespace 問題][html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace]』中提到：在 XPath 中，沒有所謂 default namespace (預設命名空間)。若 XPath 路徑未使用 prefix (前置字符) 指明 namespace，則其對應的 namespace 為 empty namespace (空命名空間)。因此，若在 XML 文件中定義了 default namespace，則所有的標籤必定都歸屬於某個不為空的 namespace。此時，未指明 namespace 的 XPath 路徑，將對應不到任何元素。
+在上一篇文章『{% post_link html-data-mining-part-2-jdom-tagsoup-xpath-default-namespace HTML 資訊汲取（中篇） - Default namespace 問題 %}』中提到：在 XPath 中，沒有所謂 default namespace (預設命名空間)。若 XPath 路徑未使用 prefix (前置字符) 指明 namespace，則其對應的 namespace 為 empty namespace (空命名空間)。因此，若在 XML 文件中定義了 default namespace，則所有的標籤必定都歸屬於某個不為空的 namespace。此時，未指明 namespace 的 XPath 路徑，將對應不到任何元素。
 
 另一方面，TagSoup 處理過的 HTML 文件，有三個與 namespace 有關的問題：
 

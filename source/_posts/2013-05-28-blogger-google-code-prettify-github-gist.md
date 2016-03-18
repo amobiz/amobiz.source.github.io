@@ -62,14 +62,15 @@ tags:
 
 {% cheatsheet 啟用 Google Code Prettify 只要一行程式碼 %}
 如果還沒有新增的話，利用前面介紹的「新增小工具」方法，插入這一行程式碼：
-``` html
+
+```html
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 ```
 {% endcheatsheet %}
 
 其實 Google Code Prettify 還有許多功能，譬如可以利用 `skin` 參數選擇外觀，利用 `lang` 參數以程式語言的副檔名指定語言：
 
-``` html
+```html
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst&lang=js"></script>
 ```
 
@@ -117,20 +118,20 @@ tags:
 {% cheatsheet 為程式碼區塊加上 [code] 圖樣 %}
 如果還沒有新增的話，利用前面介紹的「新增小工具」方法，插入這些程式碼：
 
-``` html
+```
 <style>
 pre.code {
-  display: block;
-  overflow: auto;
-  min-height: 30px;
-  max-height:800px;
-  padding: 0 0 0 11px;
-  border: 1px solid #ccc;
-  background: #f8f8ff url("data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAASwCAYAAAAt7rCDAAAABHNCSVQICAgIfAhkiAAAAQJJREFUeJzt0kEKhDAMBdA4zFmbM+W0upqFOhXrDILwsimFR5pfMrXW5jhZr7PwRlxVX8//jNHrGhExjXzdu9c5IiIz+7iqVmB7Hwp4OMa2nhhwN/PRGEMBh3Zjt6KfpzPztxW9MSAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzB8HS+J9kUTvzEDMwAAAABJRU5ErkJggg==") left top repeat-y;
+display: block;
+overflow: auto;
+min-height: 30px;
+max-height:800px;
+padding: 0 0 0 11px;
+border: 1px solid #ccc;
+background: #f8f8ff url("data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAASwCAYAAAAt7rCDAAAABHNCSVQICAgIfAhkiAAAAQJJREFUeJzt0kEKhDAMBdA4zFmbM+W0upqFOhXrDILwsimFR5pfMrXW5jhZr7PwRlxVX8//jNHrGhExjXzdu9c5IiIz+7iqVmB7Hwp4OMa2nhhwN/PRGEMBh3Zjt6KfpzPztxW9MSAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzB8HS+J9kUTvzEDMwAAAABJRU5ErkJggg==") left top repeat-y;
 }
 code.prettyprint {
-  line-height: 1.2em;
-  margin: 1px;
+line-height: 1.2em;
+margin: 1px;
 }
 </style>
 

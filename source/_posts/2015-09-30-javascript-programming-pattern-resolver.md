@@ -15,7 +15,7 @@ tags:
 
 在 JavaScript 中，有許多數值，在邏輯判斷中，其結果與 `false` 等價。由於其數值實際上並非 `false`，因此，特別稱此類數值為 __falsy__ value。
 
-在 [上一篇文章][javascript-truthy-falsy] 中，介紹了一般在程式中處理 falsy 值的方法。對於函數回傳值是 falsy 的狀況，上述的原則也都同樣適用，譬如：
+在 {% post_link javascript-truthy-falsy 上一篇文章 %} 中，介紹了一般在程式中處理 falsy 值的方法。對於函數回傳值是 falsy 的狀況，上述的原則也都同樣適用，譬如：
 
 ``` js
 // 回傳的空字串是 falsy 值
@@ -143,7 +143,7 @@ eval('1+1-2');
 
 ### 結論
 
-前一陣子 [釋出][open-source-json-normalizer] 的 [json-normalizer]，大量使用到本文介紹的 resolver 模式，想看更多 [實戰範例][normalize.js] 的朋友，不妨前往瞧個究竟。
+前一陣子 {% post_link open-source-json-normalizer 釋出 %} 的 [json-normalizer]，大量使用到本文介紹的 resolver 模式，想看更多 [實戰範例][normalize.js] 的朋友，不妨前往瞧個究竟。
 
 歡迎大家的回饋與心得分享。
 
@@ -156,11 +156,9 @@ eval('1+1-2');
 
 <!-- cross references -->
 
-{% postrefs %}
-* [JavaScript: Truthy? Falsy?][javascript-truthy-falsy]
-* [JavaScript: Resolver vs. Promise][javascript-resolver-vs-promise]
-* [JavaScript Promise: resolver vs. handler][javascript-promise-resolver-vs-handler]
-{% endpostrefs %}
+* {% post_link javascript-truthy-falsy %}
+* {% post_link javascript-resolver-vs-promise %}
+* {% post_link javascript-promise-resolver-vs-handler %}
 
 <!-- external references -->
 

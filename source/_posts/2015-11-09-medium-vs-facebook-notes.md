@@ -12,7 +12,7 @@ tags:
 ---
 ### 前言
 
-由於實在是受不了使用 HTML 寫部落格的瑣碎，前一陣子決定將部落格由 Blogger 移轉出來之後，除了 [GitHub Pages](https://pages.github.com/) / [hexo](https://hexo.io/zh-tw/) 這個可以使用 Markdown 的組合之外，其實還評估了幾個平台，尤其其中 Facebook Notes 剛剛[全新改版][facebook-notes]，吸引了不少的目光，所以就順勢評估了一下 [Medium](https://medium.com/) 和 [Facebook Notes](https://www.facebook.com/help/115983655152193)。趁文章還沒發霉前 (2015-10-11 放到現在)，趕緊發佈出來。
+由於實在是受不了使用 HTML 寫部落格的瑣碎，前一陣子決定將部落格由 Blogger 移轉出來之後，除了 [GitHub Pages](https://pages.github.com/) / [hexo](https://hexo.io/zh-tw/) 這個可以使用 Markdown 的組合之外，其實還評估了幾個平台，尤其其中 Facebook Notes 剛剛[全新改版][facebook-notes]，吸引了不少的目光，所以就順勢評估了一下 [Medium](https://medium.com/) 和 [Facebook Notes](https://www.facebook.com/help/115983655152193)。
 
 <!-- more -->
 
