@@ -10,6 +10,10 @@ tags:
   - Medium
   - Facebook Notes
 ---
+[
+![](https://images.unsplash.com/photo-1442458370899-ae20e367c5d8?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075)
+](https://unsplash.com/alexharvey)
+
 ### 前言
 
 由於實在是受不了使用 HTML 寫部落格的瑣碎，前一陣子決定將部落格由 Blogger 移轉出來之後，除了 [GitHub Pages](https://pages.github.com/) / [hexo](https://hexo.io/zh-tw/) 這個可以使用 Markdown 的組合之外，其實還評估了幾個平台，尤其其中 Facebook Notes 剛剛[全新改版][facebook-notes]，吸引了不少的目光，所以就順勢評估了一下 [Medium](https://medium.com/) 和 [Facebook Notes](https://www.facebook.com/help/115983655152193)。

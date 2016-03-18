@@ -8,6 +8,10 @@ tags:
   - Markdown
   - pitfalls
 ---
+[
+![](https://images.unsplash.com/photo-1457717047216-96440b68d44c?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075)
+](https://unsplash.com/jrbreland)
+
 ### 前言
 
 長期關注本部落格的朋友，可能有發現到，除了原本在 Blogger 的 [格物致知][andmobiz] 之外，還有一個同步更新的網站 [Fragments of Time][fragmentsoftime] 位於 [Logdown]。

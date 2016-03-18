@@ -8,6 +8,10 @@ tags:
   - Gulp
   - notes
 ---
+[
+![](https://images.unsplash.com/photo-1458217222755-d1c4985b0852?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075)
+](https://unsplash.com/mrs_m)
+
 ### 前言
 
 最近正在開發一個幫助重複使用 gulp task 的工具：[gulp-chef](https://gulp-cookery.github.io/gulp-chef/)，所以分別研究了 Gulp 3.9 和 Gulp 4.0 的原始碼，以下是 Gulp 3.9 的快速筆記。

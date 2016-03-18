@@ -9,8 +9,8 @@ tags:
   - Promise
 ---
 [
-![](https://images.unsplash.com/reserve/Af0sF2OS5S5gatqrKzVP_Silhoutte.jpg?fit=crop;fm=jpg;h=275;q=80;w=400)
-](https://unsplash.com/mayurgala)
+![](https://images.unsplash.com/photo-1439920120577-eb3a83c16dd7?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1900)
+](https://unsplash.com/liane)
 
 ### 鑽牛角尖時間：Promise: resolver vs handler
 
