@@ -9,7 +9,7 @@
 'use strict';
 
 function cheatsheetTag(args, content) {
-    var summary, value, classlist;
+    var summary, value, classlist, markdown;
 
     summary = [];
     value = args.shift();
@@ -34,10 +34,11 @@ function cheatsheetTag(args, content) {
     }
     classlist = ['cheatsheet'].concat(classlist).join(' ');
 
-    return '<aside class="' + classlist + '">'
-        + summary
-        + hexo.render.renderSync({ text: content, engine: 'markdown' })
-        + '</aside>';
+	markdown = hexo.render.renderSync({ text: content, engine: 'markdown' });
+
+    markdown = '<aside class="' + classlist + '">' + summary + markdown + '</aside>';
+
+	return markdown;
 
     function getClass(value) {
         if (value) {
