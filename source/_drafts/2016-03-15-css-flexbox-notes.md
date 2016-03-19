@@ -54,7 +54,7 @@ http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
   padding: 0;
   margin: 0;
   list-style: none;
-  
+
   -ms-box-orient: horizontal;
   display: -webkit-box;
   display: -moz-box;
@@ -69,7 +69,7 @@ http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
   background: tomato;
   padding: 10px;
   border: 5px solid red;
-  
+
   color: white;
   font-weight: bold;
   font-size: 2em;
@@ -77,8 +77,8 @@ http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
 }
 
 .flex1 { flex: 1 1 200px; }
-.flex2 { flex: 2 3 200px; } 
-.flex3 { flex: 1 0 200px; } 
+.flex2 { flex: 2 3 200px; }
+.flex3 { flex: 1 0 200px; }
 .meter-container {
   width: 1000px;
 }
@@ -90,7 +90,7 @@ http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
   background: tomato;
   padding: 10px;
   border: 5px solid red;
-  
+
   color: white;
   font-weight: bold;
   font-size: 2em;
@@ -105,19 +105,19 @@ http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
 #### 對於 flex 元素
 
 1. 當 flex 元素本身指定 `text-overflow: ellipsis` 屬性時，有效對象為：
-	1.1. flex 元素本身，
-	1.2. 具有 `display: inline` 屬性的直接子元素，以及它們所有具有 `display: inline` 屬性的直接子元素。
+	1. flex 元素本身，
+	2. 具有 `display: inline` 屬性的直接子元素，以及它們所有具有 `display: inline` 屬性的直接子元素。
  		(由於 inline 元素忽略 width 屬性，因此不論是否設定固定寬度皆同。)
 2. 將 `text-overflow: ellipsis` 屬性指定給子元素，或孫元素時，有效對象為：
-	2.1. 只有指定了 `text-overflow: ellipsis` 屬性的子元素，其具有 `inline-block` 或 `block`屬性，並且為固定寬度時有效，不論祖宗元素的 display 屬性為何。
+	1. 只有指定了 `text-overflow: ellipsis` 屬性的子元素，其具有 `inline-block` 或 `block`屬性，並且為固定寬度時有效，不論祖宗元素的 display 屬性為何。
 
 #### 對於普通元素 (非  flex 元素)
 
 1. 當對目標元素的直接父元素指定 `text-overflow: ellipsis` 屬性時：
-	1.1. 只有當目標元素的 display 屬性為 `inline`，同時其直接父元素的 display 屬性為 `block` 時有效。(也就是當父元素的寬度固定時。) 與 flex 的 1.2 相同。
+	1. 只有當目標元素的 display 屬性為 `inline`，同時其直接父元素的 display 屬性為 `block` 時有效。(也就是當父元素的寬度固定時。) 與 flex 的 1.2 相同。
 2. 當對目標元素指定 `text-overflow: ellipsis` 屬性時：
-	2.1. 當目標元素的 display 屬性為 `block`，且它的直接父元素的 display 屬性為 `block` 或 `inline` (驚！為何不是 `inline-block`?) 時有效。
-	2.2. 當目標元素的 display 屬性為 `block` 或 `inline-block，且固定寬度時有效，不論祖宗元素的 display 屬性為何。(跟 flex 的 2.1 完全相同。)
+	1. 當目標元素的 display 屬性為 `block`，且它的直接父元素的 display 屬性為 `block` 或 `inline` (驚！為何不是 `inline-block`?) 時有效。
+	2. 當目標元素的 display 屬性為 `block` 或 `inline-block，且固定寬度時有效，不論祖宗元素的 display 屬性為何。(跟 flex 的 2.1 完全相同。)
 
 #### 結論
 
@@ -126,8 +126,11 @@ http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
 
 寫了一個測試確認：
 
-<script async src="//jsfiddle.net/gfhca3n3/12/embed/html,css,result/"></script>
+* https://jsfiddle.net/gfhca3n3/13/
+<script async src="//jsfiddle.net/gfhca3n3/13/embed/html,css,result/"></script>
 
-[Bug 972664 - element with display flex box doesn't respect text-overflow ellipsis](https://bugzilla.mozilla.org/show_bug.cgi?id=972664)
-[text-overflow](https://developer.mozilla.org/zh-TW/docs/Web/CSS/text-overflow)
+參考資料：
+
+* [Bug 972664 - element with display flex box doesn't respect text-overflow ellipsis](https://bugzilla.mozilla.org/show_bug.cgi?id=972664)
+* [text-overflow](https://developer.mozilla.org/zh-TW/docs/Web/CSS/text-overflow)
 
