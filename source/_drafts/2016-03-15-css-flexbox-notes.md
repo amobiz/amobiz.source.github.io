@@ -23,6 +23,14 @@ flexbox 學習筆記
 2. 然後 container 將其餘的 item 指定的 `flex-shrink` 加總，再按比例榨取。
   假設有 n 個 item 的 `flex-shrink` 不為 0，則每個 item 被奪走的大小為： 『不足空間』 * flex-shrink(i) / sum(flex-shrink(n))。
 
+參考資料：
+
+[flex-shrink](https://css-tricks.com/almanac/properties/f/flex-shrink/)
+
+線上測試：
+
+http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
+
 ```html
 <ul class="flex-container">
   <li class="flex-item flex1">1</li>
@@ -40,14 +48,6 @@ flexbox 學習筆記
   <div class="meter"></div>
 </div>
 ```
-
-參考資料：
-
-[flex-shrink](https://css-tricks.com/almanac/properties/f/flex-shrink/)
-
-線上測試：
-
-http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
 
 ```css
 .flex-container {
@@ -98,9 +98,23 @@ http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
 }
 ```
 
+### 關於 flexbox container 元素內部元素的 display type
+
+子元素的 display type 會影響到後面介紹的 `text-overflow: ellipsis` 的有效對象。
+
+測試：
+
+http://codepen.io/amobiz/pen/MypYdN
+
+結論：
+
+flexbox container 元素的直接子元素，除非它本身是 `display: flex`，否則其 `display` type 一律是 `block`。
+間接子元素則完全由子元素本身決定。
+
+
 ### 其他問題
 
-與 text-overflow: ellipsis 的配合需要注意：
+與 `text-overflow: ellipsis` 的配合需要注意：
 
 #### 對於 flex 元素
 
