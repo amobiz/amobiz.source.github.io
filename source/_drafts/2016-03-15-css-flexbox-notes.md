@@ -29,43 +29,114 @@ flexbox 學習筆記
 
 線上測試：
 
-http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
+http://codepen.io/amobiz/pen/eZRYzd
 
-```html
-<ul class="flex-container">
-  <li class="flex-item flex1">1</li>
-  <li class="flex-item flex2">2</li>
-  <li class="flex-item flex3">3</li>
-</ul>
-<div class="meter-container">
-  <div class="meter"></div>
-  <div class="meter"></div>
-  <div class="meter"></div>
-  <div class="meter"></div>
-  <div class="meter"></div>
-  <div class="meter"></div>
-  <div class="meter"></div>
-  <div class="meter"></div>
-</div>
+```jade
+.ruler
+  - for (var i = 0; i <= 2000; i += 100)
+    label #{i}
+
+ul.flex-container
+  li.flex-item.flex1 1
+  li.flex-item.flex2 2
 ```
 
 ```css
+/* ruler */
+
+.ruler {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(90deg,
+      rgba(73, 73, 73, 0.5) 0,
+      rgba(73, 73, 73, 0.5) 2%,
+      transparent 2%
+    ),
+    linear-gradient(180deg,
+      #ffffff 50%,
+      transparent 50%
+    ),
+    linear-gradient(90deg,
+      transparent 50%,
+      rgba(73, 73, 73, 0.5) 50%,
+      rgba(73, 73, 73, 0.5) 52%,
+      transparent 52%
+    ),
+    linear-gradient(180deg,
+      #ffffff 70%,
+      transparent 70%
+    ),
+    linear-gradient(90deg,
+      transparent 10%,
+      rgba(73, 73, 73, 0.4) 10%,
+      rgba(73, 73, 73, 0.4) 12%,
+      transparent 12%,
+
+      transparent 20%,
+      rgba(73, 73, 73, 0.4) 20%,
+      rgba(73, 73, 73, 0.4) 22%,
+      transparent 22%,
+
+      transparent 30%,
+      rgba(73, 73, 73, 0.4) 30%,
+      rgba(73, 73, 73, 0.4) 32%,
+      transparent 32%,
+
+      transparent 40%,
+      rgba(73, 73, 73, 0.4) 40%,
+      rgba(73, 73, 73, 0.4) 42%,
+      transparent 42%,
+
+      transparent 60%,
+      rgba(73, 73, 73, 0.4) 60%,
+      rgba(73, 73, 73, 0.4) 62%,
+      transparent 62%,
+
+      transparent 70%,
+      rgba(73, 73, 73, 0.4) 70%,
+      rgba(73, 73, 73, 0.4) 72%,
+      transparent 72%,
+
+      transparent 80%,
+      rgba(73, 73, 73, 0.4) 80%,
+      rgba(73, 73, 73, 0.4) 82%,
+      transparent 82%,
+
+      transparent 90%,
+      rgba(73, 73, 73, 0.4) 90%,
+      rgba(73, 73, 73, 0.4) 92%,
+      transparent 92%
+    );
+  background-size: 50px 20px;
+  background-repeat: repeat-x;
+  min-height: 20px;
+
+  /* only needed for labels */
+  white-space:nowrap;
+  font-size:0;
+  margin:0;
+  padding:0;
+}
+
+label {
+  font-size:9px;
+  padding-top:2px;
+  display:inline-block;
+  width:100px;
+  text-indent:3px;
+}
+
+/* flex test */
+
 .flex-container {
   padding: 0;
   margin: 0;
   list-style: none;
 
-  -ms-box-orient: horizontal;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
 }
 
 .flex-item {
-  box-sizing: border-box;
   background: tomato;
   padding: 10px;
   border: 5px solid red;
@@ -76,25 +147,36 @@ http://codepen.io/HugoGiraudel/pen/95aeaf737efab9c2c1c90ea157c091c6
   text-align: center;
 }
 
-.flex1 { flex: 1 1 200px; }
-.flex2 { flex: 2 3 200px; }
-.flex3 { flex: 1 0 200px; }
-.meter-container {
-  width: 1000px;
-}
-.meter {
-  box-sizing: border-box;
-  width: 100px;
-  height: 20px;
-  float: left;
-  background: tomato;
-  padding: 10px;
-  border: 5px solid red;
+.flex1 { flex: 1 1 400px; }
+.flex2 { flex: 2 2 400px; }
+```
 
-  color: white;
-  font-weight: bold;
-  font-size: 2em;
-  text-align: center;
+```js
+/*
+  A ruler pattern using CSS background gradients.
+  + HTML for labels on every 100px
+
+  Browser-support: IE10+ and no Opera Mini.
+  (Because of CSS Gradients and CSS Repeating Gradients)
+
+*/
+var $ = require('jquery');
+var $1 = $('.flex1');
+var $2 = $('.flex2');
+
+print();
+$(window).resize(print);
+
+function print() {
+  _print('1: ', $1);
+  _print('2: ', $2);
+
+  function _print(label, $el) {
+    var w = $el.width();
+    var d = w - 400;
+    d = d > 0 ? ('+ ' + d) : ('- ' + (-d));
+    $el.text(label + w + ' = 400 ' + d);
+  }
 }
 ```
 
