@@ -138,25 +138,37 @@ $stateProvider
 
 ### 進入預設的 Substate
 
-使用官方的 `$urlRouterProvider` 的 `.when()` 函數即可。
+通常情況下，使用官方的 `$urlRouterProvider` 的 `.when()` 函數即可。
 
 ```js
 $urlRouterProvider.when('/main', '/main/street');
 ```
 
+這樣做的話，使用者直接進入 `/main` 網址時，就會直接 redirect 轉到 `main.street` 子狀態。
+
+然而，若在 substate 之下，還有 substate 的話，則必須使用 ui-router-extras 的 deep state redirect 功能解決，使用方式請參考後面的說明。
+
+假設 substate `main.street` 還有 substate `main.street.lane`，而使用者嘗試直接進入 substate `main.street.lane` 時，你將發現，該 state 確實啟動了，但是網址卻又跳回那個預設的 substate `main.street`。
+
+首先，這是因為，ui-router 在進入 substate 前，必須先進入 parent state，一路由 root 向終端 substate 轉換。在此過程中，每進入一個 state，都會觸發 `$stateChangeStart` 、 `$stateChangeSuccess` 等事件。
+因此，若要直接進入 `main.street.lane` state，則必定要先進入 `main` state，而此時就會觸發上面 `when()` 的規則，而跳躍到 `main.street` state，並且中斷了原本的 state transfer。
+
+那麼，為什麼顯示的是 `main.street.lane` state 的內容呢？我測試的時候，在進入 root state 前，會先進入 `main.street.lane` state 指定的 controller，然後才又從 root 開始，依照上述的順序轉換。
+不確定這是否是正常的行為，但至少，url location 不是停留在正確的 state 上，光這一點就無法接受。
+
 參考資料：
 
 [How to: Set up a default/index child state](https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions#how-to-set-up-a-defaultindex-child-state)
 
-#### 附註
+##### (已過時) 在 $urlRouterProvider.when() 失效期間的 Hack 解法
 
-似乎有一段時間，ui-router 的 redirect 功能失效了：
+{% cheatsheet 注意 %}
+曾經有一段時間，ui-router 的 redirect 功能失效了：
 
 [Angular UI-Router $urlRouterProvider .when not working when I click <a ui-sref=“…”>](http://stackoverflow.com/questions/27120308/angular-ui-router-urlrouterprovider-when-not-working-when-i-click-a-ui-sref)
 
-因此出現了一些 hack 解決辦法，由於這些 hack 出現在 google 搜尋結果的前面，因此浪費了一些時間，試用了這些方案，其中還遇到一些問題，因此特別記錄下來。
-
-##### 不夠好的 Hack 解決方案及其問題
+因此出現了一些 hack 解決辦法，由於這些 hack 出現在 google 搜尋結果的前面，因此浪費了一些時間，採用了這些方案。如前面說，正常情況下使用官方的 `$urlRouterProvider` 的 `.when()` 函數即可。
+{% endcheatsheet %}
 
 在 StackOverflow [Redirect a state to default substate with UI-Router in AngularJS](http://stackoverflow.com/questions/29491079/redirect-a-state-to-default-substate-with-ui-router-in-angularjs) 的提問中，
 被接受的答案，建議透過 watch `$stateChangeStart` 事件，然後透過檢查自定義屬性 `redirectTo` 來決定是否需要 redirect：
@@ -181,24 +193,15 @@ app.run(['$rootScope', '$state', function($rootScope, $state) {
 }]);
 ```
 
-這樣做的話，使用者直接進入 `/main` 網址時，就會觸發 `$stateChangeStart` 事件，由於 `main` state 定義了 `redirectTo` 屬性，所以這段程式會直接轉到 `main.street` 子狀態。
+這樣做的話，使用者直接進入 `/main` 網址時，就會觸發 `$stateChangeStart` 事件，由於 `main` state 定義了 `redirectTo` 屬性，所以這段程式會直接轉到 `main.street` 子狀態，運作原理其實完全與 1$urlRouterProvider.when()` 相同。
 
-然而，若此 substate 還有 substate，假設為 `main.street.lane`，而使用者嘗試直接進入 `main.street.lane` 此 substate 時，你將發現，該 state 確實啟動了，但是網址卻又跳回那個預設的 substate。
+##### 透過 ui-router-extras 解決深層 state 問題
 
-理論上，這是因為，ui-router 在進入 substate 前，必須先進入 parent state，一路由 root 向終端 substate 轉換。在此過程中，每進入一個 state，都會觸發 `$stateChangeStart` 、 `$stateChangeSuccess` 等事件。
-因此，若要直接進入 `main.street.lane` state，則必定要先進入 `main` state，而此時就會觸發上面 `$stateChangeStart` 那一段事件處理程式，而跳躍到 `main.street` state，並且中斷了原本的 state transfer。
+上面 StackOverflow 的第二個答案，則是建議使用 [`ui-router-extras`](https://github.com/christopherthielen/ui-router-extras) 解決 `$urlRouterProvider` 的 `.when()` 失效的問題。
+但事實上，此方法比官方的 `$urlRouterProvider` 的 `.when()` 函數更強大，可以處理在預設的 state 之下，還有 state 的問題。
 
-那麼，為什麼顯示的是 `main.street.lane` state 的內容呢？我測試的時候，在進入 root state 前，會先進入 `main.street.lane` state 指定的 controller，然後才又從 root 開始，依照上述的順序轉換。
-不確定這是否是正常的行為，但至少，url location 不是停留在正確的 state 上，光這一點就無法接受這個解法。
-
-##### 透過 ui-router-extras 解決
-
-第二個答案，則是建議使用 [`ui-router-extras`](https://github.com/christopherthielen/ui-router-extras) 解決問題。
-此方法的確可以正確處理 redirect，但是事實上使用官方的 `$urlRouterProvider` 的 `.when()` 函數即可。
-
-以下是使用 webpack 打包的方法：
-
-先透過 `imports-loader` 進行 shim 處理：
+{% cheatsheet webpack 打包的方法 %}
+如果是使用 webpack 打包，而且不想 export 為全域變數，可以先透過 `imports-loader` 進行 shim 處理：
 
 ```js
 // @see: https://github.com/webpack/docs/wiki/shimming-modules
@@ -206,8 +209,9 @@ app.run(['$rootScope', '$state', function($rootScope, $state) {
 require('imports?angular=angular!ui-router-extras/release/modular/ct-ui-router-extras.core.js');
 require('imports?angular=angular!ui-router-extras/release/modular/ct-ui-router-extras.dsr.js');
 ```
+{% endcheatsheet %}
 
-然後指定模組依賴關係：
+指定模組依賴關係：
 
 ```js
 angular.module('app', [
@@ -216,29 +220,35 @@ angular.module('app', [
 ])
 ```
 
-最後，透過 `deepStateRedirect` 屬性，指定預設的 substate：
+透過 `deepStateRedirect` 屬性，指定預設的 substate：
 
 ```js
 app.config(($stateProvider, $urlRouterProvider) => {
 	'ngInject';
 
 	$stateProvider
-	.state('forum', {
-		url: '/f',
-		template: '<forum></forum>',
+	.state('main', {
+		url: '/main',
+		template: '<main></main>',
 		// @see http://stackoverflow.com/a/29514880/726650
 		// #Redirect a state to default substate with UI-Router in AngularJS
-		deepStateRedirect: { default: { state: 'forum.posts' } }
+		deepStateRedirect: { default: { state: 'main.city' } }
 	})
-	.state('forum.posts', {
-		url: '/:forum',
+	.state('main.city', {
+		url: '/:city',
 		params: {
-			forum: 'all'
+			city: 'NY'
 		},
-		template: '<posts forum="vm.active"></posts>'
+		template: '<city></city>'
+	});
+	.state('main.city.street', {
+		url: '/street',
+		template: '<street></street>'
 	});
 })
 ```
+
+完美解決深層狀態問題！
 
 ### 指定可選子狀態
 
