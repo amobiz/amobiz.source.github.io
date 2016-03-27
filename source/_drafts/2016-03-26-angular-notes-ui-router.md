@@ -16,8 +16,8 @@ tags:
 
 ### 前言
 
-捨棄 AngularJS 內建的 `$routeProvider` 轉而使用 [ui-router](https://github.com/angular-ui/ui-router) 時，經常是為了支援巢狀 (nested state) 或並行狀態 (parallel state)。
-而巢狀 state 下，又通常需要提供預設的子狀態。這篇文章記錄一些使用 ui-router 常見的需求與注意事項。
+捨棄 AngularJS 內建的 `$routeProvider` 轉而使用 [ui-router](https://github.com/angular-ui/ui-router) 時，經常是為了支援巢狀狀態 (nested state) 或並行狀態 (parallel state)。
+而在巢狀狀態下，又通常需要提供預設的子狀態；在並行狀態下，則會希望能記憶每個狀態下的子狀態。本文不是入門教學文章，比較接近 best practice 及 how-to 清單，記錄使用 ui-router 時，常見的需求與注意事項，並列出相關資料出處，以備檢索。
 
 另外，遇問題時可以先查一下 [Frequently Asked Questions](https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions)。
 
@@ -97,7 +97,41 @@ $stateProvider
 	譬如 `person.edit` 實際上定義了兩個狀態，即 `person` 與 `edit`。
 	因此，不可定義 `group.edit`，因為這定義了 `group` 與 `edit` 兩個狀態，而 `edit` 狀態與 `person` 的子狀態重複。
 
-3. 子狀態會繼承父狀態的狀態，即，在 `$stateParams` 中，可以存取到父狀態的參數。
+3. 除了 `resolve` 和 `data` 屬性定義的資料之外，子狀態不會繼承父狀態的狀態，即，在 `$stateParams` 中，無法存取到父狀態的參數。相反地，在父狀態中，可以存取到目前子狀態的完整參數。
+
+```js
+$stateProvider.state('parent', {
+      resolve:{
+         resA:  function(){
+            return {'value': 'A'};
+         }
+      },
+	  data:{
+         customData1:  "Hello",
+         customData2:  "World!"
+      },
+      controller: function ($scope, resA){
+          $scope.resA = resA.value;
+      }
+   })
+   .state('parent.child', {
+      resolve:{
+          resB: function(resA){
+              return {'value': resA.value + 'B'};
+          }
+      },
+	  data:{
+          // customData1 inherited from 'parent'
+          // but we'll overwrite customData2
+          customData2:  "UI-Router!"
+      }
+      controller: function ($scope, resA, resB){
+          $scope.resA2 = resA.value;
+          $scope.resB = resB.value;
+      }
+```
+
+[What Do Child States Inherit From Parent States?](https://github.com/angular-ui/ui-router/wiki/Nested-States-%26-Nested-Views#what-do-child-states-inherit-from-parent-states)
 
 #### 使用 Object-based States
 
@@ -141,20 +175,24 @@ $stateProvider
 通常情況下，使用官方的 `$urlRouterProvider` 的 `.when()` 函數即可。
 
 ```js
-$urlRouterProvider.when('/main', '/main/street');
+$urlRouterProvider.when('/main', '/main/city');
 ```
 
-這樣做的話，使用者直接進入 `/main` 網址時，就會直接 redirect 轉到 `main.street` 子狀態。
+這樣設定之後，當使用者嘗試直接進入 `/main` 網址時，就會直接 redirect 轉到 `/main/city` 網址對應的子狀態。
 
-然而，若在 substate 之下，還有 substate 的話，則必須使用 ui-router-extras 的 deep state redirect 功能解決，使用方式請參考後面的說明。
+{% cheatsheet 注意 %}
+如果有深層子狀態，也就是在 substate 之下，還有 substate 時，或者，而希望記憶最後的子狀態，而非預設子狀態，則必須使用 ui-router-extras 的 deep state redirect 功能解決，使用方式請參考後面的說明。
 
-假設 substate `main.street` 還有 substate `main.street.lane`，而使用者嘗試直接進入 substate `main.street.lane` 時，你將發現，該 state 確實啟動了，但是網址卻又跳回那個預設的 substate `main.street`。
+##### 原因如下：
+
+假設 substate `main.city` 還有 substate `main.city.street`，而使用者嘗試直接進入 substate `main.city.street` 時，你將發現，該 state 確實啟動了，但是網址卻又跳回那個預設的 substate `main.city`。
 
 首先，這是因為，ui-router 在進入 substate 前，必須先進入 parent state，一路由 root 向終端 substate 轉換。在此過程中，每進入一個 state，都會觸發 `$stateChangeStart` 、 `$stateChangeSuccess` 等事件。
-因此，若要直接進入 `main.street.lane` state，則必定要先進入 `main` state，而此時就會觸發上面 `when()` 的規則，而跳躍到 `main.street` state，並且中斷了原本的 state transfer。
+因此，若要直接進入 `main.city.street` state，則必定要先進入 `main` state，而此時就會觸發上面 `when()` 的規則，而跳躍到 `main.city` state，並且中斷了原本的 state transfer。
 
-那麼，為什麼顯示的是 `main.street.lane` state 的內容呢？我測試的時候，在進入 root state 前，會先進入 `main.street.lane` state 指定的 controller，然後才又從 root 開始，依照上述的順序轉換。
+那麼，為什麼顯示的是 `main.city.street` state 的內容呢？我測試的時候，在進入 root state 前，會先進入 `main.city.street` state 指定的 controller，然後才又從 root 開始，依照上述的順序轉換。
 不確定這是否是正常的行為，但至少，url location 不是停留在正確的 state 上，光這一點就無法接受。
+{% endcheatsheet %}
 
 參考資料：
 
@@ -177,8 +215,8 @@ $urlRouterProvider.when('/main', '/main/street');
 $stateProvider
     .state('main', {
         url: '/main',
-        templateUrl: 'main.html',
-        redirectTo: 'main.street',
+        template: mainTemplate,
+        redirectTo: 'main.city',
     })
 ```
 
@@ -193,12 +231,12 @@ app.run(['$rootScope', '$state', function($rootScope, $state) {
 }]);
 ```
 
-這樣做的話，使用者直接進入 `/main` 網址時，就會觸發 `$stateChangeStart` 事件，由於 `main` state 定義了 `redirectTo` 屬性，所以這段程式會直接轉到 `main.street` 子狀態，運作原理其實完全與 1$urlRouterProvider.when()` 相同。
+這樣做的話，使用者直接進入 `/main` 網址時，就會觸發 `$stateChangeStart` 事件，由於 `main` state 定義了 `redirectTo` 屬性，所以這段程式會直接轉到 `main.city` 子狀態，運作原理其實完全與 `$urlRouterProvider.when()` 相同。
 
 ##### 透過 ui-router-extras 解決深層 state 問題
 
 上面 StackOverflow 的第二個答案，則是建議使用 [`ui-router-extras`](https://github.com/christopherthielen/ui-router-extras) 解決 `$urlRouterProvider` 的 `.when()` 失效的問題。
-但事實上，此方法比官方的 `$urlRouterProvider` 的 `.when()` 函數更強大，可以處理在預設的 state 之下，還有 state 的問題。
+但事實上，此方法比官方的 `$urlRouterProvider` 的 `.when()` 函數更強大，可以處理在預設的 state 之下，還有 state 的問題。或者是在多個平行 state 之間切換時，記憶每個 state 原本的子 state。
 
 {% cheatsheet webpack 打包的方法 %}
 如果是使用 webpack 打包，而且不想 export 為全域變數，可以先透過 `imports-loader` 進行 shim 處理：
