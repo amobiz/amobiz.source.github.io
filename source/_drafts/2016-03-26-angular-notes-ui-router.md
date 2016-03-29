@@ -306,3 +306,14 @@ $stateProvider
 參考資料：
 
 * [Defining optional parameters with AngularJS UI Router](http://benfoster.io/blog/ui-router-optional-parameters)
+
+### 常見問題
+
+#### 點選連結時，網址改變，但內容沒有變化
+
+檢查在 html/template 中，是否為子狀態設置了 `ui-view` 標籤；如果是 multiple named view，則確認對應的 name 是否正確。
+
+#### 點選孫狀態的連結，網址只顯示為該孫狀態的某個上層父狀態
+
+應該是使用 `$urlRouterProvider.when()` 來處理預設狀態的緣故。此時可以考慮採用 `ui-router-extras`，參考前面『進入預設的 Substate』的說明。
+
