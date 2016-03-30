@@ -13,13 +13,13 @@ tags:
 {% endcheatsheet %}
 
 
-如果資料來源是 `Date` 物件，要顯示完整的本地時間時，可以使用 `amDateFormat:'LLLL'` filter：
+不論資料來源是 `Date` 物件或標準的 UTC 格式字串，要顯示本地時間時，可以使用 `amDateFormat` filter 來處理。譬如，如果要顯示完整的本地時間時，可以使用簡寫格式： `amDateFormat:'LLLL'`：
 
 ```html
 <time datetime="::vm.createdAt">{{vm.createdAt | amDateFormat:'LLLL'}}</time>
 ```
 
-如果資料來源不是 `Date` 物件，而是 UTC 格式字串，則必須先使用 `amUtc` filter 將之轉換為 UTC 格式。如果要顯示本地時間，可以直接使用 `amUtcOffset`。譬如：
+如果要將資料顯示為 UTC 時間，可以使用 `amUtc` filter，或者直接使用 `amUtcOffset` 直接指定為特定時區的時間：
 
 ```html
 <time datetime="::vm.createdAt">{{vm.createdAt | amUtcOffset:'+0800' | amDateFormat:'LLLL'}}</time>
