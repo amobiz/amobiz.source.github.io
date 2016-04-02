@@ -93,8 +93,16 @@ Moment 最引人注意的，就是顯示相對時間的功能，可以將指定�
 <div>7:<span ng-bind="::(vm.createdAt) | amDateFormat:'LLLL'"></span></div>
 ```
 
+根據 [One-time binding doesn't work with filters](https://github.com/angular/angular.js/issues/8605#issuecomment-52120009) 這個留言，
+原因可能是因為 angular-moment 可能沒有正確處理 `undefined` value 的情況。
 
-根據 [One-time binding doesn't work with filters](https://github.com/angular/angular.js/issues/8605#issuecomment-52120009) 這個留言，原因可能是因為 angular-moment 可能沒有正確處理 `undefined` value 的情況。
+這個問題，我找不到相關文件，但根據上面的討論串，是因為 one-time binding 會期望要評估的值，在穩定下來 (stabilize) 之前，必須是 `undefined`。
+一旦數值不是 `undefined`，且再次檢查仍為相同數值，則判定為穩定 (stabilized)，之後就會停止 `$watch` 該數值。
 
-原本 angular-moment 自己實作了 one-time binding，但在 angular 1.3 之後移除了：
+而 angular-moment 的問題是，若輸入數值不是有效的，它就會回傳空字串，而造成 one-time binding 將結果認定為穩定 (stabilized)，因此無法得到正確的結果。
+
+上面的討論串中，有提到應該在 `$parser` 中，針對 one-time binding 的狀況，若數值為 `undefined`，就不要再呼叫 filter。
+但是，這個討論串最後還是看不出來 Angular team 如何處理這個問題，但卻把 issue 關閉了。不得不抱怨一下，常常遇到這種狀況，為什麼 close issue 的人不能描述一下理由/解決方式呢？
+
+另外，原本 angular-moment 自己實作了 one-time binding，但在 angular 1.3 之後移除了：
 [Remove one-time binding from am-time-ago directive](https://github.com/urish/angular-moment/issues/122)
