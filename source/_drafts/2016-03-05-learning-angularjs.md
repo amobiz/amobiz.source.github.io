@@ -55,6 +55,20 @@ John Papa 應該是最早介紹 Controller As 語法的人：
 
 [Exploring Angular 1.3: Binding to Directive Controllers](http://blog.thoughtram.io/angularjs/2015/01/02/exploring-angular-1.3-bindToController.html)。
 
+#### Scope 有三種
+
+1. isolated scope: `scope: {}`
+
+	強烈建議一律使用 isolated scope，不要使用另外兩種。如需要外部 scope 資料，再明確指定。
+
+2. no scope: `scope: false`
+
+	不建立 scope，直接使用父 scope
+
+3. new scope: `scope: true`
+
+	建立新的 child scope，並且繼承父 scope。
+
 #### Component Helper
 
 這是 AngularJS 1.5 新增的功能。
@@ -63,7 +77,7 @@ John Papa 應該是最早介紹 Controller As 語法的人：
 
 ```js
 var component = {
-  bindings: {
+	bindings: {
 		count: '='
 	}
 };
@@ -72,16 +86,55 @@ app.component('componentName', component);
 
 推薦像上面這樣，將 `component` 的設定另外定義，這樣比較接近 AngularJS 2.0 定義 component 的方式。
 
-注意，使用 `component()` 函數時，實際上等於指定 directive 的參數如下:
+注意：
 
-```js
-{
-	restrict: 'E',
-	scope: {}
-}
-```
+1. 使用 `component()` 函數時，實際上等於指定 directive 的參數如下:
 
-因此 `component()` 函數只能用來建立 tag 形式的 directive。其他形式的 directive，仍然必須使用原本的方式建立。建議只要是 tag 形式的 directive，都使用 `component()` 函數來建立 (參考下面 Directive Factory 的說明)。
+	```js
+	{
+		restrict: 'E',
+		scope: {}
+	}
+	```
+	因此 `component()` 函數只能用來建立 tag 形式的 directive。其他形式的 directive，仍然必須使用原本的方式建立。
+	建議只要是 tag 形式的 directive，都使用 `component()` 函數來建立 (參考下面 Directive Factory 的說明)。
+
+2. 在 Angular 1.2 ~ 1.4 之間引入的 `bindToController`，由於強烈建議應該使用只 isolated scope，因此可被 `bindings` 完全取代，所以我認為不應再使用 `bindToController`。
+
+3. 綜合以上兩點
+	1. 撰寫 component / tag directive 時，應該：
+
+		```js
+		app.component('myComponent', {
+			bindings: {
+				value: '@',
+				oneWay: '<',
+				twoWay: '=',
+				callback: '&'
+			},
+			controller: ['$inject', MyController],
+			controllerAs: 'vm'
+		});
+
+		function MyController($inject) {
+		}
+		```
+
+	2. 撰寫 attribute directive 時，應該：
+
+		```js
+		app.directive('myDirective', {
+			restrict: 'A',
+			scope: {
+				value: '@',
+				oneWay: '<',
+				twoWay: '=',
+				callback: '&'
+			},
+			link: function (scope, element, attrs) {
+			}
+		});
+		```
 
 參考資料：
 
@@ -93,8 +146,87 @@ app.component('componentName', component);
 
 其中，`directiveFactory` 函數，可以回傳一個 [`definition object`](https://docs.angularjs.org/api/ng/service/$compile#directive-definition-object)，指定相關的屬性設定。用法可參考 [Creating Custom Directives](https://docs.angularjs.org/guide/directive)。
 
-另外，還有一種進階作法，是在 `directiveFactory` 函數中回傳一個函數，該函數的作用，相當於上面 `definition object` 中的 `link` 函數，其定義為 `function link(scope, element, attrs, controller, transcludeFn) { ... }`。
-雖然官方不推薦這個作法，但是偶而會看到，所以至少需要了解其原理。詳細的 directive 處理過程，請參考 [HTML Compiler](#html-compiler) 的說明。
+注意 `definition object` 中有兩個進階屬性，`compile` 和 `link` 跟 directive 的處理過程相關。
+
+##### compile 屬性
+
+compile 函數的定義為 `function compile(element, attrs) { ... }`。
+
+注意這裡的 element 是原始的未處裡過的 DOM。`compile` 函數應該負責處理一次性的對 DOM 的操作，並且視需要，回傳一個物件，該物件可以包含 `pre` 和 `post` 兩個函數。類似這樣：
+
+```js
+function directiveFactory() {
+	return {
+		restrict: 'E',
+		compile: function (tElem, tAttrs) {
+			console.log(name + ': compile');
+			return {
+				pre: function (scope, iElem, iAttrs) {
+					console.log(name + ': pre link');
+				},
+				post: function (scope, iElem, iAttrs) {
+					console.log(name + ': post link');
+				}
+			}
+		}
+	}
+}
+```
+
+##### link 屬性
+
+link 函數的定義為 `function link(scope, element, attrs, controller, transcludeFn) { ... }`。
+如果 directive 有定義 `compile` 函數，通常就不會再定義 `link` 函數，而是直接由 `compile` 函數回傳需要的 `pre` 和 `post` 函數。
+此 link 函數，相當於 `compile` 函數中回傳的 `post` 函數。
+
+1. 如果有需要，譬如像 `ng-repeat`，Angular (其實就是後面介紹的 `$compile` 函數) 會複製 `compile` 函數處理完的 DOM。
+2. 針對每個元件單位，依據需要可能建立對應的 scope，然後呼叫 `link` 函數，進行 scope 和個別 DOM 之間的連結。通常在此 link 函數中對 DOM 註冊必要的 listener。
+
+##### 在 directiveFactory 中回傳 link 函數
+
+另外，還有一種進階作法，是在 `directiveFactory` 函數中回傳一個函數，該函數的作用，相當於上面 `definition object` 中的 `link` 函數、以及 `compile` 函數中回傳的 `post` 函數。
+雖然官方不推薦這個作法，但是偶而會看到，所以至少需要了解其原理。
+
+詳細的 directive 處理過程，請參考 [HTML Compiler](#html-compiler) 的說明。
+
+#### HTML Compiler
+
+所有的工作，都是由 `$compile` 函數處理。而其中最重要需要知道的是，Angular 處理的是 DOM，而不是 string template，以維持 DOM 結構的穩定。
+
+1. `$compile` 函數首先找到 `ng-app` directive，然後由此開始，尋找所有的 directive。
+2. 依據 directive 的 priority 排序，同一元件中 priority 最大的 directive 最先處理。
+3. `$compile` 依照階層以及 priority，逐一處理 directive。過程中，會依照階層關係，往下逐一呼叫每個 directive 的 `compile` 函數 (如果有的話)。此時 directive 的 `compile` 函數可以進行一次性的對 DOM 的操作。
+	正規化後的每個 directive 的 `compile` 函數應該回傳 { pre, post } 函數，`$compile` 函數會將整個 DOM 和這些 link 函數，結合為一個統合的 (combined) link 函數，並將之回傳。
+4. 在連結階段，將實際處理 scope 與 DOM 的繫結。
+	此時將依照階層關係，往下逐一呼叫每個 directive 的 `pre` 函數 (如果有的話)，所以父元件的 pre 會先於子元件被呼叫。
+	到達終端後，再以相反順序，呼叫每個 directive 的 `post` 函數 (如果有的話)，因此父元件的 post 會晚於子元件被呼叫。
+
+虛擬碼大約如下：
+
+```js
+var $compile = ...; // injected into your code
+var scope = ...;
+var parent = ...; // DOM element where the compiled template can be appended
+
+var html = '<div ng-bind="exp"></div>';
+
+// Step 1: parse HTML into DOM element
+var template = angular.element(html);
+
+// Step 2: compile the template
+var linkFn = $compile(template);
+
+// Step 3: link the compiled template with the scope.
+var element = linkFn(scope);
+
+// Step 4: Append to DOM (optional)
+parent.appendChild(element);
+```
+
+參考資料：
+
+[HTML Compiler](https://docs.angularjs.org/guide/compiler)
+[AngularJS directives內compile及link的函式本質](https://987.tw/2014/09/03/angularjs-directivesnei-compileji-linkhan-shi-de-ben-zhi/)
 
 #### One-Time data binding
 
