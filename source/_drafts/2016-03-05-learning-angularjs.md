@@ -10,12 +10,6 @@ tags:
 
 ### FAQ
 
-#### $watch(), $digest(), $apply() 及 $on(), $broadcast() 用途分別為何？
-
-[$watch How the $apply Runs a $digest](http://angular-tips.com/blog/2013/08/watch-how-the-apply-runs-a-digest/)
-
-[理解$watch ，$apply 和 $digest - 理解数据绑定过程](http://www.angularjs.cn/A0a6)
-
 #### 指定 controller as 之後，controller 中的 this 與 $scope 有何不同？
 
 這是 AngularJS 1.2 新增的功能。
@@ -61,6 +55,37 @@ John Papa 應該是最早介紹 Controller As 語法的人：
 
 [Exploring Angular 1.3: Binding to Directive Controllers](http://blog.thoughtram.io/angularjs/2015/01/02/exploring-angular-1.3-bindToController.html)。
 
+#### Component Helper
+
+這是 AngularJS 1.5 新增的功能。
+
+為了讓 AngularJS 1.X 移植到 AngularJS 2.0 比較容易，而提供的比較接近 AngularJS 2.0 component 寫法的方式來定義元件。
+
+```js
+var component = {
+  bindings: {
+		count: '='
+	}
+};
+app.component('componentName', component);
+```
+
+推薦像上面這樣，將 `component` 的設定另外定義，這樣比較接近 AngularJS 2.0 定義 component 的方式。
+
+注意，使用 `component()` 函數時，實際上等於指定 directive 的參數如下:
+
+```js
+{
+	restrict: 'E',
+	scope: {}
+}
+```
+
+因此 `component()` 函數只能用來建立 tag 形式的 directive。其他形式的 directive，仍然必須使用原本的方式建立。建議只要是 tag 形式的 directive，都使用 `component()` 函數來建立。
+
+參考資料：
+
+[Exploring the Angular 1.5 .component() method](https://toddmotto.com/exploring-the-angular-1-5-component-method)
 
 #### One-Time data binding
 
@@ -93,7 +118,7 @@ app.directive('directiveName', function () {
 });
 ```
 
-或使用同樣是 AngularJS 1.5 新增的 `component()` 函數：
+或使用前面提到的，同樣是 AngularJS 1.5 新增的 `component()` 函數：
 
 ```js
 var component = {
@@ -110,27 +135,11 @@ app.component('componentName', component);
 
 [Exploring the Angular 1.5 .component() method](https://toddmotto.com/exploring-the-angular-1-5-component-method/#one-way-bindings)
 
-#### Component Helper
+#### $watch(), $digest(), $apply() 及 $on(), $broadcast() 用途分別為何？
 
-這是 AngularJS 1.5 新增的功能。
+[$watch How the $apply Runs a $digest](http://angular-tips.com/blog/2013/08/watch-how-the-apply-runs-a-digest/)
 
-為了讓 AngularJS 1.X 移植到 AngularJS 2.0 比較容易，而提供的比較接近 AngularJS 2.0 component 寫法的方式來定義元件。
-
-```js
-var component = {
-  bindings: {
-		count: '='
-	}
-};
-app.component('componentName', component);
-```
-
-推薦像上面這樣，將 `component` 的設定另外定義，這樣比較接近 AngularJS 2.0 定義 component 的方式。
-
-參考資料：
-
-[Exploring the Angular 1.5 .component() method](https://toddmotto.com/exploring-the-angular-1-5-component-method)
-
+[理解$watch ，$apply 和 $digest - 理解数据绑定过程](http://www.angularjs.cn/A0a6)
 
 #### Batarang
 
