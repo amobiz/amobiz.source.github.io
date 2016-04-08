@@ -64,6 +64,11 @@ triggerElement.setAttribute('aria-expanded', 'false');
 ```
 在第 26 行 `querySelector()` 失敗，導致第 27 行 `triggerElement` 為 null。應該要檢查 `querySelector()` 的結果才對。
 
+##### 後記
+
+這個問題，我在 2016/03/04 在既有的 issue 上留言，3/16 終於被 material team 注意到，標示為 `P0 - Critical Fixes`，並指定 owner 之後，到 4/8 為止，仍然沒有修正。
+雖然其實可以很簡單避開這個問題，所以影響不大。但是，這麼簡單的問題，還被標示為 `P0 - Critical Fixes`，卻可以拖這麼久還不能解決，不禁讓人為 angular/material 感到憂心。
+
 #### 解決方式
 
 確認在 `md-menu` 元件內部，至少有一個元件具有 `ng-click` 或 `ng-mouseenter` 屬性。
