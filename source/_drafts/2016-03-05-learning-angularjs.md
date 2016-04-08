@@ -81,11 +81,20 @@ app.component('componentName', component);
 }
 ```
 
-因此 `component()` 函數只能用來建立 tag 形式的 directive。其他形式的 directive，仍然必須使用原本的方式建立。建議只要是 tag 形式的 directive，都使用 `component()` 函數來建立。
+因此 `component()` 函數只能用來建立 tag 形式的 directive。其他形式的 directive，仍然必須使用原本的方式建立。建議只要是 tag 形式的 directive，都使用 `component()` 函數來建立 (參考下面 Directive Factory 的說明)。
 
 參考資料：
 
 [Exploring the Angular 1.5 .component() method](https://toddmotto.com/exploring-the-angular-1-5-component-method)
+
+#### Directive Factory
+
+要建立自定義的 directive 時，需要呼叫 [`$CompileProvider`](https://docs.angularjs.org/api/ng/provider/$compileProvider) 的 `.directive()` 函數，其定義為： `directive(name, directiveFactory)`。
+
+其中，`directiveFactory` 函數，可以回傳一個 [`definition object`](https://docs.angularjs.org/api/ng/service/$compile#directive-definition-object)，指定相關的屬性設定。用法可參考 [Creating Custom Directives](https://docs.angularjs.org/guide/directive)。
+
+另外，還有一種進階作法，是在 `directiveFactory` 函數中回傳一個函數，該函數的作用，相當於上面 `definition object` 中的 `link` 函數，其定義為 `function link(scope, element, attrs, controller, transcludeFn) { ... }`。
+雖然官方不推薦這個作法，但是偶而會看到，所以至少需要了解其原理。詳細的 directive 處理過程，請參考 [HTML Compiler](#html-compiler) 的說明。
 
 #### One-Time data binding
 
