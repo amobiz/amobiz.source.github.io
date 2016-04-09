@@ -357,6 +357,23 @@ app.directive('markdown', function ($compile) {
 	};
 ```
 
+#### $sanitize
+
+1. 預設在使用 `ng-bind-html` 時，即會自動進行 `$sanitize` 處理，若有需要做進一步的處理，則可以直接呼叫 `$sanitize` 函數。
+2. `$sanitize` 會移除不安全的 tag，包括 `script`, `iframe`, `video`, `audio` 等。 `src`, `href` 等屬性也會進行處理。
+3. `$sanitize` 會將中文字轉換為 `&#uuuu;` 的形式，將 `\n` 轉換為 `&#10;`。所以在 `$sanitize` 之後，要處理內容時要注意這一點。
+4. 即使經過手動 `$sanitize` 處理，若是透過 `ng-bind-html` 來顯示，則還是會再次進行 `$sanitize` 處理。所以，若在 `$sanitize` 處理之後，又另外加了一些被禁用的 tag，則該 tag 仍然會被移除。
+	因此，若確信在 `$sanitize` 處理之後的內容是安全的，則可以透過 `$sce.trustAsHtml()` 函數來告知 `ng-bind-html` 不需要再 `$sanitize` 處理。但是這種處理方式有點冗餘，可以參考上面 `markdown` directive 的作法。
+
+```js
+function markdown(content) {
+	var result = this.$sanitize(content);
+	result = marked(result);
+	result = this.$sce.trustAsHtml(result);
+	return result;
+}
+```
+
 #### $watch(), $digest(), $apply() 及 $on(), $broadcast() 用途分別為何？
 
 [$watch How the $apply Runs a $digest](http://angular-tips.com/blog/2013/08/watch-how-the-apply-runs-a-digest/)
