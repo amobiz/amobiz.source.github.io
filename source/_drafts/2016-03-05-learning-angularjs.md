@@ -272,9 +272,90 @@ app.component('componentName', component);
 
 參考資料：
 
-[One-way data-binding in Angular 1.5](https://toddmotto.com/one-way-data-binding-in-angular-1-5/}
+[One-way data-binding in Angular 1.5](https://toddmotto.com/one-way-data-binding-in-angular-1-5/)
 
 [Exploring the Angular 1.5 .component() method](https://toddmotto.com/exploring-the-angular-1-5-component-method/#one-way-bindings)
+
+#### One Time Data Binding with Recompile
+
+若資料很少變動，但是偶而仍有變動可能，則可以考慮利用 `$compile` 重新 compile。
+
+假設
+
+```js
+var marked = require('marked');
+
+app.directive('markdown', function ($compile) {
+	return function (scope, element, attrs) {
+		scope.$watch(function (scope) {
+			return scope.$eval(attrs.markdown);
+		}, function (value) {
+			if (typeof value !== 'undefined') {
+				value = marked(content);
+				element.html(value);
+				$compile(element.contents())(scope);
+			}
+		};
+	};
+});
+```
+
+幾個重點：
+
+1. 這個 directiveFactory 回傳的是 link 函數，所以 signature 為：`function (scope, element, attrs)`。
+2. 由於第一項的緣故，也就是並未定義 `scope` 屬性的緣故，所以在傳入的 scope 中，並不會有任何自定義屬性 (這個例子中為 `markdown`)，所以不能使用 `scope.$watch('markdown', handler)` 來監看資料，
+	所以，這裡必須使用 factory method 的方式，透過 `$eval` 處理值的監看： `scope.$watch(function (scope) { return scope.$eval(attrs.markdown); }, handler);`
+3. 由於監看函數總是會在第一次的時候，以 `undefined` 值呼叫 handler 函數，為了避免無謂的處理，這裡檢查並排除這種情形。
+4. 由於 `$compile` 函數只處理 DOM 元素，因此，在此先將結果設定給元件，元件將字串內容轉為 DOM，然後再透過元件的 `.contents()` 函數取出 DOM，再交給 `$compile` 函數處理。
+	或者也可以透過 `angular.element(value)` 轉換為 DOM。
+5. `$compile` 函數處理後，回傳 link 函數，我們在此立即呼叫它，並傳入 scope 進行繫結。
+
+在這個例子中，`markdown` directive 的作用類似於 `ng-bind-html`，所以如果資料不會異動，也就是沒有重新 compile 的需求的話，可以在處理完畢後，移除 `$watcher`，以達成 one-time binding 的效果：
+
+```js
+var marked = require('marked');
+
+app.directive('markdown', function ($compile) {
+	return function (scope, element, attrs) {
+		var $watcher = scope.$watch(function (scope) {
+			return scope.$eval(attrs.markdown);
+		}, function (value) {
+			if (typeof value !== 'undefined') {
+				value = marked(content);
+				element.html(value);
+				$compile(element.contents())(scope);
+				$watcher();
+			}
+		};
+	};
+});
+```
+
+`.$watch` 函數回傳的是一個 `$watcher` 函數，當不需要繼續 `$watch` 的時候，只要呼叫該函數，就可以終結該 `$watch`。
+
+如果使用 `definition object` 的形式撰寫，同時定義 `scope` 屬性，則可以直接 `$watch` 需要的屬性。因此，上面的寫法，相當於：
+
+```js
+var marked = require('marked');
+
+app.directive('markdown', function ($compile) {
+	return {
+		restrict: 'A',
+		scope: {
+			markdown: '<'
+		},
+		link: function (scope, element, attrs) {
+			var $watcher = scope.$watch('markdown', function(value) {
+				if (typeof value !== 'undefined') {
+					value = marked(value);
+					element.html(value);
+					$compile(element.contents())(scope);
+					$watcher();
+				}
+			});
+		}
+	};
+```
 
 #### $watch(), $digest(), $apply() 及 $on(), $broadcast() 用途分別為何？
 
