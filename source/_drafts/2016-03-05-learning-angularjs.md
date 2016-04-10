@@ -382,11 +382,11 @@ function markdown(content) {
 
 #### Batarang
 
-對於 one time binding 的支援似乎有些問題：
+1. 對於 one time binding 的支援似乎有些問題：
 
-1. 有文章說它會 disable one time binding, 現在一時找不到該文。
-2. 我發現 one time binding 的寫法會有影響，
+有文章說它會 disable one time binding, 現在一時找不到該文。
 
+我發現 one time binding 的寫法會有影響，
 這樣在 Batarang 才不會出現 watcher:
 
 ```
@@ -399,8 +399,11 @@ function markdown(content) {
 {{ ::item.url }}
 ```
 
-就會出現。但後者似乎是官方推薦的寫法。
+就會出現 (也就是 one time binding 無效)。但後者似乎是官方推薦的寫法。
 
+2. 似乎不會追蹤手動呼叫的 `$watch()`。
+
+3. 它的 $watch view，不斷地閃動，根本看不清楚 watch text 是什麼，對於排除不必要的 $watch 實在不方便。
 
 #### jqLite
 
