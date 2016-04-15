@@ -4,84 +4,44 @@
 
 OS: 真的要問這個問題嗎？
 
- (這個問題暴露出面試官的短視與刁難心態...，這個問題應該這樣問：你覺得 AngularJS 提供 Factory, Service, Provider 的目的為何，各自的使用時機為何？)
-
 在我回答之前，我先說明為什麼這個問題不好。
 
 首先，應該看過 JavaScript: The Good Parts 這本書吧，這本書教我們避開 JavaScript 的設計錯誤部份，善用優良部份。
-同樣地，framework 設計不良的部份，也應該避免使用。你知道 [AngularJS 2.0 的 DI](https://github.com/angular/di.js) (Dependency Injection) 已經棄用這些東西了吧。
-
-其次，為什麼說這是設計不良的部份，Factory, Service (還有  constant, value) 其實都是 Provider，只是建立的形式不同，背後的運作完全是建立在 Provider 的實作之上：
-
-```js
-$provide.service = function(name, Class) {
-  provider.provide(name, function() {
-    this.$get = function($injector) {
-      return $injector.instantiate(Class);
-    };
-  });
-}
-
-$provide.factory = function(name, factory) {
-  provider.provide(name, function() {
-    this.$get = function($injector) {
-      return $injector.invoke(factory);
-    };
-  });
-}
-
-$provide.value = function(name, value) {
-  provider.factory(name, function() {
-    return value;
-  });
-};
-```
-
-而實際上，這些都只不過是 [factory method](http://www.oodesign.com/factory-method-pattern.html) 的變形。硬是冠上一堆不一樣的名詞，只是徒增困擾。
-做為 framework，不應該規範或限制使用者要如何建立服務元件，在 AngularJS 2.0 的 DI，完全不需要這些令人困擾的東西，就可以完整控制相依的元件的建立方式。
-
+同樣地，framework 設計不良的部份，也應該避免使用。你知道透過 AngularJS 2.0 的 [DI](https://github.com/angular/di.js) (Dependency Injection) 引用服務時，已經沒有這些複雜又令人困惑的東西了吧。
 
 ### 回答：
 
-要談論 Factory, Service, Provider 的區別之前，要先說明為什麼需要這些東西。這是為了替 AngularJS 的 DI 機制提供建構元件的方式。
+首先要說明的是，為什麼需要這些東西？
+
+這是為了替 AngularJS 的 DI 機制提供建構服務的方式。
+
+為什麼需要 DI 機制？
+
+為了降低程式的複雜度，讓模組與模組之間的依賴性降到最低，讓程式更容易撰寫、測試。
+
 程式透過 DI 機制，獲取相依的元件，這是結合 IoC (Inverse of Control, 控制反轉) 及 DIP (Dependency Inversion Principle, 依賴反轉)的一種作法，用來降低模組之間的耦合度。
 
-不管是那一種，註冊的方式都相同：提供一個名稱跟函數：
+一般人所稱的 Factory, Service, Provider，還有 Constant, Value 其實都只是建立服務的方法，它們的差別只在建立的形式不同，它們背後的運作完全是建立在相同的實作之上。嚴格說起來，AngularJS DI 的核心，根本不知道有這些東西，它看得到的，只有這些 `factory()`, `service()`, `provider()`, `constant()`, `value()` 方法建立起來的服務而已。
 
-##### Services
+然而，AngularJS team 犯了一個錯誤：他們把建立服務這件事，弄得太複雜，又濫用一些常見的名詞來區分不同的建構方式，導致大家以為這些是不同的東西。譬如 factory，大家很容易以為它是 factory method，在每次呼叫時，應該建立並回傳一個新的物件。很抱歉，不是，它只會被呼叫一次，就只有一次，然後建立好的東西，就被儲存、註冊為服務。
 
-```js
-module.service('serviceName', function); 
-```
+#### 差別在於 AngularJS 對待這些服務建構函數的方式：
 
-##### Factories
+繼續之前，要知道 AngularJS 為服務強制提供了 [singleton](http://www.oodesign.com/singleton-pattern.html) 機制。某種程度上，你可以將它們視為 global。
 
-```js
-module.factory('factoryName', function); 
-```
+##### `provider()`
 
-##### Providers
+將傳入的函數當作建構子 (constructor)，透過 `new` 運算子呼叫。建構子建立的物件，必須擁有 `$get()` 方法。而 `$get()` 方法的返回值，就是服務物件。只在註冊的時候，唯一呼叫一次。
 
-```js
-module.provider('providerName', function); 
-```
+##### `factory()`
 
-#### 差別在於 AngularJS 對待這些函數的方式：
+將傳入的函數當作普通函數呼叫。該函數的返回值，就是服務物件。只在註冊的時候，唯一呼叫一次。
 
-##### Services
+##### `service()`
 
-會將該函數當作建構函數 (constructor)，以 new 的方式呼叫，建立唯一一個物件，供所有的需求者透過 DI 共用。也就是說，AngularJS 為 service 強制提供了 [singleton](http://www.oodesign.com/singleton-pattern.html) 機制。
+將傳入的函數當作建構子 (constructor)，透過 `new` 運算子呼叫。建構子建立的物件，就是服務物件。只在註冊的時候，唯一呼叫一次。
 
-##### Factories
 
-會將該函數當作普通函數呼叫，並且期望函數扮演 [factory method](http://www.oodesign.com/factory-method-pattern.html) 的角色。每個需求者透過 DI 要求時，會呼叫一次該函數，然後該函數的返回值，將成為需求者獲得的結果。
-注意到，factory 可以永遠回傳相同的值，也可以每次回傳不同的值，並沒有任何限制。
-所以 factory 其實也可以在內部實作 singleton 機制，以達成 service 一樣的共用效果。
-只是，如其名稱所暗示的， factory 就是工廠，工廠就應該生產新的東西，沒錯吧。也唯有如此，才有必要使用 factory，否則，使用 service 即可。
-
-##### Providers
-
-會將該函數當作建構函數 (constructor)，以 new 的方式呼叫，建立唯一一個物件，該物件必須含有 `$get()` 函數，每次需求者透過 DI 要求時，呼叫該函數，然後該函數的返回值，將成為需求者獲得的結果。
 
 什麼時候會用到 Provider 呢，首先注意到使用 DI 的時候，我們只能指定依賴對象的名稱，而無法指定參數。
 
@@ -117,79 +77,12 @@ http://stackoverflow.com/questions/15666048/angularjs-service-vs-provider-vs-fac
 
 #### 那麼，到底什麼時候該用哪一個呢？
 
-很多人建議只使用 factory 就好，譬如上面的文章：[Sane, scalable Angular apps are tricky, but not impossible. Lessons learned from PayPal Checkout.](https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef)。
+我的答案是，隨便，不管使用哪一種方式建立服務，結果都一樣，你可以選擇最適合你的情境需要的形式來建立服務。如果你覺得要記憶三種方式很麻煩，鎖定 `factory()` 就好。
 
-這些人的論點，主要就是前面我強調的：factory 可以做所有 service 可以做的事。
+那麼，若需要對服務進行初始設定的話，要怎麼辦呢？
 
-但是我個人則認為，若只看 service 與 factory，由其名稱來看，並不會有什麼容易產生使用時機誤解的地方，反而是考慮到 provider 之後，才讓人發生困惑。
+如果可行的話，應該考慮開始採用 AngularJS 2.0，你可以考慮先引入 [`ngUpgrade`](http://blog.thoughtram.io/angular/2015/10/24/upgrading-apps-to-angular-2-using-ngupgrade.html)，然後使用 AngularJS 2.0 的 DI 來引用服務，在 AngularJS 2.0 的服務，可以是任意形式。
 
-所以我建議，當服務是 singleton 的時候，使用 service；當服務是用來建立新物件的時候，使用 factory。
-更多時候，我認為，商業邏輯以及可重用的部份，都可以寫成 service，而 factory 則是做為幫手或者『膠水』，幫助我們更方便使用這些 service。
-
-譬如：
-
-```js
-// 假設 Connection 是外部程式提供的重量級功能，需要複雜的初始化過程及漫長的建立時間
-function Connection(config) {
-}
-
-Connection.prototype.connect = function () {
-};
-
-Connection.prototype.disconnect = function () {
-};
-
-Connection.prototype.send = function (data) {
-};
-
-// 所以想利用 PoolService 幫助回收、重複使用已經建立好的 Connection 物件。
-function PoolService() {
-	this._pool = [];
-
-	this.pop = function () {
-		return this._pool.pop();
-	};
-
-	this.push = function (instance) {
-		this._pool.push(instance);
-	};
-}
-
-// 在程式中，可以寫個簡單的 factory，幫助我們建立並透過 PoolService 重用 Connection 物件。
-function connectionFactory(PoolService, connectionConfig) {
-	var connection = PoolService.pop();
-	if (connection) {
-		return connection;
-	}
-	
-	return new Connection(connectionConfig);
-}
-
-// 在程式中，由於有 factory 的幫助，需要使用 Connection 的地方，
-// 就可以直接利用 factory 來建立或重用 Connection 物件，不需要再多費心思。
-function SessionController(PoolService, connection) {
-	connection.connect();
-
-	this.close = function () {
-		connection.disconnect();
-		PoolService.push(connection);
-	};
-}
-
-var connectionConfig = {
-};
-
-angular
-	.module('app')
-	.constant('connectionConfig', connectionConfig)
-	.service('PoolService', PoolService)
-	.factory('connection', connectionFactory)
-	.controller('SessionController', SessionController);
-```
-
-那麼，若需要對 service 或 provider 進行設定的話，要怎麼辦呢？
-
-如果可行的話，應該考慮開始採用 AngularJS 2.0。
 在那之前，我建議至少開始改用 borwserify, webpack 或 System.js 這類現代工具來管理模組。
 在建立 angular 模組之前，先載入相依的模組，然後直接進行相關的設定：
 
