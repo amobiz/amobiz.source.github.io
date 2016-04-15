@@ -33,17 +33,49 @@ OS: 真的要問這個問題嗎？
 
 將傳入的函數當作建構子 (constructor)，透過 `new` 運算子呼叫。建構子建立的物件，必須擁有 `$get()` 方法。而 `$get()` 方法的返回值，就是服務物件。只在註冊的時候，唯一呼叫一次。
 
+```js
+app.provider('myService', function MyServiceProviderConstructor() {
+	this.$get = function () {
+		return 'my-service;
+	};
+});
+```
+
+如果用 ES2005 來寫的話，傳給 `provider()` 的函數，實際上是一個 class：
+
+```js
+class MyServiceProvider {
+	$get() {
+		return 'my-service';
+	}
+}
+
+app.provider('myService', MyServiceProvider);
+```
+
 ##### `factory()`
 
 將傳入的函數當作普通函數呼叫。該函數的返回值，就是服務物件。只在註冊的時候，唯一呼叫一次。
+
+```js
+app.factory('myService', function myServiceFactory() {
+	return 'my-service';
+});
+```
 
 ##### `service()`
 
 將傳入的函數當作建構子 (constructor)，透過 `new` 運算子呼叫。建構子建立的物件，就是服務物件。只在註冊的時候，唯一呼叫一次。
 
+```js
+app.service('myService', function MyServiceConstructor() {
+	this.name = 'my-service';
+});
+```
 
+為什麼必須要有 ServiceProvider： `{ $get: function () {} }` 的設計呢？
 
-什麼時候會用到 Provider 呢，首先注意到使用 DI 的時候，我們只能指定依賴對象的名稱，而無法指定參數。
+這是因為透過 AngularJS 1.x 的 DI 機制，並無法在建立服務的當下，提供初始設定值，進行適當的客製化。於是 AngularJS 想出了一個方法。其實這個想法，原本立意良好，是希望將服務初始化功能，與真正的服務功能區分開來，並且強迫初始化功能只能在 `config()` 階段使用。於是 ServiceProvider 就是用來提供初始設定功能，而服務物件則另外透過它的 `$get()` 方法提供，區隔開來。問題是，服務是全域的，每個模組都可以在 `config()` 階段進行設定，而互相干擾。這樣的作法，並沒有真正帶來任何實質的好處。
 
 其實 AngularJS 在建立 provider `xxx` 時，會先建立一個 `xxxProvider`，這其實就是使用我們提供的建構函數，以 `new` operator 呼叫後建立的物件。
 程式在初始化的時候，可以要求 DI 注入 `xxxProvider` 物件以獲取該物件，然後，我們可以呼叫該物件提供的任意函數，進行初始化或執行任意行為。
