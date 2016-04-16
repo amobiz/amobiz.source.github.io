@@ -117,29 +117,34 @@ http://stackoverflow.com/questions/15666048/angularjs-service-vs-provider-vs-fac
 
 #### 那麼，到底什麼時候該用哪一個呢？
 
-我的答案是，隨便，不管使用哪一種方式建立服務，結果都一樣，你可以選擇最適合你的情境需要的形式來建立服務。如果你覺得要記憶三種方式很麻煩，鎖定 `factory()` 就好。
+我的答案是，隨便，不管使用哪一種方式建立服務，結果都一樣，如果你了解它們背後的實作方式，你可以選擇最適合你的情境需要的形式來建立服務。如果你覺得要記憶三種方式很麻煩，則鎖定 `factory()` 就好。
 
 那麼，若需要對服務進行初始設定的話，要怎麼辦呢？
 
-如果可行的話，應該考慮開始採用 AngularJS 2.0，你可以考慮先引入 [`ngUpgrade`](http://blog.thoughtram.io/angular/2015/10/24/upgrading-apps-to-angular-2-using-ngupgrade.html)，然後使用 AngularJS 2.0 的 DI 來引用服務，在 AngularJS 2.0 的服務，可以是任意形式。
+1. 考慮使用 AngularJS 2.0 DI
 
-在那之前，我建議至少開始改用 borwserify, webpack 或 System.js 這類現代工具來管理模組。
-在建立 angular 模組之前，先載入相依的模組，然後直接進行相關的設定：
+	如果可行的話，應該考慮開始採用 AngularJS 2.0，你可以考慮先引入 [`ngUpgrade`](http://blog.thoughtram.io/angular/2015/10/24/upgrading-apps-to-angular-2-using-ngupgrade.html)，然後使用 AngularJS 2.0 的 DI 來引用服務，在 AngularJS 2.0 的服務，可以是任意形式。
 
-```js
-import angular from 'angular';
-import myOtherModule from '../my-other-module/my-other-module';
-import MyAppController from './my-app-controller';
+2. 使用現代工具來管理模組
 
-myOtherModule.setValue('max-cache', 500);
+	在那之前，我建議至少開始改用 borwserify, webpack 或 System.js 這類現代工具來管理模組。在建立 angular 模組之前，先載入相依的模組，然後直接進行相關的設定：
 
-let appModule = angular.module('myApp', [myOtherModule])
-.controller('MyAppController', MyAppController);
+	```js
+	import angular from 'angular';
+	import myOtherModule from '../my-other-module/my-other-module';
+	import MyAppController from './my-app-controller';
 
-export default appModule;
-```
+	myOtherModule.setValue('max-cache', 500);
 
-至於那些 angular 提供的 provider，只好繼續使用 `.config()` 來引用並進行設定了。
+	let appModule = angular.module('myApp', [myOtherModule])
+	.controller('MyAppController', MyAppController);
+
+	export default appModule;
+	```
+
+3. 直接在服務物件上提供設定功能
+
+4. 至於那些 angular 提供的 provider，只好繼續使用 `.config()` 來引用並進行設定了。
 
 
 ## 請說明 controller 的 $scope 的繼承機制
