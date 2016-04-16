@@ -31,7 +31,7 @@ OS: 真的要問這個問題嗎？
 
 ##### `provider()`
 
-將傳入的函數當作建構子 (constructor)，透過 `new` 運算子呼叫。建構子建立的物件，必須擁有 `$get()` 方法。而 `$get()` 方法的返回值，就是服務物件。只在註冊的時候，唯一呼叫一次。
+將傳入的函數當作建構子 (constructor)，透過 `new` 運算子呼叫。建構子建立的物件 (姑且稱此物件為 ServiceProvider)，必須擁有 `$get()` 方法。而 `$get()` 方法的返回值，就是服務物件 (稱此物件為 Service)。只在註冊的時候，唯一呼叫一次。
 
 ```js
 app.provider('myService', function MyServiceProviderConstructor() {
@@ -75,30 +75,27 @@ app.service('myService', function MyServiceConstructor() {
 
 為什麼必須要有 ServiceProvider： `{ $get: function () {} }` 的設計呢？
 
-這是因為透過 AngularJS 1.x 的 DI 機制，並無法在建立服務的當下，提供初始設定值，進行適當的客製化。於是 AngularJS 想出了一個方法。其實這個想法，原本立意良好，是希望將服務初始化功能，與真正的服務功能區分開來，並且強迫初始化功能只能在 `config()` 階段使用。於是 ServiceProvider 就是用來提供初始設定功能，而服務物件則另外透過它的 `$get()` 方法提供，區隔開來。問題是，服務是全域的，每個模組都可以在 `config()` 階段進行設定，而互相干擾。這樣的作法，並沒有真正帶來任何實質的好處。
+這是因為透過 AngularJS 1.x 的 DI 機制，並無法在要求注入服務的當下指定參數，進行適當的客製化。於是 AngularJS 想出了一個方法，讓我們某種程度上，能夠在建立服務之前，進行初始化：
+
+1. 將服務初始化功能，與真正的服務功能區分開來，
+2. 藉由強迫初始化功能只能在 `config()` 階段使用，也就是只有在 `config()` 函數，才可以要求注入 ServiceProvider，這樣所有的要求注入該服務的模組，都能夠藉由呼叫 ServiceProvider，這樣所有的要求注入該服務的模組，都能夠藉由呼叫該物件提供的任意函數，先對該服務的初始化進行調整， 提供的任意函數，該服務的初始化進行調整，
+3. 在 `config()` 階段完成初始化之後，在包含 `run()` 階段及其它 `directive()`, `controller()` 定義階段，服務第一次被要求注入時，才透過 ServiceProvider 的 `$get()` 方法建立並註冊服務。
+
+其實這個想法，原本立意良好，問題是，服務是全域的，每個模組都可以在 `config()` 階段進行設定，而互相干擾。
 
 其實 AngularJS 在建立 provider `xxx` 時，會先建立一個 `xxxProvider`，這其實就是使用我們提供的建構函數，以 `new` operator 呼叫後建立的物件。
-程式在初始化的時候，可以要求 DI 注入 `xxxProvider` 物件以獲取該物件，然後，我們可以呼叫該物件提供的任意函數，進行初始化或執行任意行為。
-而其餘部份的程式，則依照舊有的方式，以名稱 `xxx` 的方式，要求注入 `xxx` 物件，這時候 AngularJS 才會呼叫 `xxxProvider.$get()` 函數，返回真正的元件。
 
-注意到，provider 本身是 singleton，就跟 service 一樣。但是透過 DI 由 `.$get()` 函數取得的值，則由 provider 本身決定，就跟 factory 一樣。由此可知，service 與 factory 實際上是 provider 的特殊化版本。
+##### 為什麼只有在 `config()` 期間可以使用 ServiceProvider？
 
-另外，注意到『程式在初始化的時候』，這表示，要對 provider 進行設定，有一定的順序要求，請參考『程式初始化流程』
+provider 只能在 `module.config()` 函數中使用，並且不能在 `module.config()` 以外的函數中使用。
+其他如 factory, service 等，則不能在 `module.config()` 函數中使用。
 
-另外，`$provide` 服務還支援 [decorator](https://docs.angularjs.org/api/auto/service/$provide#decorator)，
-可以用來攔截 value, service, factory, provider，加以修改。
+這是因為在 `config()` 函數之外，任何的 DI 指定的名稱，假設為 `xxx`，則 DI 系統會嘗試找到 `xxxProvider`，然後在第一次遇到要求注入 `xxx` 的地方，透過該 `xxxProvider.$get()` 函數，取得真正的物件。
+因此，譬如若在 `config()` 函數之外，指定注入 `$locationProvider`，則 DI 會先嘗試找到 `$locationProviderProvider`，而當然沒有這個東西，自然就無法在 `config()` 函數之外使用 provider。
 
-根據這篇文章：[Sane, scalable Angular apps are tricky, but not impossible. Lessons learned from PayPal Checkout.](https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef)， 只有 provider 能在 `module.config()` 函數中使用，並且不能在 `module.config()` 以外的函數中使用。其他如 factory, service 等，則不能在 `module.config()` 函數中使用。(**補上官方文件**)
-(這是因為在 `.config()` 函數之外，任何的 DI 指定的名稱，假設為 `xxx`，則 DI 系統會嘗試找到 `xxxProvider`，然後透過該 `xxxProvider.$get()` 取得真正的物件。
-因此，若指定譬如 `$locationProvider`，則在 `.config()` 函數之外， DI 會先嘗試找到 `$locationProviderProvider`，而當然沒有這個東西，自然就無法在 `.config()` 函數之外使用 provider。)
+##### `value()` 與 `constant()`
 
-另外，`$provide` 服務還支援 [constant](https://docs.angularjs.org/api/auto/service/$provide#constant)，其特性為:
-
-1. 可在 module `.config()` 時期透過 DI 取用，
-2. 不可 DI 引用其他服務，
-3. 不可透過 decorator 修飾。
-
-value 相較於  constant 的區別：
+value 相較於 constant 的區別：
 
 1. 不可在 module.config() 時期透過 DI 取用，
 2. 不可 DI 引用其他服務 (與 constant 同)，
@@ -106,6 +103,17 @@ value 相較於  constant 的區別：
 
 AngularJS: Service vs provider vs factory
 http://stackoverflow.com/questions/15666048/angularjs-service-vs-provider-vs-factory
+
+##### `decorator()`
+
+另外，`$provide` 服務還支援 [decorator](https://docs.angularjs.org/api/auto/service/$provide#decorator)，
+可以用來攔截 value, service, factory, provider，加以修改。
+
+另外，`$provide` 服務還支援 [constant](https://docs.angularjs.org/api/auto/service/$provide#constant)，其特性為:
+
+1. 可在 module `.config()` 時期透過 DI 取用，
+2. 不可 DI 引用其他服務，
+3. 不可透過 decorator 修飾。
 
 #### 那麼，到底什麼時候該用哪一個呢？
 
