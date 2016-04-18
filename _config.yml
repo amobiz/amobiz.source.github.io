@@ -76,7 +76,7 @@ deploy:
   repository: https://github.com/amobiz/amobiz.github.io.git
   branch: master
 
-# Fork Me GitHub Ribbon 
+# Fork Me GitHub Ribbon
 forkme:
   home: https://github.com/amobiz
 
