@@ -40,22 +40,25 @@ setCssStyle(el.style, styles);
 
 #### OOCSS, SMACSS, BEM, SUIT
 
-使用人為的命名方式，來區別模組名稱，這方面的嘗試堪稱代表的有：OOCSS, SMACSS, BEM, SUIT，其中又以 BEM 及 SUIT 最受到歡迎。
-許多人認為 SUIT 是 BEM 的改良，而其語法除了 camel case 較不討喜之外，相對於 BEM 使用 `__` 及 `--` 來區別層級更容易理解。
+使用人為的命名方式，來區別模組名稱。
+
+這方面的嘗試堪稱代表的有：OOCSS, SMACSS, BEM, SUIT，其中又以 BEM 及 SUIT 最受到歡迎。許多人認為 SUIT 是 BEM 的改良，而其語法除了 camel case 較不討喜之外，相對於 BEM 使用 `__` 及 `--` 來區別層級更容易理解。
 
 採用命名規範來處理 css 的模組化問題，最重要的守則，就是：
 
->> Blocks should only be used inside a component of the same name.
+{% blockquote https://medium.com/seek-ui-engineering/block-element-modifying-your-javascript-components-d7f99fcab52b#.lc19hxlo7 Block, Element, Modifying Your JavaScript Components %}
+Blocks should only be used inside a component of the same name.
+{% endblockquote %}
 
 『最上層區塊的命名必須與元件同名，並且其下的子元素，只能用在元件內部。』
 
 採用這些方案的好處是，由於是 100% 原生的 CSS 語法，因此有以下優點:
 
-1. 不須要任何前處理器工具，導入最容易，
+1. 不須要任何前處理器工具，導入、除錯最容易，
 2. 可以輕易與既有的前處理器工具搭配，
 3. 可以避免使用巢狀的選擇器，提昇效能，並且避免結構依賴問題。
 
-譬如，使用 `postcss-bem`，就可以使用巢狀的宣告方式，省卻繁複的名稱重複撰寫問題，輕鬆撰寫符合 SUIT 規範的 CSS：
+上面第二項，譬如可以使用 PostCSS 外掛 [`postcss-bem`](https://github.com/ileri/postcss-bem)，就可以使用巢狀的宣告方式，省卻繁複的名稱重複撰寫問題，輕鬆撰寫符合 SUIT 規範的 CSS：
 
 ```css
 @namespace app {
@@ -80,7 +83,7 @@ setCssStyle(el.style, styles);
 }
 ```
 
-可以產生：
+可以輸出：
 
 ```css
 .app-SearchForm {
@@ -101,7 +104,7 @@ setCssStyle(el.style, styles);
 }
 ```
 
-每個 class 都將直接對應到目標元件上：
+每個輸出的 class，都將直接對應到目標元件上，從而避免使用巢狀的選擇器：
 
 ```html
 <form name="search" class="app-SearchForm">
@@ -109,7 +112,7 @@ setCssStyle(el.style, styles);
 </form>
 ```
 
-不過，我覺得很奇怪，可能是我自己閱讀的還不夠多，好像很少看到有人提到，目前還缺乏 markup 處理工具，幫忙將同樣的結果套用到 html 上。目前只能手動將最終的名稱寫到 html 上，仍然相當不方便，而且容易出錯。雖然有 [postcss-bem-linter](https://github.com/postcss/postcss-bem-linter) 來幫忙檢查 css 是否符合 BEM/SUIT 規範，卻沒有工具可以用來檢查 html。
+不過，我覺得很奇怪，可能是我自己閱讀的還不夠多，好像很少看到有人提到/抱怨，目前還缺乏 markup 處理工具，幫忙將同樣的結果套用到 html 上。目前只能手動將最終的名稱寫到 html 上，仍然相當不方便，而且容易出錯。雖然有 [postcss-bem-linter](https://github.com/postcss/postcss-bem-linter) 來幫忙檢查 css 是否符合 BEM/SUIT 規範，卻沒有工具可以用來檢查 html。
 
 #### css-modules
 
