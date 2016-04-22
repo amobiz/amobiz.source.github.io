@@ -21,11 +21,27 @@
 
 ## 問題
 
+### (2016/04/22) ($mdIconProvider, md-svg-icon)
+
+#### 問題描述
+
+使用 `md-svg-icon` 透過 $mdIconProvider 以 id 引用的 icon，若實際為 Data URL 在 Safari 下不顯示。
+
+#### 問題原因
+
+程式錯誤。在 [src/components/icon/js/iconService.js](https://github.com/angular/material/blob/master/src/components/icon/js/iconService.js) 中未正確區分 data url 與真正的 url，導致 ajax 失敗，而未能正確注入 svg icon。(蠻奇怪的是似乎只有 Safari 瀏覽器有這個問題。一度以為是 Safari [不支援 inline svg](https://techxplorer.com/2015/05/on-safari-with-inline-svg/) 的問題。)
+
+#### 解決方式
+
+官方已修正： [fix(icon): Allow using data URLs](https://github.com/angular/material/commit/bebd07c505fd78e01335916d603f0afebc82e61d)，升級到 v1.0.7 版以上即可。
+
 ### (2016/03/12) (md-sidenav)
 
 #### 問題描述
 
 Sidenav 開啟時，畫面捲動；點擊 Sidenav 上的 button 時，focus 行為異常，有時候 focus 會停留在上次的 focus 元件，有時候會成為 sidenav 本身，多數時候會造成畫面捲動。
+
+#### 問題原因
 
 問題在於 sidenav 對 isOpen 的偵測：在 `updateIsOpen(isOpen)` 函數中，使用 `＄watch()` 的方式，偵測 sidenav 是否開啟，並且利用 promise，異步設定 focus() 到由 `md-autofocus` 或 `md-sidenav-focus` 指定的元件，或 sidenav 本身。
 
@@ -53,7 +69,9 @@ scope.$watch('isOpen', updateIsOpen);
 
 #### 問題描述
 
-Console 出現 "Cannot read property 'setAttribute' of null" 錯誤訊息
+Console 出現 "Cannot read property 'setAttribute' of null" 錯誤訊息。
+
+#### 問題原因
 
 如我在該 issue 的 comment 所言，我遇到的問題是 `md-menu` 內部沒有任何元件具有 `ng-click` 或 `ng-mouseenter` 屬性，
 所以在  [material/src/components/menu/js/menuController.js](https://github.com/angular/material/blob/b58343c20ac4bd3418629c29abddfe3ac3840eb5/src/components/menu/js/menuController.js#L26-L27) Lines 26-27:
@@ -81,7 +99,9 @@ triggerElement.setAttribute('aria-expanded', 'false');
 
 #### 問題描述
 
-Menu 開啟後 (dropdown)，整個程式沒有反應
+Menu 開啟後 (dropdown)，整個程式沒有反應。
+
+#### 問題原因
 
 這其實是 cssnano 的問題，因為 angular-material 開啟的 menu 元件為 `.md-open-menu-container`，設定的 `z-index` 是 100，
 而為了能在點擊 menu 外部時關閉 menu，所以底下會有一個覆蓋整個 viewport 的 `.md-scroll-mask` 元件，其 `z-index` 為 50，不過這是直接設定在元件上，而不是使用 css stylesheet 控制。
