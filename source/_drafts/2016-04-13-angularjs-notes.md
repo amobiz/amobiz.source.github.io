@@ -7,6 +7,9 @@ tags:
   - notes
   - AngularJS
 ---
+{% credit credit:"Karl Fredrickson" link:https://unsplash.com/kfred %}
+![](https://images.unsplash.com/photo-1442512595331-e89e73853f31?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1000)
+{% endcredit %}
 
 ## 前言
 
@@ -17,6 +20,8 @@ tags:
 其中，`directiveFactory` 函數，可以回傳一個 [`definition object`](https://docs.angularjs.org/api/ng/service/$compile#directive-definition-object)，指定相關的屬性設定。用法可參考 [Creating Custom Directives](https://docs.angularjs.org/guide/directive)。
 
 注意 `definition object` 中有兩個進階屬性，`compile` 和 `link` 跟 directive 的處理過程相關。
+
+<!-- more -->
 
 ##### compile 屬性
 
