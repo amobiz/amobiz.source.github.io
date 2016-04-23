@@ -339,6 +339,8 @@ export default class Dialog extends React.Component {
 
 由於目前 css-modules 的實作，主要還是基於 Webpack 的 css-loader。而 Webpack 的思維，是以 JavaScript 為核心，透過 `require()` 函數來描述相關資源的關係，剛好與 ReactJS 的 JSX 的作法相同，兩者可說是天作之合。然而，明明要套用 class 的對象是 html/template，卻必須勞動 JavaScript 在__執行期間__來處理，似乎不是那麼經濟。
 
+雖然 [Browserify](https://github.com/substack/node-browserify) 有 [css-modulesify](https://github.com/css-modules/css-modulesify)，但 Browserify 其實是更加以 JavaScript 為中心，因此採用的是與 css-loader 完全相同的作法。
+
 我個人傾向於，工具應該要能夠在前處理期間就做好這些轉換工作，最終的 css 和 html template 都能直接處理好 local class 名稱對應，在 JavaScript 中，只要直接引用 template 即可。
 
 輸入：
@@ -381,13 +383,11 @@ __dialog.html__
 </div>
 ```
 
-雖然 [Browserify](https://github.com/substack/node-browserify) 有 [css-modulesify](https://github.com/css-modules/css-modulesify)，但 Browserify 其實是更加以 JavaScript 為中心，因此採用的是與 css-loader 完全相同的作法。
-
 當然，這只是目前實作的問題，css-modules 規範本身，除了預設為 local scope 值得商榷之外，並沒有太大的問題。
 
 ### Web Components / Shadow DOM
 
-[Shadow DOM](https://www.w3.org/TR/2015/WD-shadow-dom-20151215/) 是 [Web Components](http://webcomponents.org/) 的子規格，目前仍在草案階段，瀏覽器的支援也許還不足，但是實際上已經有相當多成熟的實作。最好的例子就是 [Polymer](https://www.polymer-project.org/1.0/)，已經正式發表 1.0 版，而 AngularJS 2.0 也即將正式發佈。即使不使用 framework，也可以直接透過 [polyfill](https://github.com/webcomponents/webcomponentsjs/) 使用。
+[Shadow DOM](https://www.w3.org/TR/2015/WD-shadow-dom-20151215/) 是 [Web Components](http://webcomponents.org/) 的附屬規格，目前仍在草案階段，瀏覽器的支援也許還不足，但是實際上已經有相當多成熟的實作。最好的例子就是 [Polymer](https://www.polymer-project.org/1.0/)，已經正式發表 1.0 版，而 AngularJS 2.0 也即將正式發佈。即使不使用 framework，也可以直接透過 [polyfill](https://github.com/webcomponents/webcomponentsjs/) 使用。
 
 重點是，在 Shadow DOM 中，不論 markup 或 style，都是私有的，外界只能看到最外層的元件。換句話說，對 Shadow DOM 而言，CSS 就是 local scope 的！
 
