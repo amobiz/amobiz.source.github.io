@@ -21,6 +21,8 @@ tags:
 
 這篇文章記錄個人嘗試 css-modules 過程中所遇到的問題，並且順便將目前業界各種對 modular css 的嘗試/進展，做一個相關資訊的摘錄。
 
+還沒有找到適合自己偏好作法的讀者，可以將此文視為簡單的[技術選型](http://www.gegugu.com/2016/01/11/20196.html)指南，從中挑選適合自己的作法。
+
 <!-- more -->
 
 ## 模組化的 CSS
@@ -384,6 +386,8 @@ __dialog.html__
 ```
 
 當然，這只是目前實作的問題，css-modules 規範本身，除了預設為 local scope 值得商榷之外，並沒有太大的問題。
+
+[CSS Modules 详解及 React 中实践](http://zhuanlan.zhihu.com/p/20495964) 這篇文章有相當深入精闢的技術解說，想進一步了解 css-modules 的朋友千萬不要錯過。
 
 ### Web Components / Shadow DOM
 
