@@ -7,9 +7,9 @@ tags:
   - JavaScript
   - Design Pattern
 ---
-[
+{% credit credit:"John Cobb" link:"https://unsplash.com/johncobb" %}
 ![](https://images.unsplash.com/photo-1428542170253-0d2f063e92c2?fit=crop&fm=jpg&h=800&q=80&w=1200)
-](https://unsplash.com/johncobb)
+{% endcredit %}
 
 ### 前言
 

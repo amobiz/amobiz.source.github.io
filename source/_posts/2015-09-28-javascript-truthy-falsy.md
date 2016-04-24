@@ -7,9 +7,9 @@ tags:
   - JavaScript
   - pitfalls
 ---
-[
+{% credit credit:"Genta Mochizawa" link:"https://unsplash.com/foxwalk" %}
 ![](https://images.unsplash.com/photo-1431051047106-f1e17d81042f?fit=crop&fm=jpg&h=725&q=80&w=1075)
-](https://unsplash.com/foxwalk)
+{% endcredit %}
 
 ### 簡介
 

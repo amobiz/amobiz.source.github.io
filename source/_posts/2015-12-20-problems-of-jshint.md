@@ -9,9 +9,9 @@ tags:
   - lint
   - pitfalls
 ---
-[
+{% credit credit:"Samantha Sophia" link:"https://unsplash.com/samanthasophia"	%}
 ![](https://images.unsplash.com/photo-1442115597578-2d0fb2413734?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075)
-](https://unsplash.com/samanthasophia)
+{% endcredit %}
 
 最早的 JavaScript [linter] 是 [JSLint]，但是由於作者 [Douglas Crockford] 設定了太多個人主觀認定必須要遵守的強制規則，而且很少有妥協的餘地，所以後來強調可以配置規則的 [JSHint] 漸漸崛起，我自己從一開始就是使用 JSHint，並且也用了蠻長一段時間。然而...
 

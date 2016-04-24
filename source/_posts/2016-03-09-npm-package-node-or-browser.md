@@ -13,8 +13,9 @@ tags:
   - CommonJS
   - UMD
 ---
-[
-![](https://images.unsplash.com/photo-1454587399083-b11b22f48fb6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=8a0cb2a646f0d3a30461337998b6c642)](https://unsplash.com/photos/GOQ32dlahDk)
+{% credit credit:"Vítor Santos" link:"https://unsplash.com/photos/GOQ32dlahDk"	%}
+![](https://images.unsplash.com/photo-1454587399083-b11b22f48fb6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=8a0cb2a646f0d3a30461337998b6c642)
+{% endcredit %}
 
 在社群上有網友問到如何判斷 [npmjs.com](https://www.npmjs.com/) (或任意 open source 平台)上的套件，是否支援 node 或 browser，以下我將自己的經驗整理回答如下：
 

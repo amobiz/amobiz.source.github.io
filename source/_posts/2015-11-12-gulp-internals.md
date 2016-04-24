@@ -8,9 +8,9 @@ tags:
   - Gulp
   - notes
 ---
-[
+{% credit credit:"Maria Vernigora" link:"https://unsplash.com/mrs_m" %}
 ![](https://images.unsplash.com/photo-1458217222755-d1c4985b0852?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075)
-](https://unsplash.com/mrs_m)
+{% endcredit %}
 
 ### 前言
 

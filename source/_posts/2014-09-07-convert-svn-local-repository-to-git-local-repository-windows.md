@@ -8,9 +8,9 @@ tags:
   - svn
   - howto
 ---
-[
-  ![](https://s3.amazonaws.com/ooomf-com-files/Vo7YbYQQ8iyOo4J9bOoj_ggb24.jpg)
-](https://www.flickr.com/photos/lucastheis/)
+{% credit credit:"Lucas Theis" link:"https://www.flickr.com/photos/lucastheis/" %}
+![](https://s3.amazonaws.com/ooomf-com-files/Vo7YbYQQ8iyOo4J9bOoj_ggb24.jpg)
+{% endcredit %}
 
 如果有舊專案使用 [Subversion] 管理程式碼，而且不是儲存在 svn server 上，而是使用 [TortoiseSVN] 的 create repository here 指令所建立的 repository。或者是 server 已不復存在，只剩下 repository 目錄的備份，那麼可以試著使用本文介紹的方式，轉換為 git 格式。
 

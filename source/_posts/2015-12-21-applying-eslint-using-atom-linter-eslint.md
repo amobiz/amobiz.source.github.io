@@ -12,9 +12,9 @@ tags:
   - lint
   - tutorial
 ---
-[
+{% credit credit:"Calum MacAulay" link:"https://unsplash.com/calum_mac"	%}
 ![](https://images.unsplash.com/photo-1453946610176-6be21147c400?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075)
-](https://unsplash.com/calum_mac)
+{% endcredit %}
 
 使用 Atom 編輯器，安裝上 linter-eslint 外掛，再加上一個現成的 ESLint  範本，就可以無痛投入到 ESLint 的懷抱了。
 

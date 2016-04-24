@@ -8,9 +8,9 @@ tags:
   - Design Pattern
   - Promise
 ---
-[
+{% credit credit:"Liane Metzler" link:"https://unsplash.com/liane" %}
 ![](https://images.unsplash.com/photo-1439920120577-eb3a83c16dd7?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1900)
-](https://unsplash.com/liane)
+{% endcredit %}
 
 ### 鑽牛角尖時間：Promise: resolver vs handler
 

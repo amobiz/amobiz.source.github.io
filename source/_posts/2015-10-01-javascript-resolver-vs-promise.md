@@ -8,9 +8,9 @@ tags:
   - Design Pattern
   - Promise
 ---
-[
+{% credit credit:"Demi DeHerrera" link:"https://unsplash.com/demidearest" %}
 ![](https://images.unsplash.com/photo-1429308755210-25a272addeb3?fit=crop&fm=jpg&h=800&q=80&w=1200)
-](https://unsplash.com/demidearest)
+{% endcredit %}
 
 ### 前言
 

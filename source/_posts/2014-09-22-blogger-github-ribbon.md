@@ -9,9 +9,9 @@ tags:
   - GitHub
   - howto
 ---
-[
-  ![](https://unsplash.imgix.net/3/alejandroescamilla-tenedores.jpg?q=75&fm=jpg&auto=format&s=927ccb71c1941511657cd27823e96129)
-](https://unsplash.com/)
+{% credit credit:"Alejandro Escamilla" link:"https://unsplash.com/alejandroescamilla" %}
+![](https://unsplash.imgix.net/3/alejandroescamilla-tenedores.jpg?q=75&fm=jpg&auto=format&s=927ccb71c1941511657cd27823e96129)
+{% endcredit %}
 
 {% cheatsheet 異動說明 %}
 由於部落格已經改用 [GitHub Pages](https://pages.github.com/) 並搬家到 [這裡](/)。本文提到的 [GitHub Ribbons](https://github.com/blog/273-github-ribbons) 的部份，依然對所有的部落格平台有效，但 __本文提到的 [Google Blogger](http://www.blogger.com/) 的操作部份，僅對於使用 Blogger 的朋友有效__。

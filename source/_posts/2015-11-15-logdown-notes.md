@@ -8,9 +8,9 @@ tags:
   - Markdown
   - pitfalls
 ---
-[
+{% credit credit:"John Breland 3" link:"https://unsplash.com/jrbreland"	%}
 ![](https://images.unsplash.com/photo-1457717047216-96440b68d44c?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075)
-](https://unsplash.com/jrbreland)
+{% endcredit %}
 
 ### 前言
 
