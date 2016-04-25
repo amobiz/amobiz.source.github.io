@@ -9,7 +9,7 @@ tags:
   - lint
   - pitfalls
 ---
-{% credit credit:"Samantha Sophia" link:"https://unsplash.com/samanthasophia"	%}
+{% credit credit:"Samantha Sophia" link:"https://unsplash.com/samanthasophia" desc:"意象說明<br><br>問題 < 一個頭兩個大 < 小孩讀聖經" %}
 ![](https://images.unsplash.com/photo-1442115597578-2d0fb2413734?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075)
 {% endcredit %}
 

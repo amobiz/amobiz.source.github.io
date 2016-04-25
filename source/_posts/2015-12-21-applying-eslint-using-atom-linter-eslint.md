@@ -12,7 +12,7 @@ tags:
   - lint
   - tutorial
 ---
-{% credit credit:"Calum MacAulay" link:"https://unsplash.com/calum_mac"	%}
+{% credit credit:"Calum MacAulay" link:"https://unsplash.com/calum_mac" desc:"意象說明<br><br>筆記、筆記、再筆記" %}
 ![](https://images.unsplash.com/photo-1453946610176-6be21147c400?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075)
 {% endcredit %}
 

@@ -8,7 +8,7 @@ tags:
   - Design Pattern
   - Promise
 ---
-{% credit credit:"Liane Metzler" link:"https://unsplash.com/liane" %}
+{% credit credit:"Liane Metzler" link:"https://unsplash.com/liane" desc:"意象說明<br><br>Promise < 承諾" %}
 ![](https://images.unsplash.com/photo-1439920120577-eb3a83c16dd7?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1900)
 {% endcredit %}
 

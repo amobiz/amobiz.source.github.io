@@ -13,7 +13,7 @@ tags:
   - CommonJS
   - UMD
 ---
-{% credit credit:"Vítor Santos" link:"https://unsplash.com/photos/GOQ32dlahDk"	%}
+{% credit credit:"Vítor Santos" link:"https://unsplash.com/photos/GOQ32dlahDk" desc:"意象說明<br><br>工欲善其事必先利其器" %}
 ![](https://images.unsplash.com/photo-1454587399083-b11b22f48fb6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=8a0cb2a646f0d3a30461337998b6c642)
 {% endcredit %}
 

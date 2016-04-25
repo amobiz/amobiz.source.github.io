@@ -8,7 +8,7 @@ tags:
   - svn
   - howto
 ---
-{% credit credit:"Lucas Theis" link:"https://www.flickr.com/photos/lucastheis/" %}
+{% credit credit:"Lucas Theis" link:"https://www.flickr.com/photos/lucastheis/" desc:"意象說明<br><br>轉換 < 過渡 < 大橋" %}
 ![](https://s3.amazonaws.com/ooomf-com-files/Vo7YbYQQ8iyOo4J9bOoj_ggb24.jpg)
 {% endcredit %}
 

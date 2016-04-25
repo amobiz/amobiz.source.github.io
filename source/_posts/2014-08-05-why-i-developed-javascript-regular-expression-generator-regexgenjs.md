@@ -13,7 +13,7 @@ tags:
   - regex
   - open source
 ---
-{% credit credit:"Sergey Zolkin" link:"https://unsplash.com/szolkin" %}
+{% credit credit:"Sergey Zolkin" link:"https://unsplash.com/szolkin" desc:"意象說明<br><br>Regular expression < 文字處理 < 打字機" %}
 ![](https://images.unsplash.com/42/cA4aKEIPQrerBnp1yGHv_IMG_9534-3-2.jpg?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1000)
 {% endcredit %}
 

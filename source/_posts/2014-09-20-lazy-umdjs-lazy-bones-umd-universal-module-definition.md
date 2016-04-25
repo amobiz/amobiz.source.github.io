@@ -12,7 +12,7 @@ tags:
   - UMD
   - open source
 ---
-{% credit credit:"Daniel Ruswick" link:"https://unsplash.com/danielruswick" %}
+{% credit credit:"Daniel Ruswick" link:"https://unsplash.com/danielruswick" desc:"意象說明<br><br>Open source < 模組 < beans" %}
 ![](https://images.unsplash.com/44/E5KMvPp9SsCnqmEGUwAS_2014-08-10%2012.56.40%201.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=12eb02a4fdd9dded1148a672890b50ae)
 {% endcredit %}
 

@@ -7,7 +7,7 @@ tags:
   - JavaScript
   - Design Pattern
 ---
-{% credit credit:"John Cobb" link:"https://unsplash.com/johncobb" %}
+{% credit credit:"John Cobb" link:"https://unsplash.com/johncobb" desc:"意象說明<br><br>Resolver < 過關斬將 < 飛魚拍打水面飛行" %}
 ![](https://images.unsplash.com/photo-1428542170253-0d2f063e92c2?fit=crop&fm=jpg&h=800&q=80&w=1200)
 {% endcredit %}
 

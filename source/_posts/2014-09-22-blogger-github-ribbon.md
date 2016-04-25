@@ -9,7 +9,7 @@ tags:
   - GitHub
   - howto
 ---
-{% credit credit:"Alejandro Escamilla" link:"https://unsplash.com/alejandroescamilla" %}
+{% credit credit:"Alejandro Escamilla" link:"https://unsplash.com/alejandroescamilla" desc:"意象說明<br><br>Fork me on GitHub < Fork < 叉子" %}
 ![](https://unsplash.imgix.net/3/alejandroescamilla-tenedores.jpg?q=75&fm=jpg&auto=format&s=927ccb71c1941511657cd27823e96129)
 {% endcredit %}
 
