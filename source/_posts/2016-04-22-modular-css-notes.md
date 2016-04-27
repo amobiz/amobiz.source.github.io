@@ -14,7 +14,7 @@ tags:
   - SUIT
   - Webpack
 ---
-{% credit credit:"Sweet Ice Cream Photography" link:"https://unsplash.com/sweeticecreamphotography"	desc:"意象說明<br><br>模組化 < 封裝 < 與世隔絕 < 受困<br>絕佳搭配 < 天作之合 < 俊男美女" %}
+{% credit credit:"Sweet Ice Cream Photography" link:"https://unsplash.com/sweeticecreamphotography"	desc:"意象說明<br><br>模組化 < 封裝 < 與世隔絕 < 受困於小船<br>絕佳搭配 < 天作之合 < 俊男美女" %}
 ![](https://images.unsplash.com/photo-1460750860062-82a52139a0d6?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1000)
 {% endcredit %}
 

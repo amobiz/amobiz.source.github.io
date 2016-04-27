@@ -10,6 +10,12 @@ tags:
 	- modularity
 	- JavaScript
 ---
+{% credit credit:"Dmitrii Vaccinium" link:"https://unsplash.com/@vaccinium"	desc:"意象說明<br><br>JavaScript 社群 < 百家爭鳴 < 車廠＋車廂<br>黎明？黃昏？" %}
+![](https://images.unsplash.com/photo-1434871619871-1f315a50efba?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075)
+{% endcredit %}
+
+
+
 [前一陣子](http://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code/)，[`left-pad`](https://github.com/azer/left-pad) 的作者，因為不滿 npmjs.com 屈從財團的壓力，未經作者同意就擅自移轉所有權，因此憤而將全部模組從 npm 下架，而導致眾多知名模組受到波及。此事件引起了廣泛的反思。
 
 然而，漸漸出現一種聲音，開始呼籲大家不要使用 open source、要盡量自己寫程式碼，不要依賴別人的模組，就像這篇文章：『[NPM & left-pad: Have We Forgotten How To Program?](http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/)』([中譯](http://qianduan.guru/2016/04/04/npm-left-pad-have-we-forgotten-how-to-program/))。更有甚者，連『懂得怎麼寫程式之前，別去玩 node.js 好嗎？』這樣的話都出來了。
