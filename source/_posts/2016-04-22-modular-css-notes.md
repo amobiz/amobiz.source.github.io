@@ -6,7 +6,7 @@ category:
   - Programming
 tags:
   - css
-  - css-modules
+  - CSS-modules
   - modular css
   - Web Components
   - Shadow DOM
@@ -20,7 +20,7 @@ tags:
 
 ## 前言
 
-這篇文章記錄個人嘗試 css-modules 過程中所遇到的問題，並且順便將目前業界各種對 modular css 的嘗試/進展，做一個相關資訊的摘錄。
+這篇文章記錄個人嘗試 CSS-modules 過程中所遇到的問題，並且順便將目前業界各種對 modular css 的嘗試/進展，做一個相關資訊的摘錄。
 
 還沒有找到適合自己偏好作法的讀者，可以將此文視為簡單的[技術選型](http://www.gegugu.com/2016/01/11/20196.html)指南，從中挑選適合自己的作法。
 
@@ -30,9 +30,9 @@ tags:
 
 學過網頁設計的人都知道，CSS 作用的對象，是整個 html 文件。這在過去網頁都是靜態文件為主的年代，完全是合情合理的設計，不過到現代大量 Web App 為主的 SPA 時代，這樣的特性，反而造成 Web App 開發的困擾。而 CSS 規格的發展，又遠遠落後於 JavaScript / HTML5 的發展，因此，出現了各種不同的模組化嘗試。
 
-### Inline Styles
+### CSS-in-JS (Inline Styles)
 
-在這一兩年引起廣泛注目的 ReactJS，其引入的 JSX 語法，倡導在 JavaScript 中撰寫 html markup。更早，甚至於在發表 ReactJS 之前，其團隊就有人介紹 inline styles 的構想 (YouTube 影片找到後補上)：以 JavaScript 撰寫 CSS，從而避開 global scope 的問題。
+在這一兩年引起廣泛注目的 ReactJS，其引入的 JSX 語法，倡導在 JavaScript 中撰寫 html markup。更早，甚至於在發表 ReactJS 之前，其團隊就有人介紹 CSS-in-JS 的構想 (YouTube 影片找到後補上)：以 JavaScript 撰寫 CSS，從而避開 global scope 的問題。
 
 原理就是使用 JSON 語法取代 css rule，然後使用程式轉換為 css inline style，再設定給元件。譬如：
 
@@ -186,7 +186,7 @@ Blocks should only be used inside a component of the same name.
 
 1. 仍然是 global scope
 
-	雖然稍後會介紹的 css-modules 基本上也是 global scope，不過相較於 css-modules，BEM/SUIT 不小心出現重複命名的機會還是比較高，不過，當然這可以透過下面提到的 linter 來避免。
+	雖然稍後會介紹的 CSS-modules 基本上也是 global scope，不過相較於 CSS-modules，BEM/SUIT 不小心出現重複命名的機會還是比較高，不過，當然這可以透過下面提到的 linter 來避免。
 
 2. 手動處理容易出錯
 
@@ -197,11 +197,11 @@ Blocks should only be used inside a component of the same name.
 	如果認為 class 名稱太長，可以使用 [gulp-selectors](https://github.com/calebthebrewer/gulp-selectors) 這類工具，進一步做處理。不過也有不少反對意見，主要是認為[開啟 GZip 壓縮](http://stackoverflow.com/a/8067603/726650)即可，甚至也有人認為這樣會影響 SEO，但是應該是除非動到 [microformat](http://microformats.org/)，否則[沒有影響](http://webmasters.stackexchange.com/a/25477)。
 
 
-### Css-modules
+### CSS-modules
 
-[Css-modules](https://github.com/css-modules/css-modules) 基本上只是一個規格，描述使用 `:local` 與 `:global` 關鍵字來區別 scope；使用 `composes` 關鍵字來引用其它規則。
+[CSS-modules](https://github.com/css-modules/css-modules) 基本上只是一個規格，描述使用 `:local` 與 `:global` 關鍵字來區別 scope；使用 `composes` 關鍵字來引用其它規則。
 
-Css-modules 的作者 [Mark Dalgleish](https://github.com/markdalgleish)，在他的 [The End of Global CSS](https://medium.com/seek-ui-engineering/the-end-of-global-css-90d2a4a06284#.muzqdfjs7) 一文中提到，利用 Webpack 在 [2015/04/22 發佈](https://github.com/webpack/css-loader/commit/d2c9c25721a711b0fe041c597b43646e82d9f145)的 [local scope](https://github.com/webpack/css-loader#local-scope) 功能，我們可以透過 `:local(.className)` 的語法，得到轉化之後的 class 名稱：
+CSS-modules 的作者 [Mark Dalgleish](https://github.com/markdalgleish)，在他的 [The End of Global CSS](https://medium.com/seek-ui-engineering/the-end-of-global-css-90d2a4a06284#.muzqdfjs7) 一文中提到，利用 Webpack 在 [2015/04/22 發佈](https://github.com/webpack/css-loader/commit/d2c9c25721a711b0fe041c597b43646e82d9f145)的 [local scope](https://github.com/webpack/css-loader#local-scope) 功能，我們可以透過 `:local(.className)` 的語法，得到轉化之後的 class 名稱：
 
 __MyComponent.css__
 
@@ -340,7 +340,7 @@ export default class Dialog extends React.Component {
 
 3. Webpack + ReactJS 以外的選擇？
 
-由於目前 css-modules 的實作，主要還是基於 Webpack 的 css-loader。而 Webpack 的思維，是以 JavaScript 為核心，透過 `require()` 函數來描述相關資源的關係，剛好與 ReactJS 的 JSX 的作法相同，兩者可說是天作之合。然而，明明要套用 class 的對象是 html/template，卻必須勞動 JavaScript 在__執行期間__來處理，似乎不是那麼經濟。
+由於目前 CSS-modules 的實作，主要還是基於 Webpack 的 css-loader。而 Webpack 的思維，是以 JavaScript 為核心，透過 `require()` 函數來描述相關資源的關係，剛好與 ReactJS 的 JSX 的作法相同，兩者可說是天作之合。然而，明明要套用 class 的對象是 html/template，卻必須勞動 JavaScript 在__執行期間__來處理，似乎不是那麼經濟。
 
 雖然 [Browserify](https://github.com/substack/node-browserify) 有 [css-modulesify](https://github.com/css-modules/css-modulesify)，但 Browserify 其實是更加以 JavaScript 為中心，因此採用的是與 css-loader 完全相同的作法。
 
@@ -386,9 +386,9 @@ __dialog.html__
 </div>
 ```
 
-當然，這只是目前實作的問題，css-modules 規範本身，除了預設為 local scope 值得商榷之外，並沒有太大的問題。
+當然，這只是目前實作的問題，除了實作預設為 local scope 值得商榷之外，CSS-modules 規範本身並沒有太大的問題。
 
-[CSS Modules 详解及 React 中实践](http://zhuanlan.zhihu.com/p/20495964) 這篇文章有相當深入精闢的技術解說，想進一步了解 css-modules 的朋友千萬不要錯過。
+[CSS Modules 详解及 React 中实践](http://zhuanlan.zhihu.com/p/20495964) 這篇文章有相當深入精闢的技術解說，想進一步了解 CSS-modules 的朋友千萬不要錯過。
 
 ### Web Components / Shadow DOM
 
@@ -445,8 +445,33 @@ export default class ConcatCard {
 
 就是這麼簡單。即使是使用 polyfill，它也會幫忙處理好 CSS scope 問題 (雖然無法真正隱藏)。只是，又回到在執行期間處理轉換的問題。
 
-<p style="color: #fff">這或許是我選擇 AngularJS 2.0，而不是跟流行採用 ReactJS 的原因之一吧。</p>
+2016/04/28 補充：剛[發表 2.0 版](https://medium.com/the-vue-point/announcing-vue-js-2-0-8af1bde7ab9#.36j94ry4c)的 [Vue.js](https://vuejs.org/)，早在 1.0 時即有 ["Single File Components"](https://vuejs.org/guide/application.html#Single-File-Components) 的作法，透過 [vue-loader](http://vuejs.github.io/vue-loader/) 或 [vueify](https://github.com/vuejs/vueify) 處理之後，也同樣具有 local scope CSS:
 
+__my-component.vue__
+
+```html
+<style>
+.my-component h2 {
+	color: red;
+}
+</style>
+
+<template>
+	<div class="my-component">
+		<h2>{{msg}}</h2>
+	</div>
+</template>
+
+<script>
+module.exports = {
+	data: function () {
+		return {
+			msg: 'hello!'
+		}
+	}
+}
+</script>
+```
 
 ### Houdini
 
@@ -456,7 +481,7 @@ export default class ConcatCard {
 
 ## 結論
 
-若專案選擇使用 ReactJS/JSX，得力於 [react-css-modules](https://github.com/gajus/react-css-modules) 及 [Webpack](https://webpack.github.io/) 的功勞，可以使用直覺的語法，不用放棄慣用的前處理器，就可以享用 css-modules 的好處。
+若專案選擇使用 ReactJS/JSX，得力於 [react-css-modules](https://github.com/gajus/react-css-modules) 及 [Webpack](https://webpack.github.io/) 的功勞，可以使用直覺的語法，不用放棄慣用的前處理器，就可以享用 CSS-modules 的好處。
 
 若是喜歡追求業界標準，可以考慮直接採用 Web Components/Shadow DOM，或是架構在此基礎之上的 framework 來實作。
 
