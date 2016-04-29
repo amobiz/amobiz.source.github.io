@@ -445,12 +445,12 @@ export default class ConcatCard {
 
 就是這麼簡單。即使是使用 polyfill，它也會幫忙處理好 CSS scope 問題 (雖然無法真正隱藏)。只是，又回到在執行期間處理轉換的問題。
 
-2016/04/28 補充：剛[發表 2.0 版](https://medium.com/the-vue-point/announcing-vue-js-2-0-8af1bde7ab9#.36j94ry4c)的 [Vue.js](https://vuejs.org/)，早在 1.0 時即有 ["Single File Components"](https://vuejs.org/guide/application.html#Single-File-Components) 的作法，透過 [vue-loader](http://vuejs.github.io/vue-loader/) 或 [vueify](https://github.com/vuejs/vueify) 處理之後，也同樣具有 local scope CSS:
+2016/04/28 補充：剛[發表 2.0 版](https://medium.com/the-vue-point/announcing-vue-js-2-0-8af1bde7ab9#.36j94ry4c)的 [Vue.js](https://vuejs.org/)，早在 1.0 時即有 ["Single File Components"](https://vuejs.org/guide/application.html#Single-File-Components) 的作法，透過 [vue-loader](http://vuejs.github.io/vue-loader/) 或 [vueify](https://github.com/vuejs/vueify) 處理之後，也同樣具有 local scope CSS (注意 `scoped` 屬性):
 
 __my-component.vue__
 
 ```html
-<style>
+<style scoped>
 .my-component h2 {
 	color: red;
 }
