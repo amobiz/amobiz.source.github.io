@@ -44,8 +44,7 @@ function _attrs(args, keys) {
 
 function creditTag(args, content) {
 	var attrs = _attrs(args, ['desc', 'credit', 'link']);
-	return styles()
-		+ '<div class="Credit">'
+	return '<div class="Credit">'
 			+ hexo.render.renderSync({ text: content, engine: 'markdown' })
 			+ '<div class="Credit-backdrop">'
 				+ '<div class="Credit-info">'
@@ -54,18 +53,6 @@ function creditTag(args, content) {
 				+ '</div>'
 			+ '</div>'
 		+ '</div>';
-
-	function styles() {
-		return '<style type="text/css">'
-			+ '.Credit { position: relative; color: #fff; }'
-			+ '.Credit-backdrop { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #000; z-index: 50; opacity: 0; transition: opacity .8s ease-in-out; }'
-			+ '.Credit:hover .Credit-backdrop, .Credit:active .Credit-backdrop { opacity: .7; }'
-			+ '.Credit-info { position: absolute; right: 0; bottom: 0; padding: 20px; }'
-			+ '.Credit-desc { }'
-			+ '.Credit-link { color: inherit !important; }'
-			+ '.Credit-link:before { content: "Photo by "; }'
-			+ '</style>';
-	}
 
 	function desc(content) {
 		if (content) {
