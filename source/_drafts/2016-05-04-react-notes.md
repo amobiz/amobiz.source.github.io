@@ -241,6 +241,8 @@ module.exports = {
 
 這樣就可以執行了。在命令列下，執行 `npm run dev` 就可以打開 `localhost:8080` 看執行的結果。
 
+相信大家都注意到了，我們傳給 HelloWorld 元素的 `date` 屬性，竟然會自動更新顯示。由這一點可以看出，屬性的 expression 是不斷被評估執行的，這表示在背後，React 會不斷地檢查元件的 props (和 state，稍後介紹) 。在這個例子裡，這其實相當沒有效率，因為每次評估都會建立一個新的 Date 物件。
+
 ### 狀態 (State)
 
 在 React 中，跟輸出入有關的 html 元素比較特別，這跟 React 的 render 特性有關，譬如，下面範例中，試圖要在 input 元素上設定內容：
