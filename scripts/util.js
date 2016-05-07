@@ -1,6 +1,7 @@
 'use strict';
 
-function _attrs(args, keys) {
+var REGEX_PAIR = /([^:]+)\s*:\s*(.*)/;
+function attrs(args, keys) {
 	var value, ret;
 
 	ret = args.reduce(extract, {});
@@ -12,7 +13,7 @@ function _attrs(args, keys) {
 	return ret;
 
 	function extract(ret, values) {
-		var value = /([^:]+)\s*:\s*(.*)/.exec(values);
+		var value = REGEX_PAIR.exec(values);
 		if (value) {
 			add(value[1], value[2]);
 		}
@@ -32,4 +33,20 @@ function _attrs(args, keys) {
 	}
 }
 
-module.exports = _attrs;
+var REGEX_ARG = /\${([-_\w:]+)}/g;
+function render(template, values) {
+	return template.replace(REGEX_ARG, function (match, exp) {
+		var expr = values[exp];
+		switch (typeof expr) {
+			case 'string':
+				return expr;
+			case 'function':
+				return expr();
+			default:
+				return '';
+		}
+	});
+}
+
+module.exports.attrs = attrs;
+module.exports.render = render;

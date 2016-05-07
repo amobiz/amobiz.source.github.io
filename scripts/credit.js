@@ -10,7 +10,7 @@
  */
 'use strict';
 
-var _attrs = require('./attrs');
+var _attrs = require('./util').attrs;
 
 function creditTag(args, content) {
 	var attrs = _attrs(args, ['desc', 'credit', 'link']);
