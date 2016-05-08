@@ -5,10 +5,14 @@ category:
   - Programming
 tags:
   - notes
-  - ReactJS
+  - frontend
+  - JavaScript
+  - react
+  - redux
+  - redux-saga
 ---
 
-本文假設讀者已經了解基本的繼承、箭號運算式等 ES6 語法，不過即使不熟悉，只要有基本的物件導向觀念，就不會妨礙到對範例的理解。
+本文假設讀者已經知道如何使用 npm，了解基本的 JavaScript 繼承、箭號運算式等 ES6 語法，不過即使不熟悉，只要有基本的物件導向觀念，就不會妨礙到對範例的理解。
 
 <!-- more -->
 
@@ -135,19 +139,23 @@ export default class HelloWorld extends Component {
 };
 ```
 
-注意到這裡的 render 是定義元件自己的 `render()` 函數，所以在這裡我們必須使用 `return` 指令回傳 markup 內容 (可以跟後面繪製元件的作法比較一下)。這裡最好養成習慣，永遠在 `return` 指令回傳的 JSX 外面，使用 `(`, `)` 加以包圍，以避免 JSX 語法解析時發生錯誤。
+注意到這裡的 render 是定義元件自己的 `render()` 函數，所以在這裡我們必須使用 `return` 指令回傳 markup 內容 (可以跟後面繪製元件的作法比較一下)。
 
 #### JSX 語法簡介
 
 簡單介紹一下 JSX 語法。
 
-在使用 JSX 語法時，由於目的是把 html 標籤嵌入到 JavaScript 程式中，所以我們還是像平常一樣寫 JavaScript 程式。只有在定義元件的 `render()` 函數，或是呼叫 ReactDOM 的 `render()` 函數時，JSX 才會接手。在元件的 `render()` 函數定義內部，或是呼叫 `ReactDOM.render()` 的參數中出現 `<`, `>` 或 `/>` 這些標籤時，JSX 明白這是 html 元素標籤，就會進行轉換，將它們轉換為對 `React.createElement()` 之類的函數呼叫。而要在 JSX 中使用 JavaScript 運算式時，可以使用 `{expression}` 語法，以 `{`, `}` 包圍運算式 (注意不要再使用 `'` 或 `"` 字元包圍，否則就會變成普通字串常數)。
+在使用 JSX 語法時，由於目的是把 html 標籤嵌入到 JavaScript 程式中，以便充分運用 JavaScript 程式語言的靈活優勢，所以我們還是像平常一樣寫 JavaScript 程式，只有在程式中出現成對的 `<`, `>` 或 `/>` 標籤時，JSX 編譯器才接手才會進行轉換。JSX 編譯器明白這是要建立 html 元素標籤，於是將它們轉換為對 `React.createElement()` 之類的函數呼叫。同時，當反過來要在 JSX 語法中使用 JavaScript 運算式時，則可以使用 `{expression}` 語法，以 `{`, `}` 包圍 JavaScript 運算式 (注意不要再使用 `'` 或 `"` 字元包圍，否則就會變成普通字串常數)。只要遵循這樣的語法，就可以像洋蔥一樣，一層一層包裹，混合搭配 JavaScript 程式與 html 元素標籤 (不過通常會適當地分解為更小的元件)。
 
-只要遵循上面的語法，就可以像洋蔥一樣，一層一層包裹，混合搭配 JavaScript 程式與 html 元素標籤 (不過通常會適當地分解為更小的元件)。
+另外，雖然並沒有嚴格限定，但是通常我們只將 JSX 寫在元件的 `render()` 函數定義中，或是呼叫 `ReactDOM.render()` 函數的參數中，這樣更容易辨識 JSX 的存在。同時，最好養成習慣，尤其是有多行 JSX 時，永遠使用 `(`, `)` 包圍 JSX，以避免 JSX 語法解析時[發生錯誤](https://github.com/airbnb/javascript/tree/master/react#parentheses)。
+
+[Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
 
 #### 屬性 (property)
 
-由外部傳給元件的值，在元件中可以透過 `props` 屬性 (property) 取得，而且這些屬性是唯讀的，元件不應該對 `props` 屬性進行變更。除了透過 html 元素的屬性 (attribute) 明確指定要傳入的屬性之外，還有一些 React 定義的內部屬性，譬如 `children` 屬性 (property)，也會透過 `props` 屬性 (property) 傳遞。
+由外部透過標籤屬性 (attribute) 傳給元件的值，在元件中可以透過 `props` 屬性 (property) 取得，而且這些屬性元件應該將它們視為是唯讀的，元件不應該對 `props` 屬性進行變更。另外夾在元素標籤內部的子元素 (AngularJS 稱為 transclude)，也是透過 `props` 屬性傳遞，並且以 `this.props.children` 的方式取得。
+
+除了透過 html 元素的屬性 (attribute) 明確指定要傳入的屬性之外，還有一些 React 定義的內部屬性
 
 這裡的 HelloWorld 元件，期望由外部傳入一個 `date` 屬性。所以我們在元件內透過 `this.props.date` 的方式讀取該值。並且由於這是混合在 JSX 中，所以需要將運算式包圍在 `{}` 中。
 
@@ -241,7 +249,7 @@ module.exports = {
 
 這樣就可以執行了。在命令列下，執行 `npm run dev` 就可以打開 `localhost:8080` 看執行的結果。
 
-相信大家都注意到了，我們傳給 HelloWorld 元素的 `date` 屬性，竟然會自動更新顯示。由這一點可以看出，屬性的 expression 是不斷被評估執行的，這表示在背後，React 會不斷地檢查元件的 props (和 state，稍後介紹) 。在這個例子裡，這其實相當沒有效率，因為每次評估都會建立一個新的 Date 物件。
+相信大家都注意到了，我們傳給 HelloWorld 元素的 `date` 屬性，竟然會自動更新顯示。由這一點可以看出，屬性的 expression 是不斷被評估執行的，這表示在背後，React 會不斷地檢查元件的 props (和 state，稍後介紹)，這個過程稱為 [Reconciliation](http://facebook.github.io/react/docs/reconciliation.html)。在這個例子裡，這其實相當沒有效率，因為每次評估都會建立一個新的 Date 物件。
 
 ### 狀態 (State)
 
@@ -370,14 +378,32 @@ export default class HelloWorld extends Component {
 
 ### 元件組合 (Composite)
 
+盡量在父元件中維護 state，然後以 props 的形式，傳遞給子元件，讓子元件盡可能成為 stateless component，有助於簡化程式，提昇效能。
+
+[react-howto](https://github.com/petehunt/react-howto)
+[React.js 最佳实践(2016)_链接修正版](https://segmentfault.com/a/1190000004685622)
+
 ### 使用 Redux 控制資料流
+
+[还在纠结 Flux 或 Relay，或许 Redux 更适合你](https://ruby-china.org/topics/26944)
+[Rules For Structuring (Redux) Applications](http://jaysoo.ca/2016/02/28/organizing-redux-application/)
 
 ### 使用 Redux Saga 控制複雜流程
 
-Flux 的主要原則是單向資料流，而 redux 則強制使用純函數 (pure function) 來處理資料。然而，有些複雜的流程總是相互依賴、有順序關係的，如果在函數中處理這些流程，該函數就不再是單純的函數，而變成是有副作用 (side effects) 的程序。Redux-saga 則是處理這種問題的專家，可以將這些複雜的流程處理獨立出來，讓 creator 維持純函數，在獲得預期的信號時，立即介入協助處理。Redux:『救命！』，Saga：『我來了～』。
+Flux 的主要原則是單向資料流，而 redux 則強制使用純函數 (pure function) 來處理資料。然而，有些複雜的流程總是相互依賴、有順序關係的，甚至是非同步的。如果在函數中處理這些流程，該函數就不再是單純的函數，而變成是有副作用 (side effects) 的程序。Redux-saga 則是處理這種問題的專家，可以將這些複雜的流程處理獨立出來，讓 action creator 得以保持為純函數，而在獲得預期的信號時，立即介入協助處理。
+
+Redux:『救命！』，Saga：『我來了～』。
+
+[redux-saga](http://yelouafi.github.io/redux-saga/)
 
 [Managing Side Effects In React + Redux Using Sagas](http://jaysoo.ca/2016/01/03/managing-processes-in-redux-using-sagas/)
 
 [Redux nowadays : From actions creators to sagas](http://riadbenguella.com/from-actions-creators-to-sagas-redux-upgraded/)
+
+### 路由 (Routing)
+
+### Modular CSS (css-modules)
+
+### Immutable.js
 
 ### Universal JavaScript
