@@ -313,7 +313,7 @@ render () {
 }
 ```
 
-這到這裡，input 元件顯示的內容已經是由 state 輸出。但是 input 元件還是無法接受輸入。所以我們必須自行處理使用者的輸入，並將輸入設定給 state：
+到這裡，input 元件顯示的內容已經是由 state 輸出。但是 input 元件還是無法接受輸入。所以我們必須自行處理使用者的輸入，並將輸入設定給 state：
 
 ```js
 handleChange(event) {
@@ -368,3 +368,16 @@ export default class HelloWorld extends Component {
 };
 ```
 
+### 元件組合 (Composite)
+
+### 使用 Redux 控制資料流
+
+### 使用 Redux Saga 控制複雜流程
+
+Flux 的主要原則是單向資料流，而 redux 則強制使用純函數 (pure function) 來處理資料。然而，有些複雜的流程總是相互依賴、有順序關係的，如果在函數中處理這些流程，該函數就不再是單純的函數，而變成是有副作用 (side effects) 的程序。Redux-saga 則是處理這種問題的專家，可以將這些複雜的流程處理獨立出來，讓 creator 維持純函數，在獲得預期的信號時，立即介入協助處理。Redux:『救命！』，Saga：『我來了～』。
+
+[Managing Side Effects In React + Redux Using Sagas](http://jaysoo.ca/2016/01/03/managing-processes-in-redux-using-sagas/)
+
+[Redux nowadays : From actions creators to sagas](http://riadbenguella.com/from-actions-creators-to-sagas-redux-upgraded/)
+
+### Universal JavaScript
