@@ -1,4 +1,3 @@
-
 # angular-material 遇到雷
 
 本文記錄 angular material 的程式錯誤，不定期更新。
@@ -20,6 +19,33 @@
 2. 專案的雷真的很多，竟然有 1475 個 issue (2016/03/04)、(1512 - 2016/03/13)。
 
 ## 問題
+
+### (2016/xx/xx) ()
+
+#### 問題描述
+#### 問題原因
+#### 解決方式
+#### 參考資訊
+
+### (2016/05/13) ($mdThemingProvider)
+
+#### 問題描述
+
+Angular-material 的 $mdThemingProvider 會在執行期間動態插入許多 style 標籤，該標籤具有 `md-theme-style` 屬性。
+
+#### 問題原因
+
+(經過友人的提醒我才知道有這個問題。之前很少點開 head 部份檢視，頂多是查看 Webpack 產生出來的靜態檔案，所以一直沒有發現。以後一定要全盤檢視所有的部份才行。)
+
+[src/core/services/theming/theming.js#generateTheme()](https://github.com/angular/material/blob/61b742ef353f355e30e014114e7b22c9986d149b/src/core/services/theming/theming.js#L624) 這段程式碼動態插入 style 標籤。
+
+#### 解決方式
+
+官方有考慮未來改為只插入一個 tag。目前除了直接修改 material 的 source 外 (恐怕是大工程)，似乎還無解。
+
+#### 參考資訊
+
+* [WP - Performance issue (found something)](https://github.com/angular/material/issues/8218#issuecomment-214717578)
 
 ### (2016/04/22) ($mdIconProvider, md-svg-icon)
 
