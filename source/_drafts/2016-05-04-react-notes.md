@@ -149,6 +149,8 @@ export default class HelloWorld extends Component {
 
 另外，雖然並沒有嚴格限定，但是通常我們只將 JSX 寫在元件的 `render()` 函數定義中，或是呼叫 `ReactDOM.render()` 函數的參數中，這樣更容易辨識 JSX 的存在。同時，最好養成習慣，尤其是有多行 JSX 時，永遠使用 `(`, `)` 包圍 JSX，以避免 JSX 語法解析時[發生錯誤](https://github.com/airbnb/javascript/tree/master/react#parentheses)。
 
+可以利用 [Babel REPL](https://babeljs.io/repl/) 撰寫 JSX，查看實際上 JSX 轉換為 JavaScript 之後的樣子。或者是利用 [HTML to JSX Compiler](https://facebook.github.io/react/html-jsx.html) 將現有的 html template 轉換為 JSX。
+
 [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
 
 #### 屬性 (property)
