@@ -253,7 +253,9 @@ module.exports = {
 
 相信大家都注意到了，我們傳給 HelloWorld 元素的 `date` 屬性，竟然會自動更新顯示。由這一點可以看出，屬性的 expression 是不斷被評估執行的，這表示在背後，React 會不斷地檢查元件的 props (和 state，稍後介紹)，這個過程稱為 [Reconciliation](http://facebook.github.io/react/docs/reconciliation.html)。在這個例子裡，這其實相當沒有效率，因為每次評估都會建立一個新的 Date 物件。
 
-### 狀態 (State)
+可以在這裡看到[這個步驟的完整程式碼](https://github.com/amobiz/react-tut/tree/e9f210c6b2d57b3e2ff035631e44a89604ebfb1f)。
+
+### 受控元件 (Controlled Components)
 
 在 React 中，跟輸出入有關的 html 元素比較特別，這跟 React 的 render 特性有關，譬如，下面範例中，試圖要在 input 元素上設定內容：
 
@@ -282,15 +284,21 @@ export default class HelloWorld extends Component {
 
 "bundle.js:1749 Warning: Failed form propType: You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`."
 
-React 把 html 內建具有 `checked` (如 checkbox 及 radio), `selected` (如 options) 或 `value` (如 input) 這些屬性的元件稱為受控元件 ([Controlled Components](https://facebook.github.io/react/docs/forms.html#controlled-components))。這些元件只要該屬性指定了除了 `null` 及 `undefined` 以外的常數值，就會表現出上面的行為：對使用者的輸入沒有反應。
-
 {% endcondition %}
 
-這其實是很容易理解的，因為 React 元件總是要忠實反映它被指定的屬性及狀態，而這裡我們指定給 `value` 的值，是固定的字串常數 `"guest"`，所以顯示值當然就永遠不變。
+在正常的情況下，HTML 表單元件的部份屬性 (property) 直接與使用者的互動有關。該屬性 (property) 的初始值來自於標籤屬性 (attribute)，並且一旦設定後，元件的屬性 (property) 就隨著使用者的互動改變，不再與標籤屬性 (attribute) 直接關聯。
 
-解決方式也很簡單：要反應表單元件上的資料變動，就必須要將改變更新到 state 上，最後才能夠在 view 上呈現出來。
+然而因為 React 元件總是要忠實反映它被指定的屬性 (props) 及狀態 (state)，而這裡我們指定給 `value` 屬性 (props / attribute) 的值，是固定的字串常數 `"guest"`，所以顯示值當然就永遠不變。
 
-因此，要讓 view 顯示出我們指定的 state，首先我們必須先設定好 state 初始值：
+因此，React 把 HTML 內建具有 `checked` (如 checkbox 及 radio), `selected` (如 options) 或 `value` (如 input) 這些屬性的元件稱為受控元件 ([Controlled Components](https://facebook.github.io/react/docs/forms.html#controlled-components))。這些元件只要該屬性指定了除了 `null` 及 `undefined` 以外的__常數值__，就會表現出上面的特殊行為：對使用者的輸入沒有反應。
+
+可以在這裡看到[這個步驟異動的程式碼](https://github.com/amobiz/react-tut/commit/ee0071e996a3d0feb67cdbc7117ddddd3820cd7a)。
+
+### 狀態 (State)
+
+要解決上面受控元件的問題，其實很簡單：__當要反應表單元件上的資料變動，就必須要將改變更新到 state 上，最後才能夠在元件上呈現出來__。
+
+因此，要讓元件顯示出我們指定的 state，首先我們必須先設定好 state 初始值：
 
 ```js
 constructor() {
@@ -301,7 +309,7 @@ constructor() {
 }
 ```
 
-注意這裡的 state 變數名稱是固定的，且必須為物件型態。稍後提到的 `setState()` 方法，會用新的狀態取代該變數。
+注意這裡的 `state` 變數名稱是固定的，且必須為物件型態。稍後提到的 `setState()` 方法，會用新的狀態取代該變數。
 
 {% condition when:advanced %}
 其實這是 React 針對使用 ES6 語法定義元件的使用情境所設定的預設行為。事實上 React 內部是透過 `getInitialState()` 方法取得初始狀態，而使用 ES6 繼承方式時，預設的實作就是回傳我們在 constructor 中指定的 `state` 變數。
@@ -323,7 +331,11 @@ render () {
 }
 ```
 
-到這裡，input 元件顯示的內容已經是由 state 輸出。但是 input 元件還是無法接受輸入。所以我們必須自行處理使用者的輸入，並將輸入設定給 state：
+可以在這裡看到[這個步驟異動的程式碼](https://github.com/amobiz/react-tut/commit/42aa7ab17764bbf4a2e7693dd570c74b11b1045c)。
+
+### 更新狀態 (Updating State)
+
+到上一個步驟，input 元件顯示的內容已經是由 state 輸出。但是 input 元件還是無法接受輸入。所以我們必須自行處理使用者的輸入，並將輸入設定給 state：
 
 ```js
 handleChange(event) {
@@ -377,6 +389,8 @@ export default class HelloWorld extends Component {
     }
 };
 ```
+
+可以在這裡看到[這個步驟異動的程式碼](https://github.com/amobiz/react-tut/commit/e7a5970fdf9ebca11dba0119d57ea7f7dd64e9c1)。
 
 ### 元件組合 (Composite)
 
