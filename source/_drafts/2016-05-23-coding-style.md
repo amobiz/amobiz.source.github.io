@@ -37,3 +37,10 @@ tags:
 
 有人也許會說，Python 使用 indent 做為層級是為了強制 coding style。反問，有 {} 就不能強制嗎？
 
+### 參考資料
+
+https://www.facebook.com/ypcheng5673/posts/10208572178757696
+https://www.youtube.com/watch?v=SsoOG6ZeyUI
+
+为什么代码缩进时必须要用 Tab 而不能用空格
+http://www.techug.com/why-tabs-are-clearly-superior
