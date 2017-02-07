@@ -112,12 +112,12 @@ class Component extends React.Component {
     );
   }
 
-  handleClick = (e) => { 
-  }
+  handleClick = (e) => {
+  };
 }
 ```
 
-為什麼不把 ``` {`today is ${this.props.date}`} ``` 這一段也拉出來？像這樣：
+但是，為什麼不把 ``` {`today is ${this.props.date}`} ``` 這一段也拉出來？像這樣：
 
 ```js
 componentWillReceiveProps(nextProps) {
@@ -135,11 +135,48 @@ render() {
 
 首先，透過 `props` 傳入的屬性，基本上是動態的，父元件隨時可以傳入不同的內容。因此，一旦屬性有變動，我們就必須在適當的時候更新對應的值。
 再者，看似比較適合用來更新對應值的 [`componentWillReceiveProps()`](https://facebook.github.io/react/docs/component-specs.html#updating-componentwillreceiveprops)
- 函數，在 `render()` 函數第一次執行之前，並不會被呼叫。只有在第一次 render 之後，且 `props` 有更新的前提下，`componentWillReceiveProps()` 函數才會被呼叫。
+ 函數，在 `render()` 函數第一次執行之前，並不會被呼叫。只有在第一次 render 之後，且 `props` 有更新的前提下，`componentWillReceiveProps()` 函數才會被呼叫 (這樣說其實有些過度簡化，因為實際上若父元件未做好這裡說明的最佳化，就有可能會有多餘的 render，而導致 `componentWillReceiveProps()` 函數被呼叫)。
+
 像上面的寫法，第一次 render 時，`div` 元素內部將不會有內容。而且如果 `date` 屬性從來沒有更新過，那麼 `div` 元素內部將永遠不會有內容。
 
-要解決這種在 render 時，由於必須對動態傳入的 `props` 進行加工處理，而導致每次 render 時都會產生新的文字內容的問題，
-最好的方法，還是要依賴後面將會介紹的 `shouldComponentUpdate()` 函數。
+不過還好，我們還有 `constructor()` 可用，`constructor()` 接受 `props` 參數，我們可以在這裡做第一次的計算，然後在 `componentWillReceiveProps()` 函數中進行 `props` 改變時的計算：
+
+```js
+class Component extends React.Component {
+  static propTypes = {
+    date: PropTypes.string.isRequired
+  };
+
+  constructor(props) {
+    this.dateText = this.renderDateText(props);
+    this.style = {
+      background: '#fafafa',
+      color: '#3c3c3c'
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.dateText = this.renderDateText(props);
+  }
+
+  render() {
+    return (
+      <div style={this.style} onClick={this.handleClick}>
+        {this.dateText}
+      </div>
+    );
+  }
+
+  renderDateText(props) {
+    return `today is ${props.date}`;
+  }
+
+  handleClick = (e) => {
+  };
+}
+```
+
+但是話說回來，這樣做真的是有點小題大做了。除非要計算的東西真的很複雜，否則要解決這種在 render 時必須對動態傳入的 `props` 進行加工處理，而導致每次 render 時都會產生新的文字內容的問題，最好的方法，還是要依賴後面將會介紹的 `shouldComponentUpdate()` 函數。或者，React 15.3.0 版新增了 `PureComponent` 元件，只要我們的元件是 pure 的，也就是元件的輸出完全依賴於 `props` 與 `state`，而不會有任何副作用，那麼就可以直接繼承 `PureComponent` 元件，而省略  `shouldComponentUpdate()` 函數。
 
 #### 使用 Factory Method 時，應該預先呼叫以建立 member
 
@@ -149,7 +186,7 @@ render() {
 
 ```js
 class Component extends React.Component {
-  handleClick = (text) => (e) => { 
+  handleClick = (text) => (e) => {
     console.log(`Item ${text} clicked`);
   }
 
@@ -168,7 +205,7 @@ class Component extends React.Component {
 
 ```js
 class Component extends React.Component {
-  createClickHandler = (text) => (e) => { 
+  createClickHandler = (text) => (e) => {
     console.log(`Item ${text} clicked`);
   }
 
@@ -255,7 +292,7 @@ var Component = function (_React$Component) {
 
 ```js
 class Component extends React.Component {
-  createClickHandler = (text) => (e) => { 
+  createClickHandler = (text) => (e) => {
     console.log(`Item ${text} clicked`);
   }
 
@@ -281,10 +318,10 @@ class Component extends React.Component {
 
 ```js
 class Component extends React.Component {
-  createClickHandler = (text) => (e) => { 
+  createClickHandler = (text) => (e) => {
     console.log(`Item ${text} clicked`);
   }
-  
+
   refOn = (<div onClick={this.createClickHandler('on')}>on</div>);
   refOff = (<div onClick={this.createClickHandler('off')}>off</div>);
 
@@ -317,7 +354,7 @@ class Component extends React.Component {
     return _ref;
   }
 
-  createClickHandler = (text) => (e) => { 
+  createClickHandler = (text) => (e) => {
     console.log(`Item ${text} clicked`);
   }
 }
@@ -343,7 +380,7 @@ class Component extends React.Component {
     );
   }
 
-  createClickHandler = (text) => (e) => { 
+  createClickHandler = (text) => (e) => {
     console.log(`Item ${text} clicked`);
   }
 }
@@ -369,7 +406,7 @@ class Component extends React.Component {
     console.log(this.statusText());
     this.props.onToggle();
   }
-  
+
   statusText() {
     return this.props.status ? 'on' : 'off';
   }
@@ -424,6 +461,10 @@ class Component extends React.Component {
 }
 ```
 
+這邊還有一個細節，`shouldComponentUpdate()` 函數能夠發揮作用的前提，是該元件在其父元件中被重複使用，`shouldComponentUpdate()` 函數才有機會被呼叫。
+如果父元件並沒有預先建立好子元件並加以重複使用，而是每次都建立新的子元件，記得前面已經說明，在第一次 render 時，`shouldComponentUpdate()` 函數不會被呼叫，
+而下次要 render 時，原有的子元件卻被捨棄了，每次都是重新建立新的子元件。在這樣的情況下，即使子元件正確實作 `shouldComponentUpdate()` 函數，也是無用武之地。
+
 詳細說明可以參考 [React 巢狀 Component 效能優化](https://blog.wuct.me/react-%E5%B7%A2%E7%8B%80-component-%E6%95%88%E8%83%BD%E5%84%AA%E5%8C%96-b01d8a0d3eff#.1tfs3gt40) 這篇文章。
 
 #### 使用 3rd party library 幫忙處理 `shouldComponentUpdate()` 函數
@@ -447,7 +488,7 @@ class Component extends React.Component {
 * [PureRenderMixin](https://facebook.github.io/react/docs/pure-render-mixin.html)
 
   [Mixins Considered Harmful](https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html)
-  
+
 * [React.PureComponent](https://github.com/facebook/react/pull/7195)
 
 ### 與實體 DOM 互動
