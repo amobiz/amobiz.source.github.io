@@ -29,12 +29,17 @@ require('css-modules-require-hook')({
   generateScopedName: '[name]_[local]_[hash:base64:5]'
 });
 
-// jsdom do not support svg
+// babel / jsdom do not support svg, disable image loader with mocha compiler
+// 可能是 babel, 因為平常使用 webpack url-loader 先將 svg 打包成 data url,
+// 或是 file-loader 將 svg 轉換成路徑，所以 babel 在解析語法時，面對的只是字串，
+// 但是因為上面的 emzyme 設定沒使用 webpack，所以 import svg 的檔案被當做一般的 module 載入。
 
-```
+function noop(module) { module.exports = ''; }
 
-參考資料：
-https://github.com/airbnb/enzyme/issues/408#issuecomment-222752484
+require.extensions['.svg'] = noop;
+require.extensions['.png'] = noop;
+require.extensions['.jpg'] = noop;
+require.extensions['.jpeg'] = noop;
 
 // enzyme mount support
 
@@ -57,6 +62,10 @@ global.navigator = {
 documentRef = document;
 ```
 
+#### 參考資料：
+https://github.com/airbnb/enzyme/issues/408#issuecomment-222752484
+https://gist.github.com/diessica/76cdb131ddba6ef103d688ab7165c74e#gistcomment-1874162
+
 ### 檔案結構：
 
 ```
@@ -70,7 +79,7 @@ posts/
 
 ### Shallow Rendering：
 
-只 render 第一層子元件，不管子元件的內容。專注在目前元件的 render 結果。
+只 render 目前的元件，將子元件視為 atomic (就像 HTML 內建標籤) 而不 render 子元件的內容。專注在目前元件的 render 結果。
 
 ```js
 describe('PostAuthor', () => {
