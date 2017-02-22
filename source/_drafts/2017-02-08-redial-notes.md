@@ -2,6 +2,42 @@
 
 ## TL;DR:
 
+應該處理 `location.action` 為 `POP` 的情形：
+
+```js
+history.listen(location => {
+  match({
+    routes,
+    location
+  }, (err, redirectLocation, renderProps) => {
+    if (err || !renderProps) return;
+
+    const {components} = renderProps;
+
+    const locals = {
+      path: location.pathname,
+      query: location.query || {},
+      params: renderProps.params || {},
+      location: location,
+      dispatch: store.dispatch,
+      getState: store.getState
+    };
+
+    if (window.$STATE) {
+      delete window.$STATE;
+    } else if (location.action === 'POP') {
+      trigger('pop', components, locals);
+    } else {
+      trigger('fetch', components, locals);
+    }
+
+    trigger('defer', components, locals);
+  });
+});
+```
+
+## 說明
+
 原本的 mobile.js / desktop.js 處理 route matching 的方式：
 
 ```js
@@ -39,40 +75,6 @@ history.listen(location => {
 注意函數中的第一行，除了 `window.$STATE` 存在的的狀況外，`location.action === 'POP'` 的情況都會被排除。
 
 這會導致 PostListPage 在 `POP` 的情況下無法正確 fetch 資料。
-
-建議改為：
-
-```js
-history.listen(location => {
-  match({
-    routes,
-    location
-  }, (err, redirectLocation, renderProps) => {
-    if (err || !renderProps) return;
-
-    const {components} = renderProps;
-
-    const locals = {
-      path: location.pathname,
-      query: location.query || {},
-      params: renderProps.params || {},
-      location: location,
-      dispatch: store.dispatch,
-      getState: store.getState
-    };
-
-    if (window.$STATE) {
-      delete window.$STATE;
-    } else if (location.action === 'POP') {
-      trigger('pop', components, locals);
-    } else {
-      trigger('fetch', components, locals);
-    }
-
-    trigger('defer', components, locals);
-  });
-});
-```
 
 ## 操作步驟：
 

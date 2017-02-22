@@ -13,7 +13,7 @@ Annotation 其實只是一個普通的函數，實際運作上是將被 annotate
 	mapDispatchToProps
 )
 class MyComponent extends React.Component {
-	
+
 }
 ```
 
@@ -21,7 +21,7 @@ class MyComponent extends React.Component {
 
 ```js
 class MyComponent extends React.Component {
-	
+
 }
 
 connect(mapStateToProps(state, [ownProps]) {}, mapDispatchToProps)(MyComponent);
@@ -56,7 +56,7 @@ hook 函數可以回傳 promise，而 trigger() 函數會返回一個 promise，
 如果是跟 react-router 的 match() 函數綁定，match() 函數會回傳該路徑上的所有 component，因此，所有路徑上的元件都可以進行必要的額外 hook 處理。
 
 不過這裡的問題是，每個 hook 執行的內容，都各自 dispatch，將造成 state 不斷 update，每次 update，就觸發一次 render。
-因此，雖然可以在路徑上的每個元件都埋 hook，卻不建議這麼做。應該只在最上層元件埋 hook，待所有的資料收集完畢，才一次呼叫 setState() 或是 redux 
+因此，雖然可以在路徑上的每個元件都埋 hook，卻不建議這麼做。應該只在最上層元件埋 hook，待所有的資料收集完畢，才一次呼叫 setState() 或是 redux
 
 
 
@@ -92,7 +92,7 @@ redux-form 會將相關的 props 都傳給元件，元件可以由 `props.form` 
   };
 })
 export default class MyForm extends React.PureComponent {
-	
+
 }
 ```
 
@@ -106,7 +106,7 @@ export default class MyForm extends React.PureComponent {
   };
 })
 export default class MyForm extends React.PureComponent {
-	
+
 }
 ```
 
@@ -120,6 +120,7 @@ immutable.js 的缺點：https://kknews.cc/tech/xaz3j9.html
 
 可慮使用 react-addon-update 取代 immutable.js
 
+關於 immutable.js 的優缺點，[Immutable 详解及 React 中实践](https://zhuanlan.zhihu.com/p/20295971?columnSlug=purerender) 這一篇文章寫的很清楚，值得參考。
 
 ### react-router
 

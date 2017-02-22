@@ -9,7 +9,7 @@ post
 
 
 comment
-	host: 此 (已發表的) 留言，是本篇文章的作者	
+	host: 此 (已發表的) 留言，是本篇文章的作者
 
 
 
@@ -227,12 +227,12 @@ export default function createAsyncAction(type, handler, meta) {
 	Dcard-Web 多數 action 的參數都是 `(id, options, refresh)`。
 	`options` 通常是給 api endpoint 的 `query` 參數。
 	`refresh` 參數實際上只有 pagination 相關的 reducer 會處理，所以如果沒有 pagination 就完全用不到。
-	
+
 
 `meta` 部分，可以是一個物件，或是一個函數。
 
 	如果是函數，則呼叫 action 的所有參數，會如同 `handler` 一樣，完整的傳遞給 `meta` 函數，而函數預期應該回傳一個物件。
-	
+
 	如果需要對不同的 api 呼叫儲存在不同的 pagination，
 	譬如 `popular=true` 與 `popular=false` 兩者，內容的排序不同，但項目基本上是相同來源，有可能重疊時，
 	則這裡通常須要根據 query 決定並提供 key 屬性，所以經常在 action 中看到 `getPostListKey()` 這樣的函數。
@@ -311,3 +311,26 @@ function(options, refresh) {
 
 
 
+### 為 `createPaginationReducer` 加上 destroy action 的處理
+
+要注意：
+
+1. DESTROY_ACTION 的 meta 若有指定 `key`，
+  則取出時，亦必須指定相同的 `key`，如：
+   `state.xxxPagination.store.get('key')`
+2. DESTROY_ACTION 回傳的 payload，必須包含 `id` 欄位，此欄位必須為目標對象的 primary key，
+  ```js
+  removeCollectionEntry(collectionId, postId) {
+    return api(`collections/${collectionId}/posts/${postId}`, {
+      method: 'delete'
+    }, this)
+      .then(filterError)
+      .then(() => ({
+        collectionId,
+        id: postId
+      }));
+  }
+  ```
+3. 考慮 COLLECT, UNCOLLECT 是否需處理 pagination 對應行為
+(COLLECT 應該不需要，因為每次進入 MyCollectionPage 都會呼叫 listCollectionEntry，重新建立 list)，
+4. 檢查所有呼叫 createPaginationReducer。
