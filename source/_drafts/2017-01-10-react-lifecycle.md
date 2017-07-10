@@ -66,7 +66,7 @@ imgur.com
 * [`componentDidMount()`](https://facebook.github.io/react/docs/react-component.html#componentdidmount)
 * [`componentWillUnmount()`](https://facebook.github.io/react/docs/react-component.html#componentwillunmount)
 
-#### 
+####
 
 #### 與實體 DOM 互動 (純 client 端)
 
@@ -103,8 +103,112 @@ imgur.com
 
 * [`constructor()`](https://facebook.github.io/react/docs/react-component.html#constructor)
 
+注意 1：
+
+如果元件需要設定 state，但不需要參考 `props`，那麼其實不需要向官方範例一樣，在 constructor 中設定：
+
+```js
+class MyComponent extends PureComponent {
+	constructor(props) {
+		super(props);
+		this.state = {
+			myState: 0
+		};
+	}
+}
+```
+
+其實只需要這樣寫：
+
+```js
+class MyComponent extends PureComponent {
+	state = {
+		myState: 0
+	};
+}
+```
+
+另外，如果初始化 state 的程式碼很複雜，需要另外獨立一個函數的話，雖然可以像下面這樣寫，但是看起來很奇怪：
+
+```js
+class MyComponent extends PureComponent {
+	state = this.initComplexState();
+}
+```
+
+這時候還是放在 constructor 中比較順眼：
+
+```js
+class MyComponent extends PureComponent {
+	constructor(props) {
+		super(props);
+		this.state = this.initComplexState();
+	}
+}
+```
+
+這麼做有個附加的好處，就是當 `state` 的設定，需要參考 `props` 時，除了必須在 `constructor` 設定 `state`，還應該在 `componentWillReceiveProps()` 函數中做相同的處理，這時候，獨立的 `state` 初始化函數就可以共用了：
+
+```js
+class MyComponent extends PureComponent {
+	constructor(props) {
+		super(props);
+		this.state = {
+			myState: 0,
+			...this.calcStateFromProps(props)
+		};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.value !== this.props.value) {
+			this.setState(this.calcStateFromProps(nextProps));
+		}
+	}
+
+	calcStateFromProps(props) {
+		return {
+			myStateFromProps: props.value
+		};
+	}
+}
+```
+
+注意到這裡用來從 `props` 計算出 `state` 的 `calcStateFromProps(props)` 函數會回傳一個新的 `state` (部分) 物件，因此我們可以用來:
+1. 在 constructor 中初始化 state，
+2. 也可以在 `componentWillReceiveProps()` 函數中用來傳遞給 `setState()`。
+
+順便提一下，呼叫 `setState()` 函數時，並不需要傳遞全部的 `state` 屬性，只需要傳遞需要更改的部分即可。在上面的例子中，`myState` 是一個不需要依賴 `props` 的狀態，並不會隨著 `props` 的改變而發生變化，因此只需要在 `constructor` 中初始化一次即可，並不需要在 `componentWillReceiveProps()` 函數中重新設定；而 `myStateFromProps` 則是由 `props` 推導出來的，因此必須在 `constructor` 和 `componentWillReceiveProps()` 函數中分別進行初始化以及重新設定。
+
+如果將 `calcStateFromProps(props)` 函數改寫成在函數中直接呼叫 `setState()` 的話，有個小細節要注意一下：
+
+```js
+class MyComponent extends PureComponent {
+	constructor(props) {
+		super(props);
+		this.state = {    // 注意這裡就算沒有必要設定 state 屬性，
+		  myState: 0      // 也必需先初始化 state，譬如，至少需要 `this.state = {};`，
+		};                // 否則後續的 setState() 呼叫都會失敗，
+										  // 丟出 can not call `get` function of undefined 錯誤。
+		this.calcStateFromProps(props);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.value !== this.props.value) {
+		  this.calcStateFromProps(nextProps);
+		}
+	}
+
+	calcStateFromProps(props) {
+		this.setState({
+			myStateFromProps: props.value
+		});
+	}
+}
+```
+
+
 * [`componentWillMount()`](https://facebook.github.io/react/docs/react-component.html#componentwillmount)
-在元件掛載前呼叫，呼叫 `setState()` 不會觸發 re-render。會在 server 端呼叫。官方建議使用 `constructor()` 即可。
+在元件掛載前呼叫，此時呼叫 `setState()` 不會觸發 re-render。是唯一會在 server rendering 時呼叫的 lifecycle 函數。官方建議使用 `constructor()` 即可。
 
 * [`componentDidUpdate()`](https://facebook.github.io/react/docs/react-component.html#componentdidupdate)
 

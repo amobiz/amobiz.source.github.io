@@ -228,24 +228,62 @@ export default function createAsyncAction(type, handler, meta) {
 	`options` 通常是給 api endpoint 的 `query` 參數。
 	`refresh` 參數實際上只有 pagination 相關的 reducer 會處理，所以如果沒有 pagination 就完全用不到。
 
+範例：
+
+`deleteEmail` action 只接受 `emailId` 參數，此參數需透過 `meta` 傳遞給 reducer 處理。
+注意第三個參數 meta 部分，由於 `emailId` 只有 handler 函數看得到，所以這裡的 meta 必須寫成函數的形式，
+才能接收到 handler 相同的參數：
+
+```js
+export const deleteEmail = createAsyncAction(ActionTypes.DESTROY_EMAIL, function(emailId) {
+  return api(`emails/${emailId}`, {
+    method: 'delete'
+  }, this)
+    .then(filterError);
+}, (emailId) => ({emailId}));
+```
 
 `meta` 部分，可以是一個物件，或是一個函數。
 
 	如果是函數，則呼叫 action 的所有參數，會如同 `handler` 一樣，完整的傳遞給 `meta` 函數，而函數預期應該回傳一個物件。
 
-	如果需要對不同的 api 呼叫儲存在不同的 pagination，
-	譬如 `popular=true` 與 `popular=false` 兩者，內容的排序不同，但項目基本上是相同來源，有可能重疊時，
-	則這裡通常須要根據 query 決定並提供 key 屬性，所以經常在 action 中看到 `getPostListKey()` 這樣的函數。
+另外，注意到這裡有兩次 `dispatch` 呼叫，第一次實際上不呼叫 handler，目的是要提供給 reducer 預先做準備或進行清理。如前所述，目前只有對 pagination 相關的 reducer 會有影響，請參考後面 pagination 的說明。
 
-	然後像這樣取得正確的 pagination：
-	```js
-	const key = getPostListKey(location.query);
-	const pagination = state.postPagination.store.get(key);
-	```
+最後，從第二次 `dispatch` 也可以看到，每個 reducer 收到的 action，必定包含了三個屬性：`type`, `meta`, `payload`。
 
-另外，注意到這裡有兩次 `dispatch` 呼叫，第一次實際上不呼叫 handle，目的是要提供給 reducer 預先做準備或進行清理。
+### pagination
 
-目前只發現一個實際的例子，在 `createPaginationReducer()` 函數，當 `payload` 為空且 `refresh` 為 `true` 時，會清除 `index` 的索引內容。
+前面提到，在 `createAsyncAction()` 函數的兩次 `dispatch` 呼叫中，第一次實際上不呼叫 handler，
+目前實際上的應用，只發現一個例子，就是在 `createPaginationReducer()` 函數，當 `payload` 為空，且 `refresh` 為 `true` 時，會清除 `index` 的索引內容：
+
+```js
+export function createPaginationReducer(listType, destroyType) {
+  const actions = {
+
+    ...
+
+    [listType]: (state, action) => {
+      const {
+        meta: {key, refresh},
+        payload,
+        error
+      } = action;
+
+      ...
+
+      if (!payload) {
+        return {
+          ...state,
+          store: state.store.set(key, data.merge({
+            loading: true,
+            index: refresh ? new OrderedSet() : data.get('index')
+          }))
+        };
+      }
+    }
+}
+```
+
 而 `payload` 為空，正是第一次 `dispatch` 會造成的結果，所以第一次 `dispatch` 可能就只是為了這個目的而存在。
 
 ```js
@@ -272,9 +310,13 @@ export function createPaginationReducer(listType) {
 
 ```
 
-由於上面的實作方式，`refresh` 預設為 `true`，導致這裡有一個 pagination 容易被忽略的實作關鍵：
+#### pagination 沒有被清楚說明的實作關鍵
+
+1. 必須實作 `meta()` 函數
+
+由於原本的實作方式，`refresh` 預設為 `true`，導致這裡有一個 pagination 容易被忽略的實作關鍵：
 就是 list 類的 action __必須__ 實作 meta 的部分，
-這樣才可以讓 pagination 的 reducer 不使用預設值，將 `refresh` 設定為 `true`。
+這樣才可以讓 pagination 的 reducer 不使用預設值 (原本為 `true`, 我已改為 `undefined`)，依需要設定 `refresh`。否則，`meta` 將為 `undefined`，因此永遠會使用預設值，而無法依需要，在第一次呼叫時設定為 `true`，而在後續的載入更多時設定為 `false`。
 
 譬如：
 
@@ -295,7 +337,7 @@ function(options, refresh) {
 });
 ```
 
-注意這裡傳給的 `createAsyncAction()` 函數的第二個函數，這就是用來建立 meta 的函數，
+注意這裡傳給的 `createAsyncAction()` 函數的第三個參數 (或者說第二個函數)，就是用來建立 meta 的函數，
 當 action 被呼叫時，若沒有明確指定 `refresh` 為 `true`，
 由於 meta 函數會得到 action 函數相同的參數，因此 meta 函數被呼叫時，就會得到 `undefined` 的 `refresh`。
 這樣的效果，等於是將 `refresh` 的預設值重設為 `false`。
@@ -303,24 +345,38 @@ function(options, refresh) {
 由於 refresh 只有 pagination 會用到，而要讓 pagination 能正確運作，卻又必須覆蓋預設的實作，
 所以可以確認，這其實是一個設計或實作錯誤。
 
+我已經將取消設定 refresh 的預設值，也就是說，refresh 的預設值現在是 `undefined`，也就是 falsy。
 
-最後，從第二次 `dispatch` 也可以看到，每個 reducer 收到的 action，必定包含了三個屬性：`type`, `meta`, `payload`。
+2. 實作的 `meta()` 函數必須回傳 `key` 和 `refresh` 欄位
 
+pagination 另一個容易被忽略的實作關鍵是，`meta` 必須回傳 `key` 和 `refresh` 欄位。
 
+如果需要對不同的 api 呼叫儲存在不同的 pagination，
+譬如 `popular=true` 與 `popular=false` 兩者，內容的排序不同，但項目基本上是相同來源，有可能重疊時，
+則這裡通常須要根據 query 決定並提供 key 屬性，所以經常在 action 中看到 `getPostListKey()` 這樣的函數。
 
+然後像這樣取得正確的 pagination：
 
-
+```js
+const key = getPostListKey(location.query);
+const pagination = state.postPagination.store.get(key);
+```
 
 ### 為 `createPaginationReducer` 加上 destroy action 的處理
+
+原本的 pagination 不處理 DESTROY 類的 action，這導致在顯示內容時，還必須判斷得到的 item 是否存在。
 
 要注意：
 
 1. DESTROY_ACTION 的 meta 若有指定 `key`，
   則取出時，亦必須指定相同的 `key`，如：
    `state.xxxPagination.store.get('key')`
-2. DESTROY_ACTION 回傳的 payload，必須包含 `id` 欄位，此欄位必須為目標對象的 primary key，
+2. DESTROY_ACTION 回傳的 payload 或者 meta，必須包含 `id` 欄位，此欄位必須為目標對象的 primary key，
+
+若是透過 payload, 則必須這樣寫：
+
   ```js
-  removeCollectionEntry(collectionId, postId) {
+  const removeCollectionEntry = createAsyncAction(ActionTypes.REMOVE_COLLECTION_ENTRY, function(collectionId, postId) {
     return api(`collections/${collectionId}/posts/${postId}`, {
       method: 'delete'
     }, this)
@@ -329,8 +385,24 @@ function(options, refresh) {
         collectionId,
         id: postId
       }));
-  }
+  });
   ```
+
+  若是透過 meta, 則必須這樣寫：
+
+  ```js
+  const removeCollectionEntry = createAsyncAction(ActionTypes.REMOVE_COLLECTION_ENTRY, function(collectionId, postId) {
+    return api(`collections/${collectionId}/posts/${postId}`, {
+      method: 'delete'
+    }, this)
+      .then(filterError)
+      .then(parseJSON);
+  }, (collectionId, postId) => ({
+    collectionId,
+    id: postId
+  }));
+  ```
+
 3. 考慮 COLLECT, UNCOLLECT 是否需處理 pagination 對應行為
 (COLLECT 應該不需要，因為每次進入 MyCollectionPage 都會呼叫 listCollectionEntry，重新建立 list)，
 4. 檢查所有呼叫 createPaginationReducer。

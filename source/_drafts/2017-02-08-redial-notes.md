@@ -1,5 +1,57 @@
 # redial
 
+## provideHooks
+
+Dcard 相關
+
+由於 server.js 中 (在 server rendering 時期)，
+
+呼叫 react-router 的 `match` 時，
+`match` 函數可能回傳空的 `location`，(但 `props.location` 卻不為 `null` ?)
+
+而在呼叫 `trigger` 時，會直接傳出該 location，因此在元件的 `fetch` hook 中，有可能得到 `null` 的 `location`：
+
+```js
+function matchAsync(data) {
+  return new Promise((resolve, reject) => {
+    match(data, (err, location, props) => {
+      if (err) return reject(err);
+      resolve({ location, props });
+    });
+  });
+}
+```
+
+```js
+    return trigger('fetch', props.components, {
+      path: props.location.pathname,
+      query: props.location.query,
+      params: props.params,
+      location: location,
+      dispatch: store.dispatch,
+      getState: store.getState
+    })
+```
+
+不過，雖然在 server rendering 時期，location 可能為 `null`，
+但在 `connect` 時 `location` 已被初始化。
+
+```js
+@provideHooks({
+  fetch: ({dispatch, location, query, getState}) => {
+    console.log('provideHooks:fetch:location='+JSON.stringify(location)); // null
+  }
+})
+@connect((state, {location}) => {
+  console.log('connect:location='+JSON.stringify(location));              // not null
+
+  return {};
+})
+class Component extends PureComponent {
+
+}
+```
+
 ## TL;DR:
 
 應該處理 `location.action` 為 `POP` 的情形：
